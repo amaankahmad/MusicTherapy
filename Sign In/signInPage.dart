@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:musictherapy/ui/pages/signUpPage.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -20,7 +21,7 @@ class SignInPage extends StatelessWidget {
             height: height * 0.10,
           ),
 //-----------------------------------
-// Text for 'Select Player:
+// Text for Logo:
           Center(
             child: Container(
               child: Text(
@@ -164,6 +165,13 @@ class SignInPage extends StatelessWidget {
                         width: 5,
                       ),
                       InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => SignUp(),
+                            ),
+                          );
+                        },
                         child: Text(
                           'Sign up',
                           style: TextStyle(
