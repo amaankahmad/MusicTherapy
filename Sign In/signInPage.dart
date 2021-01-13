@@ -9,7 +9,7 @@ class SignIn extends StatelessWidget {
     final orange = const Color(0xFFF2BA49);
     final green = const Color(0xFF04A489);
     final blue = const Color(0xFF1E325C);
-    final white = const Color(0xFFF1FAEE);
+    final white = const Color(0xFFFFFBF2);
     return Scaffold(
       backgroundColor: white,
       body: Column(
