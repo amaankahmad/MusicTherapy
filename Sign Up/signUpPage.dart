@@ -9,6 +9,9 @@ class SignUp extends StatefulWidget {
 
 // State of Widget
 class _SignUpState extends State<SignUp> {
+  bool _checkPlayer = false;
+  bool _checkAdmin = false;
+  bool _checkTC = false;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -16,10 +19,7 @@ class _SignUpState extends State<SignUp> {
     final orange = const Color(0xFFF2BA49);
     final green = const Color(0xFF04A489);
     final blue = const Color(0xFF1E325C);
-    final white = const Color(0xFFF1FAEE);
-    bool _checkPlayer = true;
-    bool _checkAdmin = false;
-    bool _checkTC = true;
+    final white = const Color(0xFFFFFBF2);
     return Scaffold(
       backgroundColor: white,
       body: Stack(
