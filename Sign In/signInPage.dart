@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/signUpPage.dart';
 
-class SignInPage extends StatelessWidget {
+class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -27,7 +27,7 @@ class SignInPage extends StatelessWidget {
               child: Text(
                 'Logo',
                 style: TextStyle(
-                  fontFamily: 'Museo',
+                  //fontFamily: 'Museo',
                   fontSize: height * 0.09,
                   color: green,
                   fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class SignInPage extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'email',
                     labelStyle: TextStyle(
-                      fontFamily: 'Museo',
+                      //fontFamily: 'Museo',
                       fontSize: 18,
                       color: orange,
                     ),
@@ -71,7 +71,7 @@ class SignInPage extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'password',
                     labelStyle: TextStyle(
-                      fontFamily: 'Museo',
+                      //fontFamily: 'Museo',
                       fontSize: 18,
                       color: orange,
                     ),
@@ -99,7 +99,7 @@ class SignInPage extends StatelessWidget {
                       'Forgot Password',
                       style: TextStyle(
                         color: orange,
-                        fontFamily: 'Museo',
+                        //fontFamily: 'Museo',
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.underline,
@@ -118,30 +118,31 @@ class SignInPage extends StatelessWidget {
                 Container(
                   width: width * 0.6,
                   child: Material(
-                      borderRadius: BorderRadius.circular(40),
-                      shadowColor: blue,
-                      color: orange,
-                      elevation: 5,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            child: Text(
-                              'Sign In!',
-                              style: TextStyle(
-                                color: white,
-                                fontFamily: 'Museo',
-                                fontSize: 24,
-                                fontWeight: FontWeight.w800,
-                              ),
+                    borderRadius: BorderRadius.circular(40),
+                    shadowColor: blue,
+                    color: orange,
+                    elevation: 5,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Text(
+                            'Sign In!',
+                            style: TextStyle(
+                              color: white,
+                              //fontFamily: 'Museo',
+                              fontSize: 24,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
 //-----------------------------------
-// Spacing for Button:
+// Spacing for Text:
                 SizedBox(
                   height: height * 0.03,
                 ),
@@ -155,7 +156,7 @@ class SignInPage extends StatelessWidget {
                         'Don\'t have an account?',
                         style: TextStyle(
                           color: orange,
-                          fontFamily: 'Museo',
+                          //fontFamily: 'Museo',
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           decorationColor: orange,
@@ -176,7 +177,7 @@ class SignInPage extends StatelessWidget {
                           'Sign up',
                           style: TextStyle(
                             color: orange,
-                            fontFamily: 'Museo',
+                            //fontFamily: 'Museo',
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             decoration: TextDecoration.underline,
