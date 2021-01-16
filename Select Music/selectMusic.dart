@@ -11,6 +11,12 @@ class _SelectMusicState extends State<SelectMusic> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final white = const Color(0xFFFFFBF2);
+    final honeydew = const Color(0xFFF1FAEE);
+    final blue = const Color(0xFF1E325C);
+    final yellow = const Color(0xFFFFC247);
+    final orange = const Color(0xFFF57E00);
+    final green = const Color(0xFF04A489);
     final List<String> entriesone = <String>[
       'Can-Can',
       'When the Saints go Marching'
@@ -18,7 +24,7 @@ class _SelectMusicState extends State<SelectMusic> {
     final List<String> entriestwo = <String>['Auld Lang Syne', '...'];
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.green[50],
+        backgroundColor: white,
         body: SafeArea(
           child: Stack(
             children: [
@@ -99,7 +105,7 @@ class _SelectMusicState extends State<SelectMusic> {
                       Text(
                         'Select Music',
                         style: TextStyle(
-                            color: const Color(0xFF1E325C),
+                            color: blue,
                             fontFamily: 'Museo',
                             fontWeight: FontWeight.bold,
                             fontSize: height * 0.07),
@@ -116,7 +122,7 @@ class _SelectMusicState extends State<SelectMusic> {
                               vertical: 10.0,
                               horizontal:
                                   width * 0.050), //Sets margins for card
-                          color: const Color(0xFF04A489),
+                          color: green,
                           child: Padding(
                             padding: EdgeInsets.all(15.0),
                             child: Row(
@@ -153,7 +159,7 @@ class _SelectMusicState extends State<SelectMusic> {
                     height: height * 0.6,
                     width: width * 0.9,
                     decoration: BoxDecoration(
-                        color: const Color(0xFFFFFBF2), //Container color
+                        color: honeydew, //Container color
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
                         )),
@@ -174,7 +180,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                       fontSize: height * 0.05),
                                 ),
                                 Card(
-                                  color: const Color(0xffF57E00),
+                                  color: orange,
                                   margin: EdgeInsets.symmetric(vertical: 8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
@@ -219,7 +225,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontFamily: 'Museo',
-                                                  fontSize: height * 0.03,
+                                                  fontSize: height * 0.026,
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -233,7 +239,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                   ),
                                 ),
                                 Card(
-                                  color: const Color(0xFFFFC247),
+                                  color: yellow,
                                   margin: EdgeInsets.symmetric(vertical: 8),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
@@ -278,7 +284,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   fontFamily: 'Museo',
-                                                  fontSize: height * 0.03,
+                                                  fontSize: height * 0.026,
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold),
                                             ),
