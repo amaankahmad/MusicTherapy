@@ -5,9 +5,15 @@ class PlayerStatistics extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final white = const Color(0xFFFFFBF2);
+    final honeydew = const Color(0xFFF1FAEE);
+    final blue = const Color(0xFF1E325C);
+    final yellow = const Color(0xFFFFC247);
+    final orange = const Color(0xFFF57E00);
+    final green = const Color(0xFF04A489);
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.green[50],
+        backgroundColor: white,
         body: SafeArea(
           child: Stack(
             children: [
@@ -21,7 +27,7 @@ class PlayerStatistics extends StatelessWidget {
                   height: 50,
                   child: Material(
                     borderRadius: BorderRadius.circular(10000),
-                    shadowColor: const Color(0xFF1E325C),
+                    shadowColor: blue,
                     color: Colors.white,
                     elevation: 5,
                     child: GestureDetector(
@@ -36,7 +42,7 @@ class PlayerStatistics extends StatelessWidget {
                           ),
                           child: Image.asset(
                             "assets/images/home.png",
-                            color: const Color(0xFF1E325C),
+                            color: blue,
                           ),
                         ),
                       ),
@@ -54,7 +60,7 @@ class PlayerStatistics extends StatelessWidget {
                   height: 50,
                   child: Material(
                     borderRadius: BorderRadius.circular(10000),
-                    shadowColor: const Color(0xFF1E325C),
+                    shadowColor: blue,
                     elevation: 5,
                     child: GestureDetector(
                       onTap: () {},
@@ -92,8 +98,8 @@ class PlayerStatistics extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Museo',
                         fontSize: height * 0.06,
-                        color: const Color(0xFF1E325C),
-                        fontWeight: FontWeight.bold,
+                        color: blue,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
 //--------------------------------------
@@ -104,12 +110,11 @@ class PlayerStatistics extends StatelessWidget {
 //---------------------------------------
 // Container for player avatar
                           child: Container(
-                            width: 180,
-                            height: 180,
+                            width: 160,
+                            height: 160,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: const Color(0xffF57E00), width: 12.0),
+                              border: Border.all(color: orange, width: 12.0),
                             ),
                             child: ClipOval(
                               child: Padding(
@@ -128,7 +133,7 @@ class PlayerStatistics extends StatelessWidget {
                           height: height * 0.5,
                           width: width * 0.9,
                           decoration: BoxDecoration(
-                              color: const Color(0xFFFFFBF2), //Container color
+                              color: honeydew, //Container color
                               borderRadius: BorderRadius.all(
                                 Radius.circular(15),
                               )),
@@ -167,7 +172,7 @@ class PlayerStatistics extends StatelessWidget {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return Card(
-                                              color: const Color(0xFF04A489),
+                                              color: white,
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: 5),
                                               shape: RoundedRectangleBorder(
@@ -186,7 +191,7 @@ class PlayerStatistics extends StatelessWidget {
                                                     style: TextStyle(
                                                         fontFamily: 'Museo',
                                                         fontSize: height * 0.03,
-                                                        color: Colors.white,
+                                                        color: blue,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
@@ -232,7 +237,7 @@ class PlayerStatistics extends StatelessWidget {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return Card(
-                                              color: const Color(0xFF04A489),
+                                              color: white,
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: 5),
                                               shape: RoundedRectangleBorder(
@@ -251,7 +256,7 @@ class PlayerStatistics extends StatelessWidget {
                                                     style: TextStyle(
                                                         fontFamily: 'Museo',
                                                         fontSize: height * 0.03,
-                                                        color: Colors.white,
+                                                        color: blue,
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
