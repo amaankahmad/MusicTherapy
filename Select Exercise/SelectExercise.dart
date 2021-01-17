@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 //------------------------
-//Add/modify: exercise preview widget type, search icon, back and home buttons
+//Change exercise preview widget type
 //------------------------
 class SelectExercise extends StatelessWidget {
   @override
@@ -20,7 +20,7 @@ class SelectExercise extends StatelessWidget {
         home: Scaffold(
             //------------------------
             //Main Background
-            backgroundColor: Colors.green[50],
+            backgroundColor: const Color(0xFFFFFBF2),
             body: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +74,7 @@ class SelectExercise extends StatelessWidget {
                           height: height * 0.7,
                           width: width * 0.9,
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFFFBF2),
+                            color: Colors.green[50],
                             borderRadius: BorderRadius.all(
                               Radius.circular(30),
                             ),
@@ -92,35 +92,17 @@ class SelectExercise extends StatelessWidget {
                                       Container(
                                         width: 0.8 * width,
                                         margin: EdgeInsets.all(10.0),
-                                        child: RaisedButton(
-                                          onPressed: () {}, //SearchBar Function
-                                          color: Colors.white,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(40)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 2.5, horizontal: 50),
-                                            //search icon + text
-                                            child: Text(
-                                              //Text&font:'Search'
-                                              'Search',
-                                              style: TextStyle(
-                                                fontSize: height * 0.03,
-                                                color: Colors.grey[400],
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                        child: TextField(
+                                          cursorColor: blue,
+                                          decoration: InputDecoration(
+                                            hoverColor: Colors.grey,
+                                            hintText: 'Search',
+                                            prefixIcon: Icon(Icons.search),
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(40.0)),
                                             ),
                                           ),
-                                          //boxShadow: [
-                                          //BoxShadow(
-                                          //color:
-                                          //Colors.black.withOpacity(0.1),
-                                          //spreadRadius: 3,
-                                          //blurRadius: 3,
-                                          //offset: Offset(0, 3),
-                                          //),
-                                          //],
                                         ),
                                       ),
                                       //------------------------
