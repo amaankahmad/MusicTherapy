@@ -131,15 +131,13 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                     child: TextField(
                                       onChanged: (value) {},
                                       decoration: InputDecoration(
-                                          prefixIcon: Icon(Icons.search),
-                                          hintText: 'Search',
-                                          hintStyle: TextStyle(
-                                              fontFamily: 'Museo',
-                                              fontSize: height * 0.025),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.white10),
-                                          )),
+                                        border: InputBorder.none,
+                                        prefixIcon: Icon(Icons.search),
+                                        hintText: 'Search',
+                                        hintStyle: TextStyle(
+                                            fontFamily: 'Museo',
+                                            fontSize: height * 0.025),
+                                      ),
                                     ),
                                   ),
                                 ),
