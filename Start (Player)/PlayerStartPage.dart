@@ -1,5 +1,5 @@
-// sambo slice
-// 16th jan
+//samus
+//update 19th jan
 
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,7 @@ class PlayerStartPage extends StatelessWidget {
          children: <Widget>[
 // --------- BACK BUTTON --------------
            Positioned(
-             top: 15,
+             top: 60,
              left: 40,
              child: Container(
                width: 50,
@@ -57,10 +57,10 @@ class PlayerStartPage extends StatelessWidget {
 // --------- SPACING CONTROL --------------
 // --------- AVATAR DON -------------------
                  CircleAvatar(
-                   radius: 70,
+                   radius: 80,
                    backgroundColor: orange,
                    child: CircleAvatar(
-                     radius: 60,
+                     radius: 65,
                      backgroundImage: AssetImage("assets/images/parrot.jpg"),
                    ),
                  ),
@@ -92,13 +92,13 @@ class PlayerStartPage extends StatelessWidget {
 // --------- SPACING CONTROL --------------
 // --------- START BUTTON -----------------
                  Container(
-                   width: width * 0.7,
-                   height: height * 0.25,
+                   width: width * 0.75,
+                   height: height * 0.2,
                    child: Material(
                      borderRadius: BorderRadius.circular(40),
-                     shadowColor: blue,
+                     shadowColor: orange,
                      color: orange,
-                     elevation: 5,
+                     elevation: 3,
                      child: GestureDetector(
                        onTap: () {},
                        child: Center(
@@ -109,7 +109,7 @@ class PlayerStartPage extends StatelessWidget {
                              style: TextStyle(
                                color: white,
                                //fontFamily: 'Museo',
-                               fontSize: 60,
+                               fontSize: 50,
                                //fontWeight: FontWeight.w700,
                              ),
                            ),
@@ -126,12 +126,13 @@ class PlayerStartPage extends StatelessWidget {
 // --------- SPACING CONTROL --------------
 // --------- SETTINGS BUTTON --------------
                  Container(
-                   width: width * 0.7,
+                   width: width * 0.75,
+                   height: height * 0.1,
                    child: Material(
                      borderRadius: BorderRadius.circular(40),
-                     shadowColor: blue,
+                     shadowColor: orange,
                      color: white,
-                     elevation: 5,
+                     elevation: 3,
                      child: GestureDetector(
                        onTap: () {},
                        child: Center(
@@ -142,7 +143,7 @@ class PlayerStartPage extends StatelessWidget {
                              style: TextStyle(
                                color: green,
                                //fontFamily: 'Museo',
-                               fontSize: 40,
+                               fontSize: 30,
                                //fontWeight: FontWeight.w700,
                              ),
                            ),
@@ -152,7 +153,6 @@ class PlayerStartPage extends StatelessWidget {
                    ),
                  ),
 // --------- SETTINGS BUTTON --------------
-
                ]
            )
          ],
