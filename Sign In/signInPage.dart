@@ -6,10 +6,12 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final orange = const Color(0xFFF2BA49);
+    final orange = const Color(0xFFF57E00);
     final green = const Color(0xFF04A489);
     final blue = const Color(0xFF1E325C);
     final white = const Color(0xFFFFFBF2);
+    final yellow = const Color(0xFFFFC247);
+    final honeydew = const Color(0xFFF1FAEE);
     return Scaffold(
       backgroundColor: white,
       body: Column(
@@ -119,9 +121,9 @@ class SignIn extends StatelessWidget {
                   width: width * 0.6,
                   child: Material(
                     borderRadius: BorderRadius.circular(40),
-                    shadowColor: blue,
+                    shadowColor: orange,
                     color: orange,
-                    elevation: 5,
+                    elevation: 3,
                     child: GestureDetector(
                       onTap: () {},
                       child: Center(
