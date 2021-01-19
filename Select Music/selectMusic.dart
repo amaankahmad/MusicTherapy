@@ -114,6 +114,7 @@ class _SelectMusicState extends State<SelectMusic> {
                         onPressed:
                             () {}, //Fill in to make button functional when pressed
                         child: Card(
+                          elevation: 3,
                           //Creates orange card at the bottom
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(45.0),
@@ -180,6 +181,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                       fontSize: height * 0.05),
                                 ),
                                 Card(
+                                  elevation: 3,
                                   color: orange,
                                   margin: EdgeInsets.symmetric(vertical: 8),
                                   shape: RoundedRectangleBorder(
@@ -207,6 +209,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return Card(
+                                        elevation: 3,
                                         color: const Color(0xFF04A489),
                                         margin:
                                             EdgeInsets.symmetric(horizontal: 5),
@@ -239,6 +242,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                   ),
                                 ),
                                 Card(
+                                  elevation: 3,
                                   color: yellow,
                                   margin: EdgeInsets.symmetric(vertical: 8),
                                   shape: RoundedRectangleBorder(
@@ -266,6 +270,7 @@ class _SelectMusicState extends State<SelectMusic> {
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return Card(
+                                        elevation: 3,
                                         color: const Color(0xFF04A489),
                                         margin:
                                             EdgeInsets.symmetric(horizontal: 5),
