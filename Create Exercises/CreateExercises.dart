@@ -6,10 +6,16 @@ class CreateExercises extends StatelessWidget{
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final blue = const Color(0xFF1E325C);
+    final white = const Color(0xFFFFFBF2);
+    final green = const Color(0xFF04A489);
+    final yellow =  const Color(0xFFFFC247);
+    final honeydew = const Color(0xFFF1FAEE);
+    final orange = const Color(0xFFF57E00);
+
     // TODO: implement build
     return MaterialApp(
 home:Scaffold(
-backgroundColor: Colors.green[50],
+backgroundColor:  honeydew,
 body: 
 //-----------------------------------------
 // Back Button:
@@ -69,7 +75,7 @@ mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     height: height*0.6,
     width:width*0.8,
        decoration: BoxDecoration(  
-       color:const Color(0xFFFFFBF2),//Container color
+       color:white,//Container color
        borderRadius: BorderRadius.all(
        Radius.circular(15),  
       )
@@ -90,7 +96,7 @@ SizedBox(
     shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-    color: const Color(0xFF04A489),
+    color: green,
     child:Padding(
     padding: const EdgeInsets.all(7),
       child: Text(                              
@@ -131,7 +137,7 @@ SizedBox(
     shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-    color: Colors.amber[600],
+    color: yellow,
     child:Padding(
     padding: const EdgeInsets.all(7),
     child: Text(                              
@@ -146,7 +152,7 @@ SizedBox(
   ),
 ),
 
-//browse file region
+//browse file button
 SizedBox(height:8),//gap
     Container( 
       width: width*0.7,
@@ -180,7 +186,7 @@ SizedBox(
     shape: const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(15)),
         ),
-    color: Colors.amber[600],
+    color: yellow,
     child:Padding(
     padding: const EdgeInsets.all(7),
     child: Text(                              
@@ -195,7 +201,7 @@ SizedBox(
   ),
 ),
 
-//browse file region
+//browse file button
 SizedBox(height:8),//gap
     Container( 
       width: width*0.7,
@@ -230,10 +236,10 @@ SizedBox(height:8),//gap
 //Orange Upload Button
     Container( 
       height: 50.0,
-      width:width*0.8,
+      width:width*0.75,
       child: RaisedButton(
         onPressed: (){}, //Function of the button when press
-        color: Colors.orange[700],
+        color: orange,
         shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(40.0),
       ),
