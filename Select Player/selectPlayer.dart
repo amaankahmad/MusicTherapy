@@ -109,7 +109,8 @@ class _SelectPlayerState extends State<SelectPlayer> {
                     height: height * 0.6,
                     width: width * 0.9,
                     decoration: BoxDecoration(
-                        color: const Color(0xFFFFFBF2), //Container color
+                        color: const Color(0xFFFFFBF2),
+                        //Container color
                         borderRadius: BorderRadius.all(
                           Radius.circular(15),
                         )),
@@ -124,6 +125,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                 Padding(
                                   padding: const EdgeInsets.all(8),
                                   child: Card(
+                                    elevation: 3,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(
                                           25.0), //Rounded edges for card of 'Player list
@@ -142,9 +144,11 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(
-                                      8.0), //Sets padding around 'Player list'
+                                  padding: const EdgeInsets.all(8.0),
+                                  //Sets padding around 'Player list'
                                   child: Card(
+                                    elevation: 3,
+
                                     color:
                                         green, // Set background colour for 'Player list'
                                     shape: RoundedRectangleBorder(
@@ -198,21 +202,20 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                           FlatButton(
                                             onPressed: () {},
                                             child: Container(
+                                              width: height * 0.14,
+                                              height: height * 0.14,
                                               decoration: BoxDecoration(
-                                                color: Colors.white,
                                                 shape: BoxShape.circle,
-                                                boxShadow: [
-                                                  //Creates shadow around each circle
-                                                  BoxShadow(
-                                                      offset: Offset(0, 3),
-                                                      blurRadius: 2.5,
-                                                      color: Colors.black45,
-                                                      spreadRadius: 2.5)
-                                                ],
+                                                border: Border.all(
+                                                    color: orange, width: 12.0),
                                               ),
-                                              child: CircleAvatar(
-                                                radius: height * 0.07,
-                                                backgroundColor: Colors.white,
+                                              child: ClipOval(
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Image.asset(
+                                                      "assets/images/lion.png"),
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -249,6 +252,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
                     onPressed:
                         () {}, //Fill in to make button functional when pressed
                     child: Card(
+                      elevation: 3,
                       //Creates orange card at the bottom
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(35.0),
