@@ -19,15 +19,15 @@ class AdminStartPage extends StatelessWidget {
         children: <Widget>[
 // --------- BACK BUTTON --------------
           Positioned(
-            top: 15,
+            top: 60,
             left: 40,
             child: Container(
               width: 50,
               height: 50,
               child: Material(
                 borderRadius: BorderRadius.circular(10000),
-                shadowColor: const Color(0xFF1E325C),
-                elevation: 5,
+                shadowColor: orange,
+                elevation: 3,
                 child: GestureDetector(
                   onTap: () {},
                   child: ClipOval(
