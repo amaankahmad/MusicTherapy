@@ -144,6 +144,7 @@ class PlayerStatistics extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Card(
+                                        elevation: 3,
                                         color: const Color(0xFFFFC247),
                                         margin:
                                             EdgeInsets.symmetric(vertical: 8),
@@ -172,6 +173,7 @@ class PlayerStatistics extends StatelessWidget {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return Card(
+                                              elevation: 3,
                                               color: white,
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: 5),
@@ -209,6 +211,7 @@ class PlayerStatistics extends StatelessWidget {
                                         height: height * 0.01,
                                       ),
                                       Card(
+                                        elevation: 3,
                                         color: const Color(0xFFFFC247),
                                         margin:
                                             EdgeInsets.symmetric(vertical: 8),
@@ -237,6 +240,7 @@ class PlayerStatistics extends StatelessWidget {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return Card(
+                                              elevation: 3,
                                               color: white,
                                               margin: EdgeInsets.symmetric(
                                                   horizontal: 5),
