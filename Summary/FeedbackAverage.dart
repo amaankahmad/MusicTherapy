@@ -18,11 +18,16 @@ class FeedbackAverage extends StatelessWidget{
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final blue = const Color(0xFF1E325C);
+    final white = const Color(0xFFFFFBF2);
+    final green = const Color(0xFF04A489);
+    final yellow =  const Color(0xFFFFC247);
+    final honeydew = const Color(0xFFF1FAEE);
+    final orange = const Color(0xFFF57E00);
 
     // TODO: implement build
 return MaterialApp(
 home:Scaffold(
-backgroundColor: const Color(0xFFFFFBF2),
+backgroundColor: white,
 body: Center(
 child: Column(
 mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +38,7 @@ children: <Widget>[
     height: height*0.25,
     width:width*0.85,
        decoration: BoxDecoration(  
-       color: Colors.orange[700],//Container color
+       color: orange,//Container color
        borderRadius: BorderRadius.all(
        Radius.circular(30),  
       )
@@ -60,7 +65,7 @@ children: <Widget>[
               style: TextStyle(
               fontFamily: 'Museo',
               fontSize: height * 0.035,
-              color: Colors.teal,
+              color: green,
               fontWeight: FontWeight.bold,
               ),
             ),
@@ -82,12 +87,12 @@ children: <Widget>[
     ),
     SizedBox(height:20),//gap   
   //-------------------------------------------------
-  //green container with text 'Score:55%'
+  //honeydew  container with text 'Score:55%'
     Container(
     height: height*0.2,
-    width:width*0.7,
+    width:width*0.65,
        decoration: BoxDecoration(  
-       color: Colors.green[50],//Container color
+       color: honeydew ,//Container color
        borderRadius: BorderRadius.all(
        Radius.circular(30),  
       )
@@ -125,10 +130,10 @@ children: <Widget>[
 //Button: 'go back to home page'
     Container( 
       height: height*0.1,
-      width:width*0.85,
+      width:width*0.75,
       child: RaisedButton(
         onPressed: (){}, //Function of the button when press
-        color: Colors.orange[300],
+        color: yellow,
         shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(35.0),
           ),
@@ -137,7 +142,7 @@ children: <Widget>[
        style: TextStyle(
        fontFamily: 'Museo',
        color: Colors.white,
-       fontSize: height * 0.03,
+       fontSize: height * 0.025,
        fontWeight: FontWeight.bold,
         )
       ), 
