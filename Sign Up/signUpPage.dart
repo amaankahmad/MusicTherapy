@@ -16,10 +16,12 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    final orange = const Color(0xFFF2BA49);
+    final orange = const Color(0xFFF57E00);
     final green = const Color(0xFF04A489);
     final blue = const Color(0xFF1E325C);
     final white = const Color(0xFFFFFBF2);
+    final yellow = const Color(0xFFFFC247);
+    final honeydew = const Color(0xFFF1FAEE);
     return Scaffold(
       backgroundColor: white,
       body: Stack(
@@ -34,9 +36,9 @@ class _SignUpState extends State<SignUp> {
               height: 50,
               child: Material(
                 borderRadius: BorderRadius.circular(10000),
-                shadowColor: blue,
+                shadowColor: orange,
                 color: Colors.white,
-                elevation: 5,
+                elevation: 3,
                 child: GestureDetector(
                   onTap: () {},
                   child: ClipOval(
@@ -48,7 +50,7 @@ class _SignUpState extends State<SignUp> {
                         bottom: 12,
                       ),
                       child: Image.asset(
-                        "assets/images/home.png",
+                        "assets/images/navigation/home.png",
                         color: blue,
                       ),
                     ),
@@ -67,8 +69,8 @@ class _SignUpState extends State<SignUp> {
               height: 50,
               child: Material(
                 borderRadius: BorderRadius.circular(10000),
-                shadowColor: blue,
-                elevation: 5,
+                shadowColor: orange,
+                elevation: 3,
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop(
@@ -86,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                         bottom: 12,
                       ),
                       child: Image.asset(
-                        "assets/images/arrow.jpeg",
+                        "assets/images/navigation/arrow.jpeg",
                       ),
                     ),
                   ),
@@ -108,7 +110,7 @@ class _SignUpState extends State<SignUp> {
                   Container(
                     width: 30,
                     child: Image.asset(
-                      'assets/images/left.png',
+                      'assets/images/navigaton/left.png',
                       color: Colors.orange[700],
                     ),
                   ),
@@ -127,7 +129,7 @@ class _SignUpState extends State<SignUp> {
                       child: ClipOval(
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: Image.asset("assets/images/lion.png"),
+                          child: Image.asset("assets/images/avatars/lion.png"),
                         ),
                       ),
                     ),
@@ -139,7 +141,7 @@ class _SignUpState extends State<SignUp> {
                   Container(
                     width: 30,
                     child: Image.asset(
-                      'assets/images/right.png',
+                      'assets/images/navigation/right.png',
                       color: Colors.orange[700],
                     ),
                   ),
@@ -320,9 +322,9 @@ class _SignUpState extends State<SignUp> {
                       width: width * 0.6,
                       child: Material(
                         borderRadius: BorderRadius.circular(40),
-                        shadowColor: blue,
+                        shadowColor: orange,
                         color: green,
-                        elevation: 5,
+                        elevation: 3,
                         child: GestureDetector(
                           onTap: () {},
                           child: Center(
