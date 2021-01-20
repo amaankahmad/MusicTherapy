@@ -17,45 +17,53 @@ class SelectExercise extends StatelessWidget {
     final blue = const Color(0xFF1E325C);
     final white = const Color(0xFFFFFBF2);
     return MaterialApp(
-        home: Scaffold(
+      home: Scaffold(
+        //------------------------
+        //Main Background
+        backgroundColor: const Color(0xFFFFFBF2),
+        body: Stack(
+          children: [
             //------------------------
-            //Main Background
-            backgroundColor: const Color(0xFFFFFBF2),
-            body: SafeArea(
+            //Back button
+            Container(
+              margin: EdgeInsets.only(top: 60, left: 40),
+              width: 50,
+              height: 50,
+              child: Material(
+                borderRadius: BorderRadius.circular(10000),
+                shadowColor: blue,
+                color: white,
+                elevation: 3,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: ClipOval(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        left: 12,
+                        right: 12,
+                        bottom: 12,
+                      ),
+                      child: Image.asset('images/arrow.jpeg'),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //------------------------
+            SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //------------------------
-                  //Back button
-                  Container(
-                    margin: EdgeInsets.only(left: 30),
-                    width: 50,
-                    height: 50,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(10000),
-                      shadowColor: blue,
-                      color: white,
-                      elevation: 5,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: ClipOval(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              top: 12,
-                              left: 12,
-                              right: 12,
-                              bottom: 12,
-                            ),
-                            child: Image.asset('images/arrow.jpeg'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        //------------------------
+                        //Spacing above 'Select Exercise'
+                        SizedBox(
+                          height: height * 0.05,
+                        ),
                         //------------------------
                         //Title text&font: 'Select Exercise'
                         Text(
@@ -71,8 +79,9 @@ class SelectExercise extends StatelessWidget {
                         //Scrolling area
                         Container(
                           //Scrolling area background
-                          height: height * 0.7,
-                          width: width * 0.9,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 30, horizontal: 20),
+                          height: height * 0.6,
                           decoration: BoxDecoration(
                             color: Colors.green[50],
                             borderRadius: BorderRadius.all(
@@ -90,12 +99,16 @@ class SelectExercise extends StatelessWidget {
                                       //------------------------
                                       //Search bar
                                       Container(
-                                        width: 0.8 * width,
-                                        margin: EdgeInsets.all(10.0),
+                                        width: width * 0.8,
+                                        height: height * 0.045,
+                                        margin: EdgeInsets.all(15.0),
                                         child: TextField(
-                                          cursorColor: blue,
+                                          style: TextStyle(
+                                              color: blue,
+                                              fontSize: height * 0.025),
                                           decoration: InputDecoration(
-                                            hoverColor: Colors.grey,
+                                            contentPadding:
+                                                EdgeInsets.all(height * 0.001),
                                             hintText: 'Search',
                                             prefixIcon: Icon(Icons.search),
                                             border: OutlineInputBorder(
@@ -109,7 +122,7 @@ class SelectExercise extends StatelessWidget {
                                       //'Arm Exercises' Bar
                                       Container(
                                         width: 0.8 * width,
-                                        margin: EdgeInsets.all(10.0),
+                                        margin: EdgeInsets.all(8.0),
                                         decoration: BoxDecoration(
                                             color: orange,
                                             borderRadius:
@@ -187,6 +200,10 @@ class SelectExercise extends StatelessWidget {
                   ),
                 ],
               ),
-            )));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
