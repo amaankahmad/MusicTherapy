@@ -86,7 +86,7 @@ class ExerciseListSavedConfirmation extends StatelessWidget {
                 borderRadius: BorderRadius.circular(40),
                 shadowColor: Colors.blue,
                 color: const Color(0xFFFFC247),
-                elevation: 5,
+                elevation: 3,
                 child: GestureDetector(
                   onTap: () {},
                   child: Center(
