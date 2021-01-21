@@ -144,23 +144,61 @@ class SelectExercise extends StatelessWidget {
                                       ),
                                       //------------------------
                                       //Arm Exercises video previews *2
-                                      //change widget for exercise preview
                                       Column(
                                         children: [
                                           Container(
-                                            margin: EdgeInsets.all(10.0),
+                                            margin: EdgeInsets.all(10),
                                             height: height * 0.2,
                                             width: width * 0.8,
-                                            color: Colors.white,
+                                            child: Material(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              shadowColor: blue,
+                                              color: white,
+                                              elevation: 3,
+                                              child: GestureDetector(
+                                                onTap: () {},
+                                              ),
+                                            ),
                                           ),
                                           Container(
-                                            child: Text('Exercise Name'),
+                                            margin: EdgeInsets.only(
+                                                bottom: height * 0.01),
+                                            child: Text(
+                                              'Arm Exercise 1',
+                                              style: TextStyle(
+                                                fontSize: height * 0.025,
+                                                color: blue,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
                                           Container(
-                                            margin: EdgeInsets.all(10.0),
+                                            margin: EdgeInsets.all(10),
                                             height: height * 0.2,
                                             width: width * 0.8,
-                                            color: Colors.white,
+                                            child: Material(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              shadowColor: blue,
+                                              color: white,
+                                              elevation: 3,
+                                              child: GestureDetector(
+                                                onTap: () {},
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                bottom: height * 0.01),
+                                            child: Text(
+                                              'Arm Exercise 2',
+                                              style: TextStyle(
+                                                fontSize: height * 0.025,
+                                                color: blue,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
                                         ],
                                       ),
