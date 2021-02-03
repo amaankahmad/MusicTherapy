@@ -33,7 +33,7 @@ dependencies:
   intl: ^0.16.1
   animations: ^1.0.0+5
   flutter_search_bar: ^2.1.0
-  cloud_firestore: "^0.16.0"
+ 
 
 dev_dependencies:
   flutter_test:
