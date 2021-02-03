@@ -5,6 +5,7 @@ import 'package:musictherapy/ui/pages/privacyPolicy.dart';
 import 'package:musictherapy/ui/pages/settings.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
 import 'package:musictherapy/ui/pages/terms&Conditions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Widget
 class SignUp extends StatefulWidget {
@@ -16,6 +17,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   String _email, _password;
   final auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
   bool _checkPlayer = false;
   bool _checkAdmin = false;
   bool _checkTC = false;
@@ -196,6 +198,7 @@ class _SignUpState extends State<SignUp> {
                           onChanged: (value) {
                             setState(() {
                               _checkPlayer = value;
+                              _checkAdmin = false;
                             });
                           },
                           activeColor: green,
@@ -214,6 +217,7 @@ class _SignUpState extends State<SignUp> {
                           onChanged: (value) {
                             setState(() {
                               _checkAdmin = value;
+                              _checkPlayer = false;
                             });
                           },
                           activeColor: green,
@@ -379,6 +383,11 @@ class _SignUpState extends State<SignUp> {
                                   builder: (context) => AdminStartPage(),
                                 ),
                               );
+                            });
+                            firestore.collection('user_roles').add({
+                              'admin' : _checkAdmin,
+                              'player' : _checkPlayer,
+                              'user' : _email,
                             });
                           },
                           child: Center(
