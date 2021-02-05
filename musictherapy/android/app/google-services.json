@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "685118355970",
+    "firebase_url": "https://musictherapywearable.firebaseio.com",
+    "project_id": "musictherapywearable",
+    "storage_bucket": "musictherapywearable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685118355970:android:d70508a14d8d452453851b",
+        "android_client_info": {
+          "package_name": "com.dapp2.musictherapy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685118355970-sbg5hquf22ekedflvtqbkcmo0okrlg9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6tScdDG-NjPNeo3Od9dua6mpLTM9M7d0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685118355970-sbg5hquf22ekedflvtqbkcmo0okrlg9h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "685118355970-hctju7erh1rrp7ts7b5ao832lvrpvoon.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dapp2.musictherapy"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
