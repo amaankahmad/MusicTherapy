@@ -14,20 +14,7 @@ class SignUp extends StatefulWidget {
 
 // State of Widget
 class _SignUpState extends State<SignUp> {
-  GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  void validate() {
-    if (formkey.currentState.validate()) {
-      print("validated");
-    } else {
-      print("Not validated");
-    }
-  }
-
-  String _email, _password, _password2;
-  /* TextEditingController _password1 = TextEditingController();
-  TextEditingController _confirmPassword = TextEditingController();
-  final GlobalKey<FormState> formkey = GlobalKey<FormState>();*/
-
+  String _email, _password;
   final auth = FirebaseAuth.instance;
   bool _checkPlayer = false;
   bool _checkAdmin = false;
@@ -236,83 +223,53 @@ class _SignUpState extends State<SignUp> {
                     ),
 //-----------------------------------
 //  Password Text Fields:
-
-                    Form(
-                      key: formkey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            onChanged: (password) {
-                              setState(() {
-                                _password = password.trim();
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'password',
-                              labelStyle: TextStyle(
-                                //fontFamily: 'Museo',
-                                fontSize: 18,
-                                color: orange,
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: orange,
-                                ),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: blue,
-                                ),
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Password Required";
-                              } else {
-                                return null;
-                              }
-                            },
-                            obscureText: true,
+                    TextField(
+                      onChanged: (password) {
+                        setState(() {
+                          _password = password.trim();
+                        });
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'password',
+                        labelStyle: TextStyle(
+                          //fontFamily: 'Museo',
+                          fontSize: 18,
+                          color: orange,
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: orange,
                           ),
-                          TextFormField(
-                            onChanged: (password) {
-                              setState(() {
-                                _password2 = password.trim();
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'confirm password',
-                              labelStyle: TextStyle(
-                                //fontFamily: 'Museo',
-                                fontSize: 18,
-                                color: orange,
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: orange,
-                                ),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: blue,
-                                ),
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Confirm Password Required";
-                              } else if (_password != _password2) {
-                                return "The passwords do not match";
-                              } else {
-                                return null;
-                              }
-                            },
-                            obscureText: true,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: blue,
                           ),
-                        ],
+                        ),
                       ),
+                      obscureText: true,
                     ),
-
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'confirm password',
+                        labelStyle: TextStyle(
+                          //fontFamily: 'Museo',
+                          fontSize: 18,
+                          color: orange,
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: orange,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: blue,
+                          ),
+                        ),
+                      ),
+                      obscureText: true,
+                    ),
 //-----------------------------------
 //  Spacing for Terms and Conditions:
                     SizedBox(
@@ -413,8 +370,6 @@ class _SignUpState extends State<SignUp> {
                         elevation: 3,
                         child: GestureDetector(
                           onTap: () {
-                            validate();
-
                             auth
                                 .createUserWithEmailAndPassword(
                                     email: _email, password: _password)
