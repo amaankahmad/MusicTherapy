@@ -89,7 +89,7 @@ class PlayerStartPage extends StatelessWidget {
                 Center(
                   child: Container(
                     child: Text(
-                      'Hello, Sam',
+                      'Hello!',
                       style: TextStyle(
                         //fontFamily: 'Museo',
                         fontSize: height * 0.08,

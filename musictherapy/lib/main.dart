@@ -1,12 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:musictherapy/ui/pages/adminStartPage.dart';
 import 'package:musictherapy/ui/pages/forgotPassword.dart';
+import 'package:musictherapy/ui/pages/machineLearningVision.dart';
+import 'package:musictherapy/ui/pages/playerStartPage.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
+import 'package:camera/camera.dart';
 
-void main() async {
+List<CameraDescription> cameras; // Create a list of camera frames
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  cameras = await availableCameras(); // Turn on camera
   runApp(MyApp());
 }
 
@@ -25,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignIn(),
+      home: MLVision(),
     );
   }
 }
