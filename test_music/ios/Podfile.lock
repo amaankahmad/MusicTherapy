@@ -1,0 +1,72 @@
+PODS:
+  - assets_audio_player (0.0.1):
+    - Flutter
+  - assets_audio_player_web (0.0.1):
+    - Flutter
+  - connectivity (0.0.1):
+    - Flutter
+    - Reachability
+  - Flutter (1.0.0)
+  - flutter_blue (0.0.1):
+    - Flutter
+    - flutter_blue/Protos (= 0.0.1)
+  - flutter_blue/Protos (0.0.1):
+    - Flutter
+    - Protobuf (~> 3.11.4)
+  - path_provider (0.0.1):
+    - Flutter
+  - Protobuf (3.11.4)
+  - Reachability (3.2)
+  - volume_control (0.0.1):
+    - Flutter
+  - wifi (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - assets_audio_player (from `.symlinks/plugins/assets_audio_player/ios`)
+  - assets_audio_player_web (from `.symlinks/plugins/assets_audio_player_web/ios`)
+  - connectivity (from `.symlinks/plugins/connectivity/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - volume_control (from `.symlinks/plugins/volume_control/ios`)
+  - wifi (from `.symlinks/plugins/wifi/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Protobuf
+    - Reachability
+
+EXTERNAL SOURCES:
+  assets_audio_player:
+    :path: ".symlinks/plugins/assets_audio_player/ios"
+  assets_audio_player_web:
+    :path: ".symlinks/plugins/assets_audio_player_web/ios"
+  connectivity:
+    :path: ".symlinks/plugins/connectivity/ios"
+  Flutter:
+    :path: Flutter
+  flutter_blue:
+    :path: ".symlinks/plugins/flutter_blue/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  volume_control:
+    :path: ".symlinks/plugins/volume_control/ios"
+  wifi:
+    :path: ".symlinks/plugins/wifi/ios"
+
+SPEC CHECKSUMS:
+  assets_audio_player: edee322b9cb625571b830b35872ead1a295fd917
+  assets_audio_player_web: 19826380c44375761aa0b9053665c1e3fbc3b86b
+  connectivity: c72716e202a1225ec4810740d5cb56b8ae3bf4cc
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  flutter_blue: eeb381dc4727a0954dede73515f683865494b370
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  volume_control: ae2b373c092d9ff5e57f704e9fa5e3098cc16d07
+  wifi: d7d77c94109e36c4175d845f0a5964eadba71060
+
+PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
+
+COCOAPODS: 1.10.0
