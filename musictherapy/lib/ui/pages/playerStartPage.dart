@@ -6,6 +6,7 @@ import 'package:musictherapy/ui/pages/selectExercise.dart';
 import 'package:musictherapy/ui/pages/selectMusic.dart';
 import 'package:musictherapy/ui/pages/settings.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
+import 'package:musictherapy/ui/pages/addAdmin.dart';
 
 class PlayerStartPage extends StatelessWidget {
   @override
@@ -82,7 +83,7 @@ class PlayerStartPage extends StatelessWidget {
 // --------- AVATAR DON -------------------
 // --------- SPACING CONTROL --------------
                 SizedBox(
-                  height: height * 0.1,
+                  height: height * 0.05,
                 ),
 // --------- SPACING CONTROL --------------
 // --------- WELCOME TEXT -----------------
@@ -102,7 +103,7 @@ class PlayerStartPage extends StatelessWidget {
 // --------- WELCOME TEXT -----------------
 // --------- SPACING CONTROL --------------
                 SizedBox(
-                  height: height * 0.1,
+                  height: height * 0.05,
                 ),
 // --------- SPACING CONTROL --------------
 // --------- START BUTTON -----------------
@@ -114,7 +115,7 @@ class PlayerStartPage extends StatelessWidget {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           //TODO: Change this to Select Exercise page once it has navigation to select music
-                          builder: (context) => SelectMusic(),
+                          builder: (context) => SelectExercise(),
                         ),
                       );
                     },
@@ -141,6 +142,46 @@ class PlayerStartPage extends StatelessWidget {
                   ),
                 ),
 // --------- START BUTTON -----------------
+                SizedBox(
+                  height: height * 0.04,
+                ),
+// --------- SPACING CONTROL --------------
+// --------- MY ADMIN BUTTON --------------
+                Container(
+                  width: width * 0.75,
+                  height: height * 0.1,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AddAdmin(),
+                        ),
+                      );
+                    },
+                    child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: orange,
+                      color: white,
+                      elevation: 3,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Text(
+                            'My Admin',
+                            style: TextStyle(
+                              color: green,
+                              //fontFamily: 'Museo',
+                              fontSize: 30,
+                              //fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+
 // --------- SPACING CONTROL --------------
                 SizedBox(
                   height: height * 0.04,
