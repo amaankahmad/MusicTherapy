@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:audioplayers/audioplayers.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
+// import 'package:web_socket_channel/io.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,6 +33,8 @@ class _MyAppState extends State<MyApp> {
   int _counter = 0;
 
   Timer timer;
+
+  
 
   void _incrementCounter() {
     setState(() {
@@ -120,29 +123,6 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // FlatButton(
-              //   onPressed: () {
-              //     assetsAudioPlayer_1.open(Audio('assets/bass_loop.wav'),
-              //         loopMode: LoopMode.single);
-              //     // assetsAudioPlayer_1.open(Audio('assets/beat_loop.wav'),
-              //     //     loopMode: LoopMode.single, volume: 1);
-              //     // assetsAudioPlayer_1.open(Audio('assets/kick_loop.wav'),
-              //     //     loopMode: LoopMode.single, volume: 0);
-              //     // assetsAudioPlayer_1.open(Audio('assets/piano_loop.wav'),
-              //     //     loopMode: LoopMode.single, volume: 0);
-              //   },
-              //   child: Text('Loop track 1'),
-              //   color: Colors.blue,
-              // ),
-              // FlatButton(
-              //   onPressed: () {
-              //     assetsAudioPlayer_1.open(Audio('assets/beat_loop.wav'),
-              //         loopMode: LoopMode.single, volume: 1);
-              //   },
-              //   child: Text('Loop track 1'),
-              //   color: Colors.blue,
-              // ),
-
               FloatingActionButton(
                 backgroundColor: green,
                 onPressed: _incrementCounter,
@@ -181,6 +161,9 @@ class _MyAppState extends State<MyApp> {
                   assetsAudioPlayer_2.pause();
                   assetsAudioPlayer_3.pause();
                   assetsAudioPlayer_4.pause();
+                  assetsAudioPlayer_5.pause();
+                  assetsAudioPlayer_6.pause();
+                  assetsAudioPlayer_7.pause();
                 },
                 child: Text(
                   'Pause the audio',
@@ -208,27 +191,6 @@ class _MyAppState extends State<MyApp> {
                 ),
                 color: blue,
               ),
-              // FlatButton(
-              //   onPressed: () {
-              //     assetsAudioPlayer_2.setVolume(1);
-              //   },
-              //   child: Text('Add instrument two'),
-              //   color: Colors.blue,
-              // ),
-              // FlatButton(
-              //   onPressed: () {
-              //     assetsAudioPlayer_3.setVolume(1);
-              //   },
-              //   child: Text('Add instrument three'),
-              //   color: Colors.blue,
-              // ),
-              // FlatButton(
-              //   onPressed: () {
-              //     assetsAudioPlayer_4.setVolume(1);
-              //   },
-              //   child: Text('Add instrument four'),
-              //   color: Colors.blue,
-              // ),
             ],
           ),
         ),
