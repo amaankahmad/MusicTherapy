@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/adminStartPage.dart';
 import 'package:musictherapy/ui/pages/playerStartPage.dart';
@@ -32,10 +33,14 @@ class _SignUpState extends State<SignUp> {
 
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
-  final firebaseUser =  FirebaseAuth.instance.currentUser;
+  final firebaseUser = FirebaseAuth.instance.currentUser;
   bool _checkPlayer = false;
   bool _checkAdmin = false;
   bool _checkTC = false;
+  //bool uniqueUsername = true;
+  //int vaild = 0;
+  var uname_exists = false;
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -46,7 +51,34 @@ class _SignUpState extends State<SignUp> {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
-    
+
+      Future<void> _showMyDialog() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Username already exists'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text('Please choose a different username.'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
     return Scaffold(
       backgroundColor: white,
       body: Stack(
@@ -56,17 +88,17 @@ class _SignUpState extends State<SignUp> {
           Positioned(
             top: 60,
             left: 40,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop(
-                  MaterialPageRoute(
-                    builder: (context) => SignIn(),
-                  ),
-                );
-              },
-              child: Container(
-                width: 50,
-                height: 50,
+            child: Container(
+              width: 50,
+              height: 50,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop(
+                    MaterialPageRoute(
+                      builder: (context) => SignIn(),
+                    ),
+                  );
+                },
                 child: Material(
                   borderRadius: BorderRadius.circular(10000),
                   shadowColor: orange,
@@ -93,14 +125,14 @@ class _SignUpState extends State<SignUp> {
           Column(
             children: <Widget>[
               SizedBox(
-                height: height * 0.1,
+                height: height * 0.05,
               ),
               Row(
                 // Left Arrow
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    width: 30,
+                    width: 20,
                     child: Image.asset(
                       'assets/images/navigation/left.png',
                       color: Colors.orange[700],
@@ -112,8 +144,8 @@ class _SignUpState extends State<SignUp> {
                   // Image, TODO: ADD FUNCTIONALITY
                   Center(
                     child: Container(
-                      width: 225,
-                      height: 225,
+                      width: height * 0.2,
+                      height: height * 0.2,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(color: orange, width: 12.0),
@@ -180,7 +212,7 @@ class _SignUpState extends State<SignUp> {
 //-----------------------------------
 //user name text field
 
-                 TextField(
+                    TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       onChanged: (username) {
                         setState(() {
@@ -205,8 +237,16 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                    ),
+                      validator: (uname_exists) {
+                        if (uname_exists == true) {
+                          return "Username already in use";
+                        }else {
+                          return null;
+                        }
 
+                      },
+
+                    ),
 
 //_________________________________
 // Spacing for Select Role:
@@ -442,53 +482,83 @@ class _SignUpState extends State<SignUp> {
                     ),
 //-----------------------------------
 //  Sign Up Button:
-                    GestureDetector(
-                      onTap: () async {
-                        validate();
+                    Container(
+                      width: width * 0.6,
+                      child: GestureDetector(
+                        onTap: () async {
+                          validate();
 
-                        await auth
-                            .createUserWithEmailAndPassword(
+                          //check username
+                          final result = await FirebaseFirestore.instance
+                              .collection('user_info')
+                              .where("username", isEqualTo: _username)
+                              .get();
+                          result.docs.forEach((res) {
+                            uname_exists = true;
+                          });
+                          print('Some text');
+                          print(uname_exists);
+
+
+                          //if user name is unique
+                          if (uname_exists == false) {
+                            /* var unexists = false;
+                          var result = await FirebaseFirestore.instance
+                          firestore.collection("user_info").where("username", isEqualTo: _username).get();*/
+                            await auth.createUserWithEmailAndPassword(
                                 email: _email, password: _password);
 
-                          auth.signInWithEmailAndPassword(
-                              email: _email, password: _password);
-                          var cUser = FirebaseAuth.instance.currentUser;
-                           firestore.collection('user_info').doc(cUser.uid).set({
-                           'admin' : _checkAdmin,
-                           'player' : _checkPlayer,
-                           'email' : _email,
-                           'user_name' : _username,
-                         });
-                        firestore
-                            .collection("user_roles")
-                            .doc(cUser.uid)
-                            .get()
-                          .then((value) {
-                            if (value.data()["player"] == true) {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => PlayerStartPage(),
-                                ),
-                              );
-                            } else if (value.data()["admin"] == true) {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => AdminStartPage(),
-                                ),
-                              );
-                            }
+                            auth.signInWithEmailAndPassword(
+                                email: _email, password: _password);
+
+                            var cUser = FirebaseAuth.instance.currentUser;
+                            firestore
+                                .collection('user_info')
+                                .doc(cUser.uid)
+                                .set({
+                              'admin': _checkAdmin,
+                              'player': _checkPlayer,
+                              'email': _email,
+                              'username': _username,
+                            });
+                            firestore
+                                .collection('username_uid')
+                                .doc(_username)
+                                .set({
+                              'UID': cUser.uid,
+                            });
+                            firestore
+                                .collection("user_roles")
+                                .doc(cUser.uid)
+                                .get()
+                                .then((value) {
+                              if (value.data()["player"] == true) {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => PlayerStartPage(),
+                                  ),
+                                );
+                              } else if (value.data()["admin"] == true) {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => AdminStartPage(),
+                                  ),
+                                );
+                              }
+                            });
+
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => SignIn(),
+                              ),
+                            );
                           }
-
-                        );
-
-                           Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => SignIn(),
-                            ),
-                          );
-                      },
-                      child: Container(
-                        width: width * 0.6,
+                          //if username exists
+                          else {
+                            print('Username exists');
+                            _showMyDialog();
+                          }
+                        },
                         child: Material(
                           borderRadius: BorderRadius.circular(40),
                           shadowColor: orange,
