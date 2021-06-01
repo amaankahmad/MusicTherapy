@@ -103,7 +103,7 @@ class PlayerStartPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         //fontFamily: 'Museo',
-                        fontSize: height * 0.04,
+                        fontSize: height * 0.06,
                         color: blue,
                         fontWeight: FontWeight.w700,
                       ),

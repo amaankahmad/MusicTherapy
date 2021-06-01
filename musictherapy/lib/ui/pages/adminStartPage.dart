@@ -1,6 +1,7 @@
 //sambo slicy
 //updated jan 16th
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/createExercises.dart';
 import 'package:musictherapy/ui/pages/selectPlayer.dart';
@@ -8,6 +9,8 @@ import 'package:musictherapy/ui/pages/settings.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
 
 class AdminStartPage extends StatelessWidget {
+  String _username;
+  final cUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -18,6 +21,9 @@ class AdminStartPage extends StatelessWidget {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
+    FirebaseFirestore.instance.collection("user_info").doc(cUser.uid).get().then((value) {
+    _username = value.data()["username"];
+    });
     return Scaffold(
       backgroundColor: honeydew,
       body: Stack(
@@ -84,20 +90,20 @@ class AdminStartPage extends StatelessWidget {
             ),
 // --------- SPACING CONTROL --------------
 // --------- WELCOME TEXT -----------------
-            Center(
-              child: Container(
-                child: Text(
-                  'admin mode',
-                  style: TextStyle(
-                    //fontFamily: 'Museo',
-                    fontSize: height * 0.06,
-                    color: blue,
-                    fontWeight: FontWeight.w700,
+                Center(
+                  child: Container(
+                    child: Text(
+                     'Hello, \n ' + _username,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        //fontFamily: 'Museo',
+                        fontSize: height * 0.06,
+                        color: blue,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-// --------- WELCOME TEXT -----------------
 // --------- SPACING CONTROL --------------
             SizedBox(
               height: height * 0.12,
