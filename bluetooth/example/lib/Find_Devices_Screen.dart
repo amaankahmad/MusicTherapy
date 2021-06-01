@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -39,28 +40,35 @@ class FindDevicesScreen extends StatelessWidget {
                 initialData: [],
                 builder: (c, snapshot) => Column(
                   children: snapshot.data!
-                      .map((device) => ListTile(
-                            title: Text(device.name),
-                            subtitle: Text(device.id.toString()),
-                            trailing: StreamBuilder<BluetoothDeviceState>(
-                              stream: device.state,
-                              initialData: BluetoothDeviceState.disconnected,
-                              builder: (c, snapshot) {
-                                if (snapshot.data ==
-                                    BluetoothDeviceState.connected) {
-                                  //----------------- ALREADY CONNECTED ----------------------
-                                  return RaisedButton(
-                                    child: Text('OPEN'),
-                                    onPressed: () => Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                DeviceScreen(device: device))),
-                                  );
-                                }
-                                return Text(snapshot.data.toString());
-                              },
-                            ),
-                          ))
+                      .map(
+                        (device) => ListTile(
+                          title: Text(device.name),
+                          subtitle: Text(device.id.toString()),
+                          trailing: StreamBuilder<BluetoothDeviceState>(
+                            stream: device.state,
+                            initialData: BluetoothDeviceState.disconnected,
+                            builder: (c, snapshot) {
+                              if (snapshot.data ==
+                                  BluetoothDeviceState.connected) {
+                                //----------------- ALREADY CONNECTED ----------------------
+                                return RaisedButton(
+                                  child: Text('OPEN'),
+                                  onPressed: () => {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            DeviceScreen(device: device),
+                                      ),
+                                    ),
+                                    device.discoverServices()
+                                  },
+                                );
+                              }
+                              return Text(snapshot.data.toString());
+                            },
+                          ),
+                        ),
+                      )
                       .toList(),
                 ),
               ),
@@ -73,11 +81,30 @@ class FindDevicesScreen extends StatelessWidget {
                       .map(
                         (r) => ScanResultTile(
                           result: r,
-                          onTap: () => Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            r.device.connect();
-                            return DeviceScreen(device: r.device);
-                          })),
+                          // onTap: () => {
+                          //   Navigator.of(context).push(
+                          //     MaterialPageRoute(
+                          //       builder: (context) {
+                          //         r.device.connect();
+                          //         return DeviceScreen(device: r.device);
+                          //       },
+                          //     ),
+                          //   ),
+                          //   r.device.discoverServices()
+                          // },
+                          onTap: () => {
+                            r.device.connect(),
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DeviceScreen(device: r.device),
+                              ),
+                            ),
+                            sleep(
+                              Duration(milliseconds: 400),
+                            ),
+                            r.device.discoverServices()
+                          },
                         ),
                       )
                       .toList(),

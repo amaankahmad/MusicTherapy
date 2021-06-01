@@ -93,7 +93,7 @@ class ScanResultTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: Change from Expansion to something else
-    return ExpansionTile(
+    return ListTile(
       title: _buildTitle(context),
       // leading: Text(result.rssi.toString()),
       trailing: RaisedButton(
@@ -102,22 +102,22 @@ class ScanResultTile extends StatelessWidget {
         textColor: Colors.white,
         onPressed: (result.advertisementData.connectable) ? onTap : null,
       ),
-      children: <Widget>[
-        // _buildAdvRow(
-        //     context, 'Complete Local Name', result.advertisementData.localName),
-        // _buildAdvRow(context, 'Tx Power Level',
-        //     '${result.advertisementData.txPowerLevel ?? 'N/A'}'),
-        // _buildAdvRow(context, 'Manufacturer Data',
-        //     getNiceManufacturerData(result.advertisementData.manufacturerData)),
-        // _buildAdvRow(
-        //     context,
-        //     'Service UUIDs',
-        //     (result.advertisementData.serviceUuids.isNotEmpty)
-        //         ? result.advertisementData.serviceUuids.join(', ').toUpperCase()
-        //         : 'N/A'),
-        // _buildAdvRow(context, 'Service Data',
-        //     getNiceServiceData(result.advertisementData.serviceData)),
-      ],
+      // children: <Widget>[
+      //   // _buildAdvRow(
+      //   //     context, 'Complete Local Name', result.advertisementData.localName),
+      //   // _buildAdvRow(context, 'Tx Power Level',
+      //   //     '${result.advertisementData.txPowerLevel ?? 'N/A'}'),
+      //   // _buildAdvRow(context, 'Manufacturer Data',
+      //   //     getNiceManufacturerData(result.advertisementData.manufacturerData)),
+      //   // _buildAdvRow(
+      //   //     context,
+      //   //     'Service UUIDs',
+      //   //     (result.advertisementData.serviceUuids.isNotEmpty)
+      //   //         ? result.advertisementData.serviceUuids.join(', ').toUpperCase()
+      //   //         : 'N/A'),
+      //   // _buildAdvRow(context, 'Service Data',
+      //   //     getNiceServiceData(result.advertisementData.serviceData)),
+      // ],
     );
   }
 }
@@ -133,19 +133,22 @@ class ServiceTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (characteristicTiles.length > 0) {
-      return ExpansionTile(
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('Service'),
-            Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
-                style: Theme.of(context).textTheme.body1?.copyWith(
-                    color: Theme.of(context).textTheme.caption?.color))
-          ],
-        ),
+      return Column(
         children: characteristicTiles,
       );
+      // return ExpansionTile(
+      //   title: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: <Widget>[
+      //       Text('Service'),
+      //       Text('0x${service.uuid.toString().toUpperCase().substring(4, 8)}',
+      //           style: Theme.of(context).textTheme.body1?.copyWith(
+      //               color: Theme.of(context).textTheme.caption?.color))
+      //     ],
+      //   ),
+      //   children: characteristicTiles,
+      // );
     } else {
       return ListTile(
         title: Text('Service'),
@@ -179,43 +182,53 @@ class CharacteristicTile extends StatelessWidget {
       initialData: characteristic.lastValue,
       builder: (c, snapshot) {
         final value = snapshot.data;
+        var reps = 0;
+        if (value?.length != 0) {
+          reps = value![0];
+        } else {
+          reps = 0;
+        }
         return ExpansionTile(
           title: ListTile(
             title: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Characteristic'),
-                Text(
-                    '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
-                    style: Theme.of(context).textTheme.body1?.copyWith(
-                        color: Theme.of(context).textTheme.caption?.color))
+                Text('Rep Counter'),
+                // Text(
+                //     '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
+                //     style: Theme.of(context).textTheme.body1?.copyWith(
+                //         color: Theme.of(context).textTheme.caption?.color))
               ],
             ),
-            subtitle: Text(value.toString()),
+            subtitle: Text(reps.toString()),
             contentPadding: EdgeInsets.all(0.0),
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.file_download,
-                  color: Theme.of(context).iconTheme.color?.withOpacity(0.5),
-                ),
-                onPressed: onReadPressed,
-              ),
-              IconButton(
-                icon: Icon(Icons.file_upload,
-                    color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
-                onPressed: onWritePressed,
-              ),
+              // IconButton(
+              //   icon: Icon(
+              //     Icons.file_download,
+              //     color: Theme.of(context).iconTheme.color?.withOpacity(0.5),
+              //   ),
+              //   onPressed: onReadPressed,
+              // ),
+              // IconButton(
+              //   icon: Icon(Icons.file_upload,
+              //       color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+              //   onPressed: onWritePressed,
+              // ),
               IconButton(
                 icon: Icon(
                     characteristic.isNotifying
                         ? Icons.sync_disabled
                         : Icons.sync,
                     color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
+                // onPressed: () => {
+                //   onNotificationPressed,
+                //   // Music play
+                // },
                 onPressed: onNotificationPressed,
               )
             ],
