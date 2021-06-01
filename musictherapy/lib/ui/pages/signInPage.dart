@@ -156,7 +156,7 @@ class _SignInState extends State<SignIn> {
                       if (user != null) {
                         final cUser = FirebaseAuth.instance.currentUser;
                         _firestore
-                            .collection("user_roles")
+                            .collection("user_info")
                             .doc(cUser.uid)
                             .get()
                             .then((value) {
