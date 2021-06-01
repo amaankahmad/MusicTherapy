@@ -1,6 +1,8 @@
 //samus
 //update 19th jan
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/selectExercise.dart';
 import 'package:musictherapy/ui/pages/selectMusic.dart';
@@ -9,6 +11,8 @@ import 'package:musictherapy/ui/pages/signInPage.dart';
 import 'package:musictherapy/ui/pages/addAdmin.dart';
 
 class PlayerStartPage extends StatelessWidget {
+  String _username;
+  final cUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -19,6 +23,10 @@ class PlayerStartPage extends StatelessWidget {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
+    FirebaseFirestore.instance.collection("user_info").doc(cUser.uid).get().then((value) {
+      _username = value.data()["username"];
+    });
+
     return Scaffold(
       backgroundColor: white,
       body: Stack(
@@ -89,11 +97,13 @@ class PlayerStartPage extends StatelessWidget {
 // --------- WELCOME TEXT -----------------
                 Center(
                   child: Container(
+
                     child: Text(
-                      'Hello, Sam',
+                      'Hello, \n ' + _username,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         //fontFamily: 'Museo',
-                        fontSize: height * 0.08,
+                        fontSize: height * 0.04,
                         color: blue,
                         fontWeight: FontWeight.w700,
                       ),
@@ -195,7 +205,7 @@ class PlayerStartPage extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => Settings(),
+                          builder: (context) => SettingsPage(),
                         ),
                       );
                     },

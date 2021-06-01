@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/playerStartPage.dart';
 
-class Settings extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState extends State<SettingsPage> {
   var state = false;
   var switchColor = Colors.red[900];
   var _currentVolume = 60.0;
