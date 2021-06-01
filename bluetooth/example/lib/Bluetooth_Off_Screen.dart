@@ -10,11 +10,16 @@ class BluetoothOffScreen extends StatelessWidget {
   const BluetoothOffScreen({Key? key, this.state}) : super(key: key);
 
   final BluetoothState? state;
-
+  final orange = const Color(0xFFF57E00);
+  final green = const Color(0xFF04A489);
+  final blue = const Color(0xFF1E325C);
+  final white = const Color(0xFFFFFBF2);
+  final yellow = const Color(0xFFFFC247);
+  final honeydew = const Color(0xFFF1FAEE);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
+      backgroundColor: honeydew,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -22,14 +27,14 @@ class BluetoothOffScreen extends StatelessWidget {
             Icon(
               Icons.bluetooth_disabled,
               size: 200.0,
-              color: Colors.white54,
+              color: orange,
             ),
             Text(
-              'Bluetooth Adapter is ${state != null ? state.toString().substring(15) : 'not available'}.',
+              'Wearable connection is ${state != null ? state.toString().substring(15) : 'not available'}.',
               style: Theme.of(context)
                   .primaryTextTheme
                   .subhead
-                  ?.copyWith(color: Colors.white),
+                  ?.copyWith(color: orange),
             ),
           ],
         ),
