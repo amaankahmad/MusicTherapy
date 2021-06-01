@@ -8,7 +8,12 @@ import 'package:flutter_blue_example/widgets.dart';
 
 class DeviceScreen extends StatelessWidget {
   const DeviceScreen({Key? key, required this.device}) : super(key: key);
-
+  final orange = const Color(0xFFF57E00);
+  final green = const Color(0xFF04A489);
+  final blue = const Color(0xFF1E325C);
+  final white = const Color(0xFFFFFBF2);
+  final yellow = const Color(0xFFFFC247);
+  final honeydew = const Color(0xFFF1FAEE);
   final BluetoothDevice device;
 
   List<int> _getRandomBytes() {
@@ -59,7 +64,9 @@ class DeviceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+//----------------- APP BAR ----------------------
       appBar: AppBar(
+        backgroundColor: orange,
         title: Text(device.name),
         actions: <Widget>[
           StreamBuilder<BluetoothDeviceState>(
