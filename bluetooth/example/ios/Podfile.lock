@@ -1,4 +1,8 @@
 PODS:
+  - assets_audio_player (0.0.1):
+    - Flutter
+  - assets_audio_player_web (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_blue (0.0.1):
     - Flutter
@@ -6,27 +10,41 @@ PODS:
   - flutter_blue/Protos (0.0.1):
     - Flutter
     - Protobuf (~> 3.11.4)
+  - path_provider (0.0.1):
+    - Flutter
   - Protobuf (3.11.4)
 
 DEPENDENCIES:
+  - assets_audio_player (from `.symlinks/plugins/assets_audio_player/ios`)
+  - assets_audio_player_web (from `.symlinks/plugins/assets_audio_player_web/ios`)
   - Flutter (from `Flutter`)
   - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
 
 SPEC REPOS:
   trunk:
     - Protobuf
 
 EXTERNAL SOURCES:
+  assets_audio_player:
+    :path: ".symlinks/plugins/assets_audio_player/ios"
+  assets_audio_player_web:
+    :path: ".symlinks/plugins/assets_audio_player_web/ios"
   Flutter:
     :path: Flutter
   flutter_blue:
     :path: ".symlinks/plugins/flutter_blue/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
 
 SPEC CHECKSUMS:
+  assets_audio_player: edee322b9cb625571b830b35872ead1a295fd917
+  assets_audio_player_web: 19826380c44375761aa0b9053665c1e3fbc3b86b
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_blue: eeb381dc4727a0954dede73515f683865494b370
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
 
-PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+PODFILE CHECKSUM: 124871c13717f2388253dcfb709d8627f84a282d
 
 COCOAPODS: 1.10.1
