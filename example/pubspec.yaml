@@ -1,0 +1,24 @@
+name: flutter_blue_example
+description: Demonstrates how to use the flutter_blue plugin.
+publish_to: "none"
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  assets_audio_player: ^3.0.3+3
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_blue:
+    path: ../
+
+flutter:
+  uses-material-design: true
+
+  assets:
+  
+    - assets/
