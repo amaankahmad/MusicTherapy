@@ -41,6 +41,21 @@ class _SignUpState extends State<SignUp> {
   //int vaild = 0;
   var uname_exists = false;
 
+  int _currentAvatarIndex = 0;
+
+  // Avatar image selection
+
+ /* switch (_currentAvatarIndex) {
+    case 0:
+      Image.asset("assets/images/avatars/lion.png");
+  break;
+
+  case 1:
+  Image.asset("assets/images/avatars/cat.png");
+  break;
+
+  }*/
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -52,32 +67,32 @@ class _SignUpState extends State<SignUp> {
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
 
-      Future<void> _showMyDialog() async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Username already exists'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: const <Widget>[
-              Text('Please choose a different username.'),
+    Future<void> _showMyDialog() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Username already exists'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Please choose a different username.'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+          );
+        },
       );
-    },
-  );
-}
+    }
 
     return Scaffold(
       backgroundColor: white,
@@ -131,11 +146,29 @@ class _SignUpState extends State<SignUp> {
                 // Left Arrow
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    width: 20,
-                    child: Image.asset(
-                      'assets/images/navigation/left.png',
-                      color: Colors.orange[700],
+                  GestureDetector(
+                    onTap: () {
+                      print("Left");
+
+                      if (_currentAvatarIndex == 0) {
+                        setState(() {
+                          _currentAvatarIndex = 5;
+                          print(_currentAvatarIndex);
+                        });
+                      } else {
+                        setState(() {
+                          _currentAvatarIndex--;
+                        });
+                        print(_currentAvatarIndex);
+                      }
+                      ;
+                    },
+                    child: Container(
+                      width: 20,
+                      child: Image.asset(
+                        'assets/images/navigation/left.png',
+                        color: Colors.orange[700],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -162,11 +195,28 @@ class _SignUpState extends State<SignUp> {
                     width: 10,
                   ),
                   // Right Arrow
-                  Container(
-                    width: 25,
-                    child: Image.asset(
-                      'assets/images/navigation/right.png',
-                      color: Colors.orange[700],
+                  GestureDetector(
+                    onTap: () {
+                      print("Right");
+
+                      if (_currentAvatarIndex == 5) {
+                        setState(() {
+                          _currentAvatarIndex = 0;
+                          print(_currentAvatarIndex);
+                        });
+                      } else {
+                        setState(() {
+                          _currentAvatarIndex++;
+                        });
+                        print(_currentAvatarIndex);
+                      };                      ;
+                    },
+                    child: Container(
+                      width: 25,
+                      child: Image.asset(
+                        'assets/images/navigation/right.png',
+                        color: Colors.orange[700],
+                      ),
                     ),
                   ),
                 ],
@@ -240,12 +290,10 @@ class _SignUpState extends State<SignUp> {
                       validator: (uname_exists) {
                         if (uname_exists == true) {
                           return "Username already in use";
-                        }else {
+                        } else {
                           return null;
                         }
-
                       },
-
                     ),
 
 //_________________________________
@@ -498,7 +546,6 @@ class _SignUpState extends State<SignUp> {
                           });
                           print('Some text');
                           print(uname_exists);
-
 
                           //if user name is unique
                           if (uname_exists == false) {
