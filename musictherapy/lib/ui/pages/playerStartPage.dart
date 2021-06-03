@@ -9,6 +9,7 @@ import 'package:musictherapy/ui/pages/selectMusic.dart';
 import 'package:musictherapy/ui/pages/settings.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
 import 'package:musictherapy/ui/pages/addAdmin.dart';
+import 'package:musictherapy/ui/pages/myAdmin.dart';
 
 class PlayerStartPage extends StatelessWidget {
   String _username;
@@ -23,8 +24,24 @@ class PlayerStartPage extends StatelessWidget {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
-    FirebaseFirestore.instance.collection("user_info").doc(cUser.uid).get().then((value) {
+    FirebaseFirestore.instance
+        .collection("user_info")
+        .doc(cUser.uid)
+        .get()
+        .then((value) {
       _username = value.data()["username"];
+    });
+    var adminExists;
+    FirebaseFirestore.instance
+        .collection("player_admin")
+        .doc(cUser.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        adminExists = true;
+      } else {
+        adminExists = false;
+      }
     });
 
     return Scaffold(
@@ -73,7 +90,7 @@ class PlayerStartPage extends StatelessWidget {
             Column(
                 //crossAxisAlignment: CrossAxisAlignment.center,
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
 // --------- SPACING CONTROL --------------
                   SizedBox(
@@ -99,7 +116,6 @@ class PlayerStartPage extends StatelessWidget {
 // --------- WELCOME TEXT -----------------
                   Center(
                     child: Container(
-
                       child: Text(
                         'Hello,\n' + _username,
                         //'Hello,\n' + 'Sam',
@@ -129,7 +145,6 @@ class PlayerStartPage extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              //TODO: Change this to Select Exercise page once it has navigation to select music
                               builder: (context) => SelectExercise(),
                             ),
                           );
@@ -170,11 +185,19 @@ class PlayerStartPage extends StatelessWidget {
                       //height: height * 0.1,
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => AddAdmin(),
-                            ),
-                          );
+                          if (adminExists == false) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AddAdmin(),
+                              ),
+                            );
+                          } else if (adminExists == true) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MyAdmin(),
+                              ),
+                            );
+                          }
                         },
                         child: Material(
                           borderRadius: BorderRadius.circular(40),
@@ -199,7 +222,6 @@ class PlayerStartPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
 
 // --------- SPACING CONTROL --------------
                   SizedBox(

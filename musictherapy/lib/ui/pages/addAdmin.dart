@@ -17,7 +17,34 @@ class _AddAdminState extends State<AddAdmin> {
   String cUsername;
   String adminUsername;
   String adminUid;
-  var emptyPL = true;
+  var validAdmin = false;
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Invalid Admin Username'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Please enter an existing Admin Username.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,33 +57,6 @@ class _AddAdminState extends State<AddAdmin> {
     final green = const Color(0xFF04A489);
     final blue = const Color(0xFF1E325C);
     final white = const Color(0xFFFFFBF2);
-
-    Future<void> _showMyDialog() async {
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: false, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Invalid Admin Username'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: const <Widget>[
-                  Text('Please enter an existing Admin Username.'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
 
     return MaterialApp(
       home: Scaffold(
@@ -186,14 +186,7 @@ class _AddAdminState extends State<AddAdmin> {
                   child: GestureDetector(
                     onTap: () {
                       requestAdmin();
-                      if(adminUid != null){
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => PlayerStartPage(),
-                          ),
-                        );
-                      }
-                      else{_showMyDialog();}
+                      //if (adminUid != null) {
                     },
                     child: Material(
                       borderRadius: BorderRadius.circular(40),
@@ -234,28 +227,46 @@ class _AddAdminState extends State<AddAdmin> {
         .then((value) {
       adminUid = value.data()["UID"];
     });
-    //get the username of the player
-    await _firestore.collection("user_info").doc(cUser.uid).get().then((result) {
-      cUsername = result.data()["username"];
-    });
-    //add player to admin's players list
-    await _firestore.collection("admin_players").doc(adminUid).get()
-        .then((DocumentSnapshot documentSnapshot){
-      if(documentSnapshot.exists){}
-      else{
-        _firestore.collection("admin_players").doc(adminUid).set({"PlayerList":{}});
+    //check if the Admin username entered is valid
+    await _firestore.collection("user_info").doc(adminUid).get().then((value) {
+      if (value.data()["admin"] == true && adminUid != null) {
+        validAdmin = true;
+        //get the username of the player
+        _firestore.collection("user_info").doc(cUser.uid).get().then((result) {
+          cUsername = result.data()["username"];
+        });
+        //add player to admin's players list
+        _firestore
+            .collection("admin_players")
+            .doc(adminUid)
+            .get()
+            .then((DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.exists) {
+          } else {
+            _firestore
+                .collection("admin_players")
+                .doc(adminUid)
+                .set({"PlayerList": {}});
+          }
+        });
+        _firestore.collection("admin_players").doc(adminUid).update({
+          "PlayerList": FieldValue.arrayUnion([cUsername])
+        });
+        //save admin as player's myAdmin
+        _firestore
+            .collection("player_admin")
+            .doc(cUser.uid)
+            .set({"myAdmin": adminUid});
       }
-
     });
-
-    _firestore.collection("admin_players").doc(adminUid).update({
-      "PlayerList": FieldValue.arrayUnion([cUsername])
-    });
-    //save admin as player's myAdmin
-    _firestore
-        .collection("player_admin")
-        .doc(cUser.uid)
-        .set({"myAdmin": adminUid});
-
+    if (validAdmin == true) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PlayerStartPage(),
+        ),
+      );
+    } else {
+      _showMyDialog();
+    }
   }
 }
