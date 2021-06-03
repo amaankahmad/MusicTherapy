@@ -2,8 +2,10 @@
 // All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 //----------------- HOW DEVICE NAMES ARE SHOWN ----------------------
 class ScanResultTile extends StatelessWidget {
@@ -164,19 +166,12 @@ class ServiceTile extends StatelessWidget {
   }
 }
 
-class CharacteristicTile extends StatelessWidget {
+class CharacteristicTile extends StatefulWidget {
   final BluetoothCharacteristic characteristic;
   final List<DescriptorTile> descriptorTiles;
   final VoidCallback? onReadPressed;
   final VoidCallback? onWritePressed;
   final VoidCallback? onNotificationPressed;
-  final orange = const Color(0xFFF57E00);
-  final green = const Color(0xFF04A489);
-  final blue = const Color(0xFF1E325C);
-  final white = const Color(0xFFFFFBF2);
-  final yellow = const Color(0xFFFFC247);
-  final honeydew = const Color(0xFFF1FAEE);
-
   const CharacteristicTile(
       {Key? key,
       required this.characteristic,
@@ -187,15 +182,106 @@ class CharacteristicTile extends StatelessWidget {
       : super(key: key);
 
   @override
+  _CharacteristicTileState createState() => _CharacteristicTileState();
+}
+
+class _CharacteristicTileState extends State<CharacteristicTile> {
+  final orange = const Color(0xFFF57E00);
+  final green = const Color(0xFF04A489);
+  final blue = const Color(0xFF1E325C);
+  final white = const Color(0xFFFFFBF2);
+  final yellow = const Color(0xFFFFC247);
+  final honeydew = const Color(0xFFF1FAEE);
+
+  final assetsAudioPlayer_1 = AssetsAudioPlayer();
+  final assetsAudioPlayer_2 = AssetsAudioPlayer();
+  final assetsAudioPlayer_3 = AssetsAudioPlayer();
+  final assetsAudioPlayer_4 = AssetsAudioPlayer();
+  final assetsAudioPlayer_5 = AssetsAudioPlayer();
+  final assetsAudioPlayer_6 = AssetsAudioPlayer();
+  final assetsAudioPlayer_7 = AssetsAudioPlayer();
+
+  int reps = 0;
+
+  late Timer timer;
+
+  void increase_2(int reps) {
+    if (reps >= 5) {
+      setState(() {
+        assetsAudioPlayer_2.setVolume(1);
+      });
+    }
+  }
+
+  void increase_3(int reps) {
+    if (reps >= 10) {
+      setState(() {
+        assetsAudioPlayer_3.setVolume(1);
+      });
+    }
+  }
+
+  void increase_4(int reps) {
+    if (reps >= 15) {
+      setState(() {
+        assetsAudioPlayer_4.setVolume(1);
+      });
+    }
+  }
+
+  void increase_5(int reps) {
+    if (reps >= 20) {
+      setState(() {
+        assetsAudioPlayer_5.setVolume(1);
+      });
+    }
+  }
+
+  void increase_6(int reps) {
+    if (reps >= 25) {
+      setState(() {
+        assetsAudioPlayer_6.setVolume(1);
+      });
+    }
+  }
+
+  void increase_7(int reps) {
+    if (reps >= 30) {
+      setState(() {
+        assetsAudioPlayer_7.setVolume(1);
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => increase_2(reps));
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => increase_3(reps));
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => increase_4(reps));
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => increase_5(reps));
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => increase_6(reps));
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => increase_7(reps));
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<int>>(
-      stream: characteristic.value,
-      initialData: characteristic.lastValue,
+      stream: widget.characteristic.value,
+      initialData: widget.characteristic.lastValue,
       builder: (c, snapshot) {
         final value = snapshot.data;
-        var reps = 0;
+        // var reps = 0;
         if (value?.length != 0) {
-          reps = value![0];
+          if (value![0] < 100) {
+            reps = value[0];
+          }
         } else {
           reps = 0;
         }
@@ -207,7 +293,7 @@ class CharacteristicTile extends StatelessWidget {
             Row(
               children: [
                 SizedBox(
-                  width: 200,
+                  width: 210,
                 ),
                 Column(
                   children: [
@@ -249,6 +335,19 @@ class CharacteristicTile extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           // Music On Tap Function
+                          assetsAudioPlayer_1.open(Audio('assets/kick.wav'));
+                          assetsAudioPlayer_2.open(Audio('assets/highhat.wav'),
+                              volume: 0);
+                          assetsAudioPlayer_3.open(Audio('assets/bass.wav'),
+                              volume: 0);
+                          assetsAudioPlayer_4.open(Audio('assets/piano.wav'),
+                              volume: 0);
+                          assetsAudioPlayer_5.open(Audio('assets/beat.wav'),
+                              volume: 0);
+                          assetsAudioPlayer_6.open(Audio('assets/guitar.wav'),
+                              volume: 0);
+                          assetsAudioPlayer_7.open(Audio('assets/horns.wav'),
+                              volume: 0);
                         },
                         child: Material(
                           borderRadius: BorderRadius.circular(40),
@@ -280,7 +379,7 @@ class CharacteristicTile extends StatelessWidget {
                   Expanded(
                     child: Container(
                       child: GestureDetector(
-                        onTap: onNotificationPressed,
+                        onTap: widget.onNotificationPressed,
                         child: Material(
                           borderRadius: BorderRadius.circular(40),
                           shadowColor: orange,
@@ -307,6 +406,40 @@ class CharacteristicTile extends StatelessWidget {
                 ],
               ),
             ),
+            Container(
+              child: GestureDetector(
+                onTap: () {
+                  // Music On Tap Function
+                  assetsAudioPlayer_1.stop();
+                  assetsAudioPlayer_2.stop();
+                  assetsAudioPlayer_3.stop();
+                  assetsAudioPlayer_4.stop();
+                  assetsAudioPlayer_5.stop();
+                  assetsAudioPlayer_6.stop();
+                  assetsAudioPlayer_7.stop();
+                },
+                child: Material(
+                  borderRadius: BorderRadius.circular(40),
+                  shadowColor: orange,
+                  color: yellow,
+                  elevation: 3,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Text(
+                        'Stop Music',
+                        style: TextStyle(
+                          color: white,
+                          //fontFamily: 'Museo',
+                          fontSize: 20,
+                          //fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         );
         trailing:
@@ -327,13 +460,15 @@ class CharacteristicTile extends StatelessWidget {
             // ),
             IconButton(
               icon: Icon(
-                  characteristic.isNotifying ? Icons.sync_disabled : Icons.sync,
+                  widget.characteristic.isNotifying
+                      ? Icons.sync_disabled
+                      : Icons.sync,
                   color: Theme.of(context).iconTheme.color?.withOpacity(0.5)),
               // onPressed: () => {
               //   onNotificationPressed,
               //   // Music play
               // },
-              onPressed: onNotificationPressed,
+              onPressed: widget.onNotificationPressed,
             )
           ],
         );
