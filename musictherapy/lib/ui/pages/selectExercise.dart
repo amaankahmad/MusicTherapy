@@ -26,6 +26,17 @@ class SelectExerciseState extends State<SelectExercise> {
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
     final orange = const Color(0xFFF57E00);
+    final cUser = FirebaseAuth.instance.currentUser;
+    final _firestore = FirebaseFirestore.instance;
+    String adminUid;
+        //get uid of admin
+    _firestore
+        .collection("player_admin")
+        .doc(cUser.uid)
+        .get()
+        .then((value) {
+      adminUid = value.data()["myAdmin"];
+    });
     return Scaffold(
       floatingActionButton: null,
       backgroundColor: const Color(0xFFFFFBF2),
@@ -158,19 +169,66 @@ class SelectExerciseState extends State<SelectExercise> {
                                     ),
                                   ),
                                 ),
-                                //------------------------
-                                //My Exercise list
-                                /*
-                                Expanded(
-                                  child: ListView.builder(
-                                    itemCount: privExPreviews.length,
-                                    physics: BouncingScrollPhysics(),
-                                    itemBuilder: (context, index) {
-                                      return privExPreviews[index];
-                                    },
-                                  ),
+                              //------------------------
+                              //My Exercise list
+                              Expanded(
+                                child:StreamBuilder(
+                                      stream: FirebaseFirestore.instance
+                                        .collection('exercises_info')
+                                        .doc('PrivateExercises')
+                                        .collection(adminUid)
+                                        .snapshots(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: CircularProgressIndicator(),
+                                          );
+                                        }
+                                        return SizedBox(
+                                          height: height * 0.6,
+                                          child: ListView(
+                                            children: snapshot.data.docs
+                                                .map((document) {
+                                              return Center(
+                                                child: Container(
+                                                  width: MediaQuery.of(context).size.width / 1.2,
+                                                  child: Column(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding: EdgeInsets.only(
+                                                          top: 20,
+                                                          bottom: 5,
+                                                        ),
+                                                        child:
+                                                            //button
+                                                            Container(
+                                                                height: height * 0.1,
+                                                                width: width * 0.7,
+                                                                child: RaisedButton(
+                                                                  onPressed: () {}, //Function of the button when press
+                                                                  color: Colors.white,
+                                                                  shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(40.0),
+                                                                  ),
+                                                                  child: Text(document['name'],
+                                                                      style: TextStyle(
+                                                                        fontFamily: 'Museo',
+                                                                        color: Colors.black,
+                                                                        fontSize: height * 0.025,
+                                                                        fontWeight: FontWeight.bold,
+                                                                      )),
+                                                        )),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        );
+                                      }),
                                 ),
-                                */
                                 //------------------------
                                 //'Public Exercises' Bar
                                 Container(
@@ -259,7 +317,6 @@ class SelectExerciseState extends State<SelectExercise> {
                               ],
                             ),
                           //),
-
                         ),
                       ),
                     ],
