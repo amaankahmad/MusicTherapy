@@ -1,17 +1,23 @@
-//samus
+ //samus
 //update 19th jan
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:musictherapy/ui/pages/myAdmin.dart';
 import 'package:musictherapy/ui/pages/selectExercise.dart';
 import 'package:musictherapy/ui/pages/selectMusic.dart';
 import 'package:musictherapy/ui/pages/settings.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
 import 'package:musictherapy/ui/pages/addAdmin.dart';
-import 'package:musictherapy/ui/pages/myAdmin.dart';
 
-class PlayerStartPage extends StatelessWidget {
+
+class PlayerStartPage extends StatefulWidget {
+  @override
+  _PlayerStartPageState createState() => _PlayerStartPageState();
+}
+
+class _PlayerStartPageState extends State<PlayerStartPage> {
   String _username;
   final cUser = FirebaseAuth.instance.currentUser;
   @override
@@ -24,6 +30,10 @@ class PlayerStartPage extends StatelessWidget {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
+    /*FirebaseFirestore.instance.collection("user_info").doc(cUser.uid).get().then((value) {
+      _username = value.data()["username"];
+    });*/
+
     FirebaseFirestore.instance
         .collection("user_info")
         .doc(cUser.uid)
@@ -31,6 +41,7 @@ class PlayerStartPage extends StatelessWidget {
         .then((value) {
       _username = value.data()["username"];
     });
+
     var adminExists;
     FirebaseFirestore.instance
         .collection("player_admin")
@@ -90,7 +101,7 @@ class PlayerStartPage extends StatelessWidget {
             Column(
                 //crossAxisAlignment: CrossAxisAlignment.center,
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
 // --------- SPACING CONTROL --------------
                   SizedBox(
@@ -116,8 +127,9 @@ class PlayerStartPage extends StatelessWidget {
 // --------- WELCOME TEXT -----------------
                   Center(
                     child: Container(
+
                       child: Text(
-                        'Hello,\n' + _username,
+                        'Hello,\n $_username!',
                         //'Hello,\n' + 'Sam',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -145,6 +157,7 @@ class PlayerStartPage extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
+                              //TODO: Change this to Select Exercise page once it has navigation to select music
                               builder: (context) => SelectExercise(),
                             ),
                           );
@@ -197,7 +210,7 @@ class PlayerStartPage extends StatelessWidget {
                                 builder: (context) => MyAdmin(),
                               ),
                             );
-                          }
+                          };
                         },
                         child: Material(
                           borderRadius: BorderRadius.circular(40),
@@ -222,6 +235,7 @@ class PlayerStartPage extends StatelessWidget {
                       ),
                     ),
                   ),
+
 
 // --------- SPACING CONTROL --------------
                   SizedBox(
