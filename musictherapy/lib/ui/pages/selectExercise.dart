@@ -14,8 +14,7 @@ class SelectExercise extends StatefulWidget {
   SelectExerciseState createState() => SelectExerciseState();
 }
 
-
-class SelectExerciseState extends State<SelectExercise>  {
+class SelectExerciseState extends State<SelectExercise> {
   SelectExerciseState();
 
   Widget build(BuildContext context) {
@@ -24,15 +23,15 @@ class SelectExerciseState extends State<SelectExercise>  {
     final blue = const Color(0xFF1E325C);
     final white = const Color(0xFFFFFBF2);
     final green = const Color(0xFF04A489);
-    final yellow =  const Color(0xFFFFC247);
+    final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
     final orange = const Color(0xFFF57E00);
     return Scaffold(
       floatingActionButton: null,
       backgroundColor: const Color(0xFFFFFBF2),
-      body: 
+      body:
 //-----------------------------------------
-Stack(
+          Stack(
         children: [
           //------------------------
           //Back button
@@ -102,7 +101,7 @@ Stack(
                           //Scrolling area background
                           margin: EdgeInsets.symmetric(
                               vertical: 30, horizontal: 20),
-                          height: height * 0.6,
+                          height: height * 0.65,
                           decoration: BoxDecoration(
                             color: Colors.green[50],
                             borderRadius: BorderRadius.all(
@@ -111,6 +110,7 @@ Stack(
                           ),
                           //Scrolling area contents
                           child: SingleChildScrollView(
+                            physics: BouncingScrollPhysics (),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -197,9 +197,11 @@ Stack(
                                 //------------------------
                                 //Public Exercise list
                                 StreamBuilder(
-                                    stream: FirebaseFirestore.instance.collection('exercises_info').snapshots(),
-                                    builder:
-                                        (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    stream: FirebaseFirestore.instance
+                                        .collection('exercises_info')
+                                        .snapshots(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<QuerySnapshot> snapshot) {
                                       if (!snapshot.hasData) {
                                         return Center(
                                           child: CircularProgressIndicator(),
@@ -207,19 +209,40 @@ Stack(
                                       }
 
                                       return SizedBox(
-                                        height: height*0.6,
+                                        height: height * 0.6,
                                         child: ListView(
-                                          children: snapshot.data.docs.map((document) {
+                                          children: snapshot.data.docs
+                                              .map((document) {
                                             return Center(
                                               child: Container(
                                                 width: MediaQuery.of(context).size.width / 1.2,
                                                 child: Column(
                                                   children: <Widget>[
                                                     Padding(
-                                                      padding: EdgeInsets.only(top: 20, bottom: 5,),
-                                                      child: Text(document['name'],
+                                                      padding: EdgeInsets.only(
+                                                        top: 20,
+                                                        bottom: 5,
+                                                      ),
+                                                      child:
+                                                          //button
+                                                          Container(
+                                                              height: height * 0.1,
+                                                              width: width * 0.7,
+                                                              child: RaisedButton(
+                                                                onPressed: () {}, //Function of the button when press
+                                                                color: Colors.white,
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(40.0),
+                                                                ),
+                                                                child: Text(document['name'],
+                                                                    style: TextStyle(
+                                                                      fontFamily: 'Museo',
+                                                                      color: Colors.black,
+                                                                      fontSize: height * 0.025,
+                                                                      fontWeight: FontWeight.bold,
+                                                                    )),
+                                                              )),
                                                     ),
-                                                    )
                                                   ],
                                                 ),
                                               ),
@@ -227,7 +250,7 @@ Stack(
                                           }).toList(),
                                         ),
                                       );
-                                    }),  
+                                    }),
                               ],
                             ),
                           ),
@@ -241,9 +264,6 @@ Stack(
           ),
         ],
       ),
-
-      
-
     );
   }
 }
