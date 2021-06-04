@@ -31,44 +31,44 @@ class SelectExerciseState extends State<SelectExercise> {
       backgroundColor: const Color(0xFFFFFBF2),
       body:
 //-----------------------------------------
-          Stack(
+          SafeArea(
+            child: Stack(
         children: [
-          //------------------------
-          //Back button
-          Container(
-            margin: EdgeInsets.only(top: 60, left: 40),
-            width: 50,
-            height: 50,
-            child: Material(
-              borderRadius: BorderRadius.circular(10000),
-              shadowColor: blue,
-              color: white,
-              elevation: 3,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop(
-                    MaterialPageRoute(
-                      builder: (context) => SignIn(),
+            //------------------------
+            //Back button
+            Container(
+              margin: EdgeInsets.only(top: 60, left: 40),
+              width: 50,
+              height: 50,
+              child: Material(
+                borderRadius: BorderRadius.circular(10000),
+                shadowColor: blue,
+                color: white,
+                elevation: 3,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop(
+                      MaterialPageRoute(
+                        builder: (context) => SignIn(),
+                      ),
+                    );
+                  },
+                  child: ClipOval(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        left: 12,
+                        right: 12,
+                        bottom: 12,
+                      ),
+                      child: Image.asset('assets/images/navigation/arrow.jpeg'),
                     ),
-                  );
-                },
-                child: ClipOval(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 10,
-                      left: 12,
-                      right: 12,
-                      bottom: 12,
-                    ),
-                    child: Image.asset('assets/images/navigation/arrow.jpeg'),
                   ),
                 ),
               ),
             ),
-          ),
-          //------------------------
-          SafeArea(
-            child: Column(
+            //------------------------
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
@@ -101,7 +101,7 @@ class SelectExerciseState extends State<SelectExercise> {
                           //Scrolling area background
                           margin: EdgeInsets.symmetric(
                               vertical: 30, horizontal: 20),
-                          height: height * 0.65,
+                          height: height * 0.6,
                           decoration: BoxDecoration(
                             color: Colors.green[50],
                             borderRadius: BorderRadius.all(
@@ -109,8 +109,8 @@ class SelectExerciseState extends State<SelectExercise> {
                             ),
                           ),
                           //Scrolling area contents
-                          child: SingleChildScrollView(
-                            physics: BouncingScrollPhysics (),
+                          //child: SingleChildScrollView(
+                            //physics: BouncingScrollPhysics (),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -196,64 +196,70 @@ class SelectExerciseState extends State<SelectExercise> {
                                 ),
                                 //------------------------
                                 //Public Exercise list
-                                StreamBuilder(
-                                    stream: FirebaseFirestore.instance
-                                        .collection('exercises_info')
-                                        .snapshots(),
-                                    builder: (BuildContext context,
-                                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: CircularProgressIndicator(),
-                                        );
-                                      }
+                                Expanded(
+                                  child: StreamBuilder(
+                                      stream: FirebaseFirestore.instance
+                                          .collection('exercises_info')
+                                          .snapshots(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: CircularProgressIndicator(),
+                                          );
+                                        }
 
-                                      return SizedBox(
-                                        height: height * 0.6,
-                                        child: ListView(
-                                          children: snapshot.data.docs
-                                              .map((document) {
-                                            return Center(
-                                              child: Container(
-                                                width: MediaQuery.of(context).size.width / 1.2,
-                                                child: Column(
-                                                  children: <Widget>[
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                        top: 20,
-                                                        bottom: 5,
+                                        return SizedBox(
+                                          height: height * 0.6,
+                                          child: ListView(
+                                            children: snapshot.data.docs
+                                                .map((document) {
+                                              return Center(
+                                                child: Container(
+                                                  width: MediaQuery.of(context).size.width / 1.2,
+                                                  child: Column(
+                                                    children: <Widget>[
+                                                      Padding(
+                                                        padding: EdgeInsets.only(
+                                                          top: 20,
+                                                          bottom: 5,
+                                                        ),
+                                                        child:
+                                                            //button
+                                                            Container(
+                                                                height: height * 0.1,
+                                                                width: width * 0.7,
+                                                                child: RaisedButton(
+                                                                  onPressed: () {}, //Function of the button when press
+                                                                  color: Colors.white,
+                                                                  shape: RoundedRectangleBorder(
+                                                                    borderRadius: BorderRadius.circular(40.0),
+                                                                  ),
+                                                                  child: Text(document['name'],
+                                                                      style: TextStyle(
+                                                                        fontFamily: 'Museo',
+                                                                        color: Colors.black,
+                                                                        fontSize: height * 0.025,
+                                                                        fontWeight: FontWeight.bold,
+                                                                      )),
+                                                                )),
                                                       ),
-                                                      child:
-                                                          //button
-                                                          Container(
-                                                              height: height * 0.1,
-                                                              width: width * 0.7,
-                                                              child: RaisedButton(
-                                                                onPressed: () {}, //Function of the button when press
-                                                                color: Colors.white,
-                                                                shape: RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(40.0),
-                                                                ),
-                                                                child: Text(document['name'],
-                                                                    style: TextStyle(
-                                                                      fontFamily: 'Museo',
-                                                                      color: Colors.black,
-                                                                      fontSize: height * 0.025,
-                                                                      fontWeight: FontWeight.bold,
-                                                                    )),
-                                                              )),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      );
-                                    }),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(
+                                  height: height * 0.02,
+                                ),
                               ],
                             ),
-                          ),
+                          //),
+
                         ),
                       ),
                     ],
@@ -261,9 +267,9 @@ class SelectExerciseState extends State<SelectExercise> {
                 ),
               ],
             ),
-          ),
         ],
       ),
+          ),
     );
   }
 }
