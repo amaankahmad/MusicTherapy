@@ -34,7 +34,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
 //----------------------------
 // Home button
               Positioned(
-                top: 15,
+                top: 60,
                 right: 40,
                 child: Container(
                   width: 50,
@@ -73,7 +73,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
 //---------------------------------
 //Back button
               Positioned(
-                top: 15,
+                top: 60,
                 left: 40,
                 child: Container(
                   width: 50,
@@ -112,7 +112,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
                 children: [
                   //Spacing above 'Select Player'
                   SizedBox(
-                    height: height * 0.08,
+                    height: height * 0.05,
                   ),
 
 //-----------------------------------
@@ -132,7 +132,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
 //-----------------------------------
 // Container -> Stack -> Center -> Column
                   Container(
-                    height: height * 0.6,
+                    height: height * 0.7,
                     width: width * 0.9,
                     decoration: BoxDecoration(
                         color: const Color(0xFFFFFBF2),
@@ -144,202 +144,180 @@ class _SelectPlayerState extends State<SelectPlayer> {
                       children: [
                         Center(
                           //child: SingleChildScrollView(
-                            child: Column(
+                          child: Column(
 //---------------------------------------
 // Padding + SizedBox + Container + SizedBox
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Card(
-                                    elevation: 3,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          25.0), //Rounded edges for card of 'Player list
-                                    ),
-                                    child: TextField(
-                                      onChanged: (value) {},
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        prefixIcon: Icon(Icons.search),
-                                        hintText: 'Search',
-                                        hintStyle: TextStyle(
-                                            fontFamily: 'Museo',
-                                            fontSize: height * 0.025),
-                                      ),
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Card(
+                                  elevation: 3,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        25.0), //Rounded edges for card of 'Player list
+                                  ),
+                                  child: TextField(
+                                    onChanged: (value) {},
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      prefixIcon: Icon(Icons.search),
+                                      hintText: 'Search',
+                                      hintStyle: TextStyle(
+                                          fontFamily: 'Museo',
+                                          fontSize: height * 0.025),
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  //Sets padding around 'Player list'
-                                  child: Container(
-                                    width: 0.8 * width,
-                                    margin: EdgeInsets.all(10.0),
-                                    decoration: BoxDecoration(
-                                        color: green,
-                                        borderRadius: BorderRadius.circular(40)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 3.0,
-                                        horizontal: 20,
-                                      ),
-                                      child: Text(
-                                        //Text&font:'Leg Exercises'
-                                        'Connected Players',
-                                        style: TextStyle(
-                                            fontSize: height * 0.035,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                //Sets padding around 'Player list'
+                                child: Container(
+                                  width: 0.8 * width,
+                                  margin: EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                      color: green,
+                                      borderRadius: BorderRadius.circular(40)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 3.0,
+                                      horizontal: 20,
+                                    ),
+                                    child: Text(
+                                      //Text&font:'Leg Exercises'
+                                      'Connected Players',
+                                      style: TextStyle(
+                                          fontSize: height * 0.035,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  //Creates gap between Player list and Table
-                                  height: 5,
-                                ),
-                                Container(
-                                  height: height * 0.6,
-                                  // child: GridView.count(
-                                  //   //Creates grid
-                                  //   padding: const EdgeInsets.all(
-                                  //       20), //Padding for grid
-                                  //   crossAxisSpacing: width *
-                                  //       0.024, //Sets horizontal spacing between each circle
-                                  //   mainAxisSpacing: height *
-                                  //       0.02, //Sets vertical spacing between each circle
-                                  //   crossAxisCount:
-                                  //       2, //Sets how many units for width of grid
-                                  child: Expanded(
-                                    child: StreamBuilder(
-                                        stream: FirebaseFirestore.instance
-                                            .collection('admin_players')
-                                            .doc(cUser.uid)
-                                            .collection('PlayerList')
-                                            .snapshots(),
-                                        builder: (BuildContext context,
-                                            AsyncSnapshot<QuerySnapshot> snapshot) {
-                                          if (!snapshot.hasData) {
+                              ),
+                              SizedBox(
+                                //Creates gap between Player list and Table
+                                height: 5,
+                              ),
+                              Container(
+                                height: height * 0.4,
+                                // child: GridView.count(
+                                //   //Creates grid
+                                //   padding: const EdgeInsets.all(
+                                //       20), //Padding for grid
+                                //   crossAxisSpacing: width *
+                                //       0.024, //Sets horizontal spacing between each circle
+                                //   mainAxisSpacing: height *
+                                //       0.02, //Sets vertical spacing between each circle
+                                //   crossAxisCount:
+                                //       2, //Sets how many units for width of grid
+                                child: StreamBuilder(
+                                    stream: FirebaseFirestore.instance
+                                        .collection('admin_players')
+                                        .doc(cUser.uid)
+                                        .collection('PlayerList')
+                                        .snapshots(),
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<QuerySnapshot>
+                                            snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      }
+
+                                      return SizedBox(
+                                        height: height * 0.4,
+                                        child: ListView(
+                                          children: snapshot.data.docs.map((document) {
                                             return Center(
-                                              child: CircularProgressIndicator(),
-                                            );
-                                          }
-
-                                          return SizedBox(
-                                            height: height * 0.6,
-                                            child: ListView(
-                                              children: snapshot.data.docs
-                                                  .map((document) {
-                                                return Center(
-                                                  child: Container(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width /
-                                                        1.2,
-                                                    child: Column(
-                                                      children: <Widget>[
-                                                        Padding(
-                                                          padding: EdgeInsets.only(
-                                                            top: 20,
-                                                            bottom: 5,
-                                                          ),
-                                                          child:
-                                                              //button
-                                                              Container(
-                                                                  height:
-                                                                      height * 0.1,
-                                                                  width:
-                                                                      width * 0.7,
-                                                                  child:
-                                                                      RaisedButton(
-                                                                    onPressed:
-                                                                        () {}, //Function of the button when press
-                                                                    color: Colors
-                                                                        .white,
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                                  40.0),
-                                                                    ),
-                                                                    child: Text(
-                                                                        document[
-                                                                            'player'],
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontFamily:
-                                                                              'Museo',
-                                                                          color: Colors
-                                                                              .black,
-                                                                          fontSize:
-                                                                              height *
-                                                                                  0.025,
-                                                                          fontWeight:
-                                                                              FontWeight
-                                                                                  .bold,
-                                                                        )),
-                                                                  )),
-                                                        ),
-                                                      ],
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width / 1.2,
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        top: 20,
+                                                        bottom: 5,
+                                                      ),
+                                                      child:
+                                                      //button
+                                                          Container(
+                                                              height: height * 0.1,
+                                                              width: width * 0.7,
+                                                              child: RaisedButton(
+                                                                onPressed:
+                                                                    () {}, //Function of the button when press
+                                                                color: Colors.white,
+                                                                shape: RoundedRectangleBorder(
+                                                                  borderRadius: BorderRadius.circular(40.0),
+                                                                ),
+                                                                child: Text(document['player'],
+                                                                    style: TextStyle(
+                                                                      fontFamily:'Museo',
+                                                                      color: Colors.black,
+                                                                      fontSize: height * 0.025,
+                                                                      fontWeight: FontWeight.bold,
+                                                                    )),
+                                                              )),
                                                     ),
-                                                  ),
-                                                );
-                                              }).toList(),
-                                            ),
-                                          );
-                                        }),
-                                  ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      );
+                                    }),
 
-                                  // List.generate(18, (int index) {
-                                  //   //generated 18 circles
-                                  //   return Column(
-                                  //     //Column so that can contain circle and text
-                                  //     crossAxisAlignment: CrossAxisAlignment
-                                  //         .center, //Centered both items
-                                  //     children: [
-                                  //       FlatButton(
-                                  //         onPressed: () {},
-                                  //         child: Container(
-                                  //           width: height * 0.14,
-                                  //           height: height * 0.14,
-                                  //           decoration: BoxDecoration(
-                                  //             shape: BoxShape.circle,
-                                  //             border: Border.all(
-                                  //                 color: orange, width: 12.0),
-                                  //           ),
-                                  //           child: ClipOval(
-                                  //             child: Padding(
-                                  //               padding:
-                                  //                   const EdgeInsets.all(4.0),
-                                  //               child: Image.asset(
-                                  //                   "assets/images/avatars/lion.png"),
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //       SizedBox(
-                                  //         height: height * 0.01,
-                                  //       ),
-                                  //       Text(
-                                  //         'User ${index + 1}',
-                                  //         style: TextStyle(
-                                  //           color: const Color(0xFF1E325C),
-                                  //           fontWeight: FontWeight.bold,
-                                  //           fontFamily: 'Museo',
-                                  //           fontSize: height * 0.024,
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   );
-                                  // }),
-                                ),
-                                //),
-                                SizedBox(
-                                  height: 20, //Creates space at bottom of grid
-                                ),
-                              ],
-                            ),
+                                // List.generate(18, (int index) {
+                                //   //generated 18 circles
+                                //   return Column(
+                                //     //Column so that can contain circle and text
+                                //     crossAxisAlignment: CrossAxisAlignment
+                                //         .center, //Centered both items
+                                //     children: [
+                                //       FlatButton(
+                                //         onPressed: () {},
+                                //         child: Container(
+                                //           width: height * 0.14,
+                                //           height: height * 0.14,
+                                //           decoration: BoxDecoration(
+                                //             shape: BoxShape.circle,
+                                //             border: Border.all(
+                                //                 color: orange, width: 12.0),
+                                //           ),
+                                //           child: ClipOval(
+                                //             child: Padding(
+                                //               padding:
+                                //                   const EdgeInsets.all(4.0),
+                                //               child: Image.asset(
+                                //                   "assets/images/avatars/lion.png"),
+                                //             ),
+                                //           ),
+                                //         ),
+                                //       ),
+                                //       SizedBox(
+                                //         height: height * 0.01,
+                                //       ),
+                                //       Text(
+                                //         'User ${index + 1}',
+                                //         style: TextStyle(
+                                //           color: const Color(0xFF1E325C),
+                                //           fontWeight: FontWeight.bold,
+                                //           fontFamily: 'Museo',
+                                //           fontSize: height * 0.024,
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   );
+                                // }),
+                              ),
+                              //),
+                              SizedBox(
+                                height: height * 0.1, //Creates space at bottom of grid
+                              ),
+                            ],
+                          ),
                           //),
                         ),
                       ],
