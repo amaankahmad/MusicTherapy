@@ -19,6 +19,34 @@ class _MyAdminState extends State<MyAdmin> {
   String adminUsername;
   String adminUid;
 
+  void getPlayerInfo() async {
+    _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
+      setState(() {
+        cUsername = value.data()["username"];
+      });
+    });
+  }
+
+  void getMyAdmin() async {
+    _firestore.collection("player_admin").doc(cUser.uid).get().then((value) {
+      setState(() {
+        adminUid = value.data()["myAdmin"];
+        _firestore.collection("user_info").doc(adminUid).get().then((value) {
+          setState(() {
+            adminUsername = value.data()["username"];
+          });
+        });
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPlayerInfo();
+    getMyAdmin();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations(
@@ -32,13 +60,6 @@ class _MyAdminState extends State<MyAdmin> {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
-    //get my admin info
-    _firestore.collection("player_admin").doc(cUser.uid).get().then((value) {
-      adminUid = value.data()["myAdmin"];
-    });
-    _firestore.collection("user_info").doc(adminUid).get().then((value) {
-      adminUsername = value.data()["username"];
-    });
 
     Future<void> _showMyDialog() async {
       return showDialog<void>(
