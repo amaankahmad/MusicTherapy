@@ -137,6 +137,25 @@ class _AddAdminState extends State<AddAdmin> {
             Center(
               child: Column(children: <Widget>[
                 //------------------------
+                //Spacing
+                SizedBox(
+                  height: height * 0.08,
+                ),
+                //------------------------
+                //Title text&font: 'Connect to an Admin'
+                Text(
+                  'Connect to\nan Admin',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: height * 0.06,
+                    color: const Color(0xFF1E325C),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                // SizedBox(
+                //   height: height * 0.01,
+                // ),
+                //------------------------
                 //"Enter Username of Admin"
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,8 +163,8 @@ class _AddAdminState extends State<AddAdmin> {
                       SizedBox(
                         height: height * 0.3,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                      Container(
+                        width: width * 0.8,
                         child: TextField(
                           onChanged: (adminUname) {
                             setState(() {
@@ -155,7 +174,7 @@ class _AddAdminState extends State<AddAdmin> {
                           decoration: InputDecoration(
                             labelText: 'Enter Admin Username:',
                             labelStyle: TextStyle(
-                              fontSize: 25,
+                              fontSize: height * 0.03,
                               color: orange,
                             ),
                             enabledBorder: UnderlineInputBorder(
@@ -234,29 +253,41 @@ class _AddAdminState extends State<AddAdmin> {
         //get the username of the player
         _firestore.collection("user_info").doc(cUser.uid).get().then((result) {
           cUsername = result.data()["username"];
+          //add player to admin's player list
+          _firestore
+              .collection("admin_players")
+              .doc(adminUid)
+              .collection("PlayerList")
+              .doc(cUser.uid)
+              .set({"player": cUsername});
+          //save admin as player's myAdmin
+          _firestore
+              .collection("player_admin")
+              .doc(cUser.uid)
+              .set({"myAdmin": adminUid});
         });
-        //add player to admin's players list
-        _firestore
-            .collection("admin_players")
-            .doc(adminUid)
-            .get()
-            .then((DocumentSnapshot documentSnapshot) {
-          if (documentSnapshot.exists) {
-          } else {
-            _firestore
-                .collection("admin_players")
-                .doc(adminUid)
-                .set({"PlayerList": {}});
-          }
-        });
-        _firestore.collection("admin_players").doc(adminUid).update({
-          "PlayerList": FieldValue.arrayUnion([cUsername])
-        });
-        //save admin as player's myAdmin
-        _firestore
-            .collection("player_admin")
-            .doc(cUser.uid)
-            .set({"myAdmin": adminUid});
+
+        // _firestore
+        //     .collection("admin_players")
+        //     .doc(adminUid)
+        //     .collection("PlayerList")
+        //     .doc(cUser.uid)
+        //     .get()
+        //     .then((DocumentSnapshot documentSnapshot) {
+        //   if (documentSnapshot.exists) {
+        //   } else {
+        //     _firestore
+        //         .collection("admin_players")
+        //         .doc(adminUid)
+        //         .collection("PlayerList")
+        //         .doc(cUser.uid)
+        //         .set({"PlayerList": {}});
+        //   }
+        // });
+        // _firestore.collection("admin_players").doc(adminUid).update({
+        //   "PlayerList": FieldValue.arrayUnion([cUsername])
+        // });
+
       }
     });
     if (validAdmin == true) {
