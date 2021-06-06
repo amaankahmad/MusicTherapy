@@ -1,16 +1,16 @@
- //samus
+//samus
 //update 19th jan
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/myAdmin.dart';
+import 'package:musictherapy/ui/pages/playPage.dart';
 import 'package:musictherapy/ui/pages/selectExercise.dart';
 import 'package:musictherapy/ui/pages/selectMusic.dart';
 import 'package:musictherapy/ui/pages/settings.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
 import 'package:musictherapy/ui/pages/addAdmin.dart';
-
 
 class PlayerStartPage extends StatefulWidget {
   @override
@@ -18,8 +18,44 @@ class PlayerStartPage extends StatefulWidget {
 }
 
 class _PlayerStartPageState extends State<PlayerStartPage> {
-  String _username;
   final cUser = FirebaseAuth.instance.currentUser;
+  final _firestore = FirebaseFirestore.instance;
+  String _username;
+  var adminExists;
+
+  void getPlayerInfo() async {
+    _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
+      setState(() {
+        _username = value.data()["username"];
+      });
+    });
+  }
+
+  void checkAdmin() async {
+    _firestore
+        .collection("player_admin")
+        .doc(cUser.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        setState(() {
+          adminExists = true;
+        });
+      } else {
+        setState(() {
+          adminExists = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPlayerInfo();
+    checkAdmin();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -30,30 +66,6 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
-    /*FirebaseFirestore.instance.collection("user_info").doc(cUser.uid).get().then((value) {
-      _username = value.data()["username"];
-    });*/
-
-    FirebaseFirestore.instance
-        .collection("user_info")
-        .doc(cUser.uid)
-        .get()
-        .then((value) {
-      _username = value.data()["username"];
-    });
-
-    var adminExists;
-    FirebaseFirestore.instance
-        .collection("player_admin")
-        .doc(cUser.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        adminExists = true;
-      } else {
-        adminExists = false;
-      }
-    });
 
     return Scaffold(
       backgroundColor: white,
@@ -101,7 +113,7 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
             Column(
                 //crossAxisAlignment: CrossAxisAlignment.center,
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.min,
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
 // --------- SPACING CONTROL --------------
                   SizedBox(
@@ -127,7 +139,6 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
 // --------- WELCOME TEXT -----------------
                   Center(
                     child: Container(
-
                       child: Text(
                         'Hello,\n $_username!',
                         //'Hello,\n' + 'Sam',
@@ -159,6 +170,7 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                             MaterialPageRoute(
                               //TODO: Change this to Select Exercise page once it has navigation to select music
                               builder: (context) => SelectExercise(),
+                              //builder: (context) => PlayPage(),
                             ),
                           );
                         },
@@ -210,7 +222,8 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                                 builder: (context) => MyAdmin(),
                               ),
                             );
-                          };
+                          }
+                          ;
                         },
                         child: Material(
                           borderRadius: BorderRadius.circular(40),
@@ -235,7 +248,6 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                       ),
                     ),
                   ),
-
 
 // --------- SPACING CONTROL --------------
                   SizedBox(

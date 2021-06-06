@@ -14,8 +14,24 @@ class AdminStartPage extends StatefulWidget {
 }
 
 class AdminStartState extends State<AdminStartPage> {
-  String _username;
+  final _firestore = FirebaseFirestore.instance;
   final cUser = FirebaseAuth.instance.currentUser;
+  String _username;
+
+  void getAdminInfo() async {
+    _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
+      setState(() {
+        _username = value.data()["username"];
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAdminInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -26,15 +42,6 @@ class AdminStartState extends State<AdminStartPage> {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
-
-    /*FirebaseFirestore.instance
-        .collection("user_info")
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        _username = doc["username"];
-      });
-    });*/
 
     FirebaseFirestore.instance
         .collection("user_info")
