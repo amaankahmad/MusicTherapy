@@ -91,7 +91,7 @@ class _CreateExercisesState extends State<CreateExercises> {
                   height: height * 0.01,
                 ),
                 Text(
-                  'Upload\nExercise Video',
+                  'Create\nExercise',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Museo',
@@ -251,7 +251,7 @@ class _CreateExercisesState extends State<CreateExercises> {
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Text(
-                                      'Click to browse file/\ndrag & drop',
+                                      'Click to browse file',
                                       //move the text to center horizontally
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
