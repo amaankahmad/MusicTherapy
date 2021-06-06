@@ -187,7 +187,7 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                                 style: TextStyle(
                                   color: white,
                                   //fontFamily: 'Museo',
-                                  fontSize: 50,
+                                  fontSize: height*0.05,
                                   //fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -228,7 +228,7 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                         child: Material(
                           borderRadius: BorderRadius.circular(40),
                           shadowColor: orange,
-                          color: white,
+                          color: yellow,
                           elevation: 3,
                           child: Center(
                             child: Padding(
@@ -236,9 +236,9 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                               child: Text(
                                 'My Admin',
                                 style: TextStyle(
-                                  color: green,
+                                  color: white,
                                   //fontFamily: 'Museo',
-                                  fontSize: 30,
+                                  fontSize: height*0.033,
                                   //fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -281,7 +281,7 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                                 style: TextStyle(
                                   color: green,
                                   //fontFamily: 'Museo',
-                                  fontSize: 30,
+                                  fontSize: height*0.033,
                                   //fontWeight: FontWeight.w700,
                                 ),
                               ),
