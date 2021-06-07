@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'tflite real-time detection',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
