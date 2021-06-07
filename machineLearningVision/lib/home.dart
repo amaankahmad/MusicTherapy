@@ -5,7 +5,8 @@ import 'dart:math' as math;
 
 import 'camera.dart';
 import 'bndbox.dart';
-import 'models.dart';
+
+const String posenet = "PoseNet";
 
 class HomePage extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -30,7 +31,6 @@ class _HomePageState extends State<HomePage> {
   loadModel() async {
     String res;
     switch (_model) {
-
       case posenet:
         res = await Tflite.loadModel(
             model: "assets/posenet_mv1_075_float_from_checkpoints.tflite");

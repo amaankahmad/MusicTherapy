@@ -3,7 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:tflite/tflite.dart';
 import 'dart:math' as math;
 
-import 'models.dart';
+const String posenet = "PoseNet";
 
 typedef void Callback(List<dynamic> list, int h, int w);
 
@@ -45,7 +45,7 @@ class _CameraState extends State<Camera> {
 
             int startTime = new DateTime.now().millisecondsSinceEpoch;
 
-           if (widget.model == posenet) {
+            if (widget.model == posenet) {
               Tflite.runPoseNetOnFrame(
                 bytesList: img.planes.map((plane) {
                   return plane.bytes;

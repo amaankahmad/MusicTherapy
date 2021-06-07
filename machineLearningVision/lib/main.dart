@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'tflite real-time detection',
+      title: 'machineLearningVision',
       theme: ThemeData(
         brightness: Brightness.dark,
       ),

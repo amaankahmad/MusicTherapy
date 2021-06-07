@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'models.dart';
+
+const String posenet = "PoseNet";
 
 class BndBox extends StatelessWidget {
   final List<dynamic> results;
@@ -14,7 +15,6 @@ class BndBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> _renderKeypoints() {
       var lists = <Widget>[];
       results.forEach((re) {
@@ -59,8 +59,6 @@ class BndBox extends StatelessWidget {
       return lists;
     }
 
-    return Stack(
-      children: model == posenet ? _renderKeypoints() : null
-    );
+    return Stack(children: model == posenet ? _renderKeypoints() : null);
   }
 }
