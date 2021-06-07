@@ -152,7 +152,7 @@ class _SignUpState extends State<SignUp> {
 
                       if (_currentAvatarIndex == 0) {
                         setState(() {
-                          _currentAvatarIndex = 5;
+                          _currentAvatarIndex = 10;
                           print(_currentAvatarIndex);
                         });
                       } else {
@@ -186,7 +186,7 @@ class _SignUpState extends State<SignUp> {
                       child: ClipOval(
                         child: Padding(
                           padding: const EdgeInsets.all(4.0),
-                          child: Image.asset("assets/images/avatars/lion.png"),
+                          child: Image.asset("assets/images/avatars/$_currentAvatarIndex.jpeg"),
                         ),
                       ),
                     ),
@@ -199,7 +199,7 @@ class _SignUpState extends State<SignUp> {
                     onTap: () {
                       print("Right");
 
-                      if (_currentAvatarIndex == 5) {
+                      if (_currentAvatarIndex == 10) {
                         setState(() {
                           _currentAvatarIndex = 0;
                           print(_currentAvatarIndex);
@@ -209,7 +209,7 @@ class _SignUpState extends State<SignUp> {
                           _currentAvatarIndex++;
                         });
                         print(_currentAvatarIndex);
-                      };                      ;
+                      };                     
                     },
                     child: Container(
                       width: 25,
@@ -567,6 +567,7 @@ class _SignUpState extends State<SignUp> {
                               'player': _checkPlayer,
                               'email': _email,
                               'username': _username,
+                              'avatar' : _currentAvatarIndex,
                             });
                             firestore
                                 .collection('username_uid')
