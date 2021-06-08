@@ -346,7 +346,8 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                         ),
                       ),
                       Container(
-                        child: Text(s.elapsedMilliseconds.toString()),
+                        child: Text(
+                            "${((s.elapsedMilliseconds / 1000).round()).toString()} seconds"),
                       )
                     ],
                   ),
