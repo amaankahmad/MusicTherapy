@@ -10,15 +10,16 @@ class BndBox extends StatelessWidget {
   final double screenH;
   final double screenW;
   final String model;
+  final List<double> movement;
 
   BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
-      this.model);
+      this.model, this.movement);
 
   @override
   Widget build(BuildContext context) {
+    // var angle_prog = [];
     double shoulderX, elbowX, wristX;
     double shoulderY, elbowY, wristY;
-    List<dynamic> angle_prog = [];
     List<Widget> _renderKeypoints() {
       var lists = <Widget>[];
       results.forEach((re) {
@@ -62,7 +63,21 @@ class BndBox extends StatelessWidget {
             if (shoulderX != null && elbowX != null && wristX != null) {
               angle = getAngle(
                   shoulderX, shoulderY, elbowX, elbowY, wristX, wristY);
-              print(angle);
+              // print(angle);
+              // if (movement[movement.length - 1] -
+              //         movement[movement.length - 3] <
+              //     0.5) {
+              //   if (angle - movement[movement.length - 3] > 0.5) {
+              //     print(
+              //         "REP COUNTED! Angle difference = ${movement[movement.length - 1]}");
+              //   }
+              // }
+              if (compare(movement)) {
+                // print(
+                //     "REP COUNTED! Angle difference = ${movement[movement.length - 1]}");
+              }
+              movement.add(angle);
+              // print(movement);
             }
           }
 
@@ -85,7 +100,6 @@ class BndBox extends StatelessWidget {
 
         lists..addAll(list);
       });
-
       return lists;
     }
 
@@ -109,4 +123,50 @@ double getAngle(double shoulderX, double shoulderY, double elbowX,
       (2 * sh_to_el * el_to_wr)));
 
   // print("Angle at elbow joint: $angle");
+  return angle;
+}
+
+bool compare(List<double> movement) {
+  int end = movement.length - 1;
+  double avg_1 = ((movement[end] +
+          movement[end - 1] +
+          movement[end - 2] +
+          movement[end - 3] +
+          movement[end - 4] +
+          movement[end - 5] +
+          movement[end - 6] +
+          movement[end - 7] +
+          movement[end - 8] +
+          movement[end - 9] +
+          movement[end - 10] +
+          movement[end - 11] +
+          movement[end - 12] +
+          movement[end - 13] +
+          movement[end - 14] +
+          movement[end - 15]) /
+      16);
+
+  double avg_2 = ((movement[end - 16] +
+          movement[end - 17] +
+          movement[end - 18] +
+          movement[end - 19] +
+          movement[end - 20] +
+          movement[end - 21] +
+          movement[end - 22] +
+          movement[end - 23] +
+          movement[end - 24] +
+          movement[end - 25] +
+          movement[end - 26] +
+          movement[end - 27] +
+          movement[end - 28] +
+          movement[end - 29] +
+          movement[end - 30] +
+          movement[end - 31]) /
+      16);
+  double diff = avg_1 - avg_2;
+  print("$diff");
+  // if (avg_2 - avg_1 > 0.75) {
+  //   return true;
+  // }
+  return false;
 }

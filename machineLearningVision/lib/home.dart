@@ -22,6 +22,44 @@ class _HomePageState extends State<HomePage> {
   int _imageHeight = 0;
   int _imageWidth = 0;
   String _model = "";
+  List<double> movement = [
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14,
+    3.14
+  ];
 
   @override
   void initState() {
@@ -77,13 +115,20 @@ class _HomePageState extends State<HomePage> {
                   _model,
                   setRecognitions,
                 ),
+                Container(
+                  // Put play page here
+                  width: screen.width,
+                  height: screen.height,
+                  decoration: BoxDecoration(color: Colors.red),
+                ),
                 BndBox(
                     _recognitions == null ? [] : _recognitions,
                     math.max(_imageHeight, _imageWidth),
                     math.min(_imageHeight, _imageWidth),
                     screen.height,
                     screen.width,
-                    _model),
+                    _model,
+                    movement),
               ],
             ),
     );
