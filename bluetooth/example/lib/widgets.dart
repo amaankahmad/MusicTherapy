@@ -98,12 +98,35 @@ class ScanResultTile extends StatelessWidget {
     return ListTile(
       title: _buildTitle(context),
       // leading: Text(result.rssi.toString()),
-      trailing: RaisedButton(
-        child: Text('CONNECT'),
-        color: blue,
-        textColor: Colors.white,
-        onPressed: (result.advertisementData.connectable) ? onTap : null,
+      trailing: Expanded(
+        child: Container(
+          child: GestureDetector(
+            onTap: (result.advertisementData.connectable) ? onTap : null,
+            child: Material(
+              borderRadius: BorderRadius.circular(50),
+              shadowColor: orange,
+              color: green,
+              elevation: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Icon(
+                  Icons.add,
+                  color: white,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
+      // FloatingActionButton(
+
+      //   // child: Text('CONNECT'),
+      //   child: Icon(Icons.add_circle_outline_rounded),
+
+      //   backgroundColor: blue,
+      //   // textColor: Colors.white,
+      //   onPressed: (result.advertisementData.connectable) ? onTap : null,
+      // ),
       // children: <Widget>[
       //   // _buildAdvRow(
       //   //     context, 'Complete Local Name', result.advertisementData.localName),
@@ -205,10 +228,12 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
 
   late Timer timer;
 
+  Stopwatch s = new Stopwatch();
+
   void increase_2(int reps) {
     if (reps >= 5) {
       setState(() {
-        assetsAudioPlayer_2.setVolume(1);
+        assetsAudioPlayer_2.setVolume(0.5);
       });
     }
   }
@@ -216,7 +241,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_3(int reps) {
     if (reps >= 10) {
       setState(() {
-        assetsAudioPlayer_3.setVolume(1);
+        assetsAudioPlayer_3.setVolume(0.7);
       });
     }
   }
@@ -224,7 +249,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_4(int reps) {
     if (reps >= 15) {
       setState(() {
-        assetsAudioPlayer_4.setVolume(1);
+        assetsAudioPlayer_4.setVolume(0.7);
       });
     }
   }
@@ -232,7 +257,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_5(int reps) {
     if (reps >= 20) {
       setState(() {
-        assetsAudioPlayer_5.setVolume(1);
+        assetsAudioPlayer_5.setVolume(0.5);
       });
     }
   }
@@ -240,7 +265,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_6(int reps) {
     if (reps >= 25) {
       setState(() {
-        assetsAudioPlayer_6.setVolume(1);
+        assetsAudioPlayer_6.setVolume(0.7);
       });
     }
   }
@@ -248,7 +273,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_7(int reps) {
     if (reps >= 30) {
       setState(() {
-        assetsAudioPlayer_7.setVolume(1);
+        assetsAudioPlayer_7.setVolume(0.7);
       });
     }
   }
@@ -285,162 +310,189 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
         } else {
           reps = 0;
         }
-        return Column(
-          children: [
-            SizedBox(
-              height: 50,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 210,
-                ),
-                Column(
-                  children: [
-                    Text(
-                      'Rep Counter:',
-                      style: TextStyle(
-                        color: blue,
-                        fontSize: 20,
-                      ),
-                    ),
-                    // Text(
-                    //     '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
-                    //     style: Theme.of(context).textTheme.body1?.copyWith(
-                    //         color: Theme.of(context).textTheme.caption?.color))
-                    Container(
-                      child: Text(
-                        reps.toString(),
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: 100,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 200,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        'Rep Counter:',
                         style: TextStyle(
                           color: blue,
-                          fontSize: 125,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      // Text(
+                      //     '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
+                      //     style: Theme.of(context).textTheme.body1?.copyWith(
+                      //         color: Theme.of(context).textTheme.caption?.color))
+                      Container(
+                        child: Text(
+                          reps.toString(),
+                          style: TextStyle(
+                            color: blue,
+                            fontSize: 125,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Text(s.elapsedMilliseconds.toString()),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                child: Row(
+                  children: [
+// ------------- START MUSIC ---------------
+                    Expanded(
+                      child: Container(
+                        child: GestureDetector(
+                          onTap: () {
+                            // Music On Tap Function
+                            assetsAudioPlayer_1.open(
+                                Audio('assets/tracks/kick.wav'),
+                                volume: 0.5);
+                            assetsAudioPlayer_2.open(
+                                Audio('assets/tracks/highhat.wav'),
+                                volume: 0);
+                            assetsAudioPlayer_3.open(
+                                Audio('assets/tracks/bass.wav'),
+                                volume: 0);
+                            assetsAudioPlayer_4.open(
+                                Audio('assets/tracks/piano.wav'),
+                                volume: 0);
+                            assetsAudioPlayer_5.open(
+                                Audio('assets/tracks/beat.wav'),
+                                volume: 0);
+                            assetsAudioPlayer_6.open(
+                                Audio('assets/tracks/guitar.wav'),
+                                volume: 0);
+                            assetsAudioPlayer_7.open(
+                                Audio('assets/tracks/horns.wav'),
+                                volume: 0);
+                            s.start();
+
+                            // print(s.elapsedTicks);
+                          },
+                          child: Material(
+                            borderRadius: BorderRadius.circular(40),
+                            shadowColor: orange,
+                            color: blue,
+                            elevation: 3,
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  'Start Music',
+                                  style: TextStyle(
+                                    color: white,
+                                    //fontFamily: 'Museo',
+                                    fontSize: 18,
+                                    //fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+// ------------- START COUNTING REPS ---------------
+                    Expanded(
+                      child: Container(
+                        child: GestureDetector(
+                          onTap: widget.onNotificationPressed,
+                          child: Material(
+                            borderRadius: BorderRadius.circular(40),
+                            shadowColor: orange,
+                            color: green,
+                            elevation: 3,
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  'Start Counting',
+                                  style: TextStyle(
+                                    color: white,
+                                    // fontFamily: 'Museo',
+                                    fontSize: 18,
+                                    //fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Row(
-                children: [
-// ------------- START MUSIC ---------------
-                  Expanded(
-                    child: Container(
-                      child: GestureDetector(
-                        onTap: () {
-                          // Music On Tap Function
-                          assetsAudioPlayer_1.open(Audio('assets/kick.wav'));
-                          assetsAudioPlayer_2.open(Audio('assets/highhat.wav'),
-                              volume: 0);
-                          assetsAudioPlayer_3.open(Audio('assets/bass.wav'),
-                              volume: 0);
-                          assetsAudioPlayer_4.open(Audio('assets/piano.wav'),
-                              volume: 0);
-                          assetsAudioPlayer_5.open(Audio('assets/beat.wav'),
-                              volume: 0);
-                          assetsAudioPlayer_6.open(Audio('assets/guitar.wav'),
-                              volume: 0);
-                          assetsAudioPlayer_7.open(Audio('assets/horns.wav'),
-                              volume: 0);
-                        },
-                        child: Material(
-                          borderRadius: BorderRadius.circular(40),
-                          shadowColor: orange,
-                          color: blue,
-                          elevation: 3,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text(
-                                'Start Music',
-                                style: TextStyle(
-                                  color: white,
-                                  //fontFamily: 'Museo',
-                                  fontSize: 20,
-                                  //fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-// ------------- START COUNTING REPS ---------------
-                  Expanded(
-                    child: Container(
-                      child: GestureDetector(
-                        onTap: widget.onNotificationPressed,
-                        child: Material(
-                          borderRadius: BorderRadius.circular(40),
-                          shadowColor: orange,
-                          color: green,
-                          elevation: 3,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text(
-                                'Start Counting',
-                                style: TextStyle(
-                                  color: white,
-                                  //fontFamily: 'Museo',
-                                  fontSize: 20,
-                                  //fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
               ),
-            ),
-            Container(
-              child: GestureDetector(
-                onTap: () {
-                  // Music On Tap Function
-                  assetsAudioPlayer_1.stop();
-                  assetsAudioPlayer_2.stop();
-                  assetsAudioPlayer_3.stop();
-                  assetsAudioPlayer_4.stop();
-                  assetsAudioPlayer_5.stop();
-                  assetsAudioPlayer_6.stop();
-                  assetsAudioPlayer_7.stop();
-                },
-                child: Material(
-                  borderRadius: BorderRadius.circular(40),
-                  shadowColor: orange,
-                  color: yellow,
-                  elevation: 3,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Text(
-                        'Stop Music',
-                        style: TextStyle(
-                          color: white,
-                          //fontFamily: 'Museo',
-                          fontSize: 20,
-                          //fontWeight: FontWeight.w700,
+//---------------- STOP BUTTON ------------------------
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 80, vertical: 8),
+                child: Container(
+                  child: GestureDetector(
+                    onTap: () {
+                      // Music On Tap Function
+                      assetsAudioPlayer_1.stop();
+                      assetsAudioPlayer_2.stop();
+                      assetsAudioPlayer_3.stop();
+                      assetsAudioPlayer_4.stop();
+                      assetsAudioPlayer_5.stop();
+                      assetsAudioPlayer_6.stop();
+                      assetsAudioPlayer_7.stop();
+                      s.stop();
+                    },
+                    child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: orange,
+                      color: yellow,
+                      elevation: 3,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 20),
+                          child: Text(
+                            'Stop Music',
+                            style: TextStyle(
+                              color: white,
+                              //fontFamily: 'Museo',
+                              fontSize: 18,
+                              //fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
         trailing:
         Column(

@@ -21,4 +21,9 @@ flutter:
 
   assets:
   
-    - assets/
+    - assets/tracks/
+
+  # fonts:
+  #   - family: Museo
+  #     fonts:
+  #       - asset: assets/fonts/MuseoSansRounded-700.ttf

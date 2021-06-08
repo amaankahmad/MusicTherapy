@@ -67,7 +67,12 @@ class DeviceScreen extends StatelessWidget {
 //----------------- APP BAR ----------------------
       appBar: AppBar(
         backgroundColor: orange,
-        title: Text(device.name),
+        // title: Text(device.name),
+        title: Text(
+          'Melomotion',
+          style: TextStyle(fontSize: 25),
+        ),
+
         actions: <Widget>[
           StreamBuilder<BluetoothDeviceState>(
             stream: device.state,
@@ -79,6 +84,7 @@ class DeviceScreen extends StatelessWidget {
                 case BluetoothDeviceState.connected:
                   onPressed = () => device.disconnect();
                   text = 'DISCONNECT';
+
                   break;
                 case BluetoothDeviceState.disconnected:
                   onPressed = () => device.connect();
@@ -104,6 +110,7 @@ class DeviceScreen extends StatelessWidget {
         ],
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           // StreamBuilder<BluetoothDeviceState>(
           //   stream: device.state,
@@ -163,27 +170,23 @@ class DeviceScreen extends StatelessWidget {
             ),
           ),
 // ------------- MAIN BIT ---------------
-          Center(
-            child: Column(
-              children: [
-// ------------- GIF ---------------
-                Column(
-                  children: <Widget>[
+          Column(
+            children: <Widget>[
 // ------------- REPS ---------------
-                    StreamBuilder<List<BluetoothService>>(
-                      stream: device.services,
-                      initialData: [],
-                      builder: (c, snapshot) {
-                        return Column(
-                          children: _buildServiceTiles(snapshot.data!),
-                        );
-                      },
-                    ),
+              StreamBuilder<List<BluetoothService>>(
+                stream: device.services,
+                initialData: [],
+                builder: (c, snapshot) {
+                  return Column(
+                    children: _buildServiceTiles(snapshot.data!),
+                  );
+                },
+              ),
 // ------------- TIMER ---------------
-                  ],
-                ),
-              ],
-            ),
+            ],
+          ),
+          SizedBox(
+            height: 1,
           ),
 //           Padding(
 //             padding: const EdgeInsets.all(10.0),
