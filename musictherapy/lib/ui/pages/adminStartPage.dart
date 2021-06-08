@@ -17,11 +17,13 @@ class AdminStartState extends State<AdminStartPage> {
   final _firestore = FirebaseFirestore.instance;
   final cUser = FirebaseAuth.instance.currentUser;
   String _username;
+  int _currentAvatarIndex = 0;
 
   void getAdminInfo() async {
     _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
       setState(() {
         _username = value.data()["username"];
+        _currentAvatarIndex = value.data()["avatar"];
       });
     });
   }
@@ -110,7 +112,7 @@ class AdminStartState extends State<AdminStartPage> {
                 child: CircleAvatar(
                   radius: 65,
                   backgroundImage: AssetImage(
-                    "assets/images/avatars/parrot.jpeg",
+                    "assets/images/avatars/$_currentAvatarIndex.jpeg",
                   ),
                 ),
               ),

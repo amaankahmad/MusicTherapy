@@ -22,11 +22,13 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
   final _firestore = FirebaseFirestore.instance;
   String _username;
   var adminExists;
+  int _currentAvatarIndex = 0;
 
   void getPlayerInfo() async {
     _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
       setState(() {
         _username = value.data()["username"];
+        _currentAvatarIndex = value.data()["avatar"];
       });
     });
   }
@@ -127,7 +129,7 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                     child: CircleAvatar(
                       radius: 65,
                       backgroundImage:
-                          AssetImage("assets/images/avatars/parrot.jpeg"),
+                          AssetImage("assets/images/avatars/$_currentAvatarIndex.jpeg"),
                     ),
                   ),
 // --------- AVATAR DON -------------------
