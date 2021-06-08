@@ -71,126 +71,128 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
 
     return Scaffold(
       backgroundColor: white,
-      body: SafeArea(
-        child: Stack(
-          children: <Widget>[
-// --------- BACK BUTTON --------------
-            Positioned(
-              top: 60,
-              left: 40,
-              child: Container(
-                width: 50,
-                height: 50,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => SignIn(),
-                      ),
-                    );
-                  },
-                  child: Material(
-                    borderRadius: BorderRadius.circular(10000),
-                    shadowColor: const Color(0xFF1E325C),
-                    elevation: 5,
-                    child: ClipOval(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 12,
-                          left: 10,
-                          right: 12,
-                          bottom: 12,
-                        ),
-                        child: Image.asset(
-                          'assets/images/navigation/arrow.jpeg',
-                        ),
-                      ),
+      body: Stack(children: <Widget>[
+        // --------- BACK BUTTON --------------
+        Positioned(
+          top: 60,
+          left: 40,
+          child: Container(
+            width: 50,
+            height: 50,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SignIn(),
+                  ),
+                );
+              },
+              child: Material(
+                borderRadius: BorderRadius.circular(10000),
+                shadowColor: const Color(0xFF1E325C),
+                elevation: 5,
+                child: ClipOval(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 12,
+                      left: 10,
+                      right: 12,
+                      bottom: 12,
+                    ),
+                    child: Image.asset(
+                      'assets/images/navigation/arrow.jpeg',
                     ),
                   ),
                 ),
               ),
             ),
+          ),
+        ),
 // --------- BACK BUTTON --------------
+        SafeArea(
+          child: Stack(
+            children: <Widget>[
 // --------- ERRYTING ELSE ------------
-            Column(
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+              Column(
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
 // --------- SPACING CONTROL --------------
-                  SizedBox(
-                    height: height * 0.1,
-                  ),
-// --------- SPACING CONTROL --------------
-// --------- AVATAR DON -------------------
-                  CircleAvatar(
-                    radius: 80,
-                    backgroundColor: orange,
-                    child: CircleAvatar(
-                      radius: 65,
-                      backgroundImage:
-                          AssetImage("assets/images/avatars/$_currentAvatarIndex.jpeg"),
+                    SizedBox(
+                      height: height * 0.1,
                     ),
-                  ),
+// --------- SPACING CONTROL --------------
+// --------- AVATAR DON -------------------
+                    CircleAvatar(
+                      radius: 80,
+                      backgroundColor: orange,
+                      child: CircleAvatar(
+                        radius: 65,
+                        backgroundImage: AssetImage(
+                            "assets/images/avatars/$_currentAvatarIndex.jpeg"),
+                      ),
+                    ),
 // --------- AVATAR DON -------------------
 // --------- SPACING CONTROL --------------
-                  SizedBox(
-                    height: height * 0.05,
-                  ),
+                    SizedBox(
+                      height: height * 0.05,
+                    ),
 // --------- SPACING CONTROL --------------
 // --------- WELCOME TEXT -----------------
-                  Center(
-                    child: Container(
-                      child: Text(
-                        'Hello,\n $_username!',
-                        //'Hello,\n' + 'Sam',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          //fontFamily: 'Museo',
-                          fontSize: height * 0.06,
-                          color: blue,
-                          fontWeight: FontWeight.w700,
+                    Center(
+                      child: Container(
+                        child: Text(
+                          'Hello,\n $_username!',
+                          //'Hello,\n' + 'Sam',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            //fontFamily: 'Museo',
+                            fontSize: height * 0.06,
+                            color: blue,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
-                  ),
 // --------- WELCOME TEXT -----------------
 // --------- SPACING CONTROL --------------
-                  SizedBox(
-                    height: height * 0.05,
-                  ),
+                    SizedBox(
+                      height: height * 0.05,
+                    ),
 // --------- SPACING CONTROL --------------
 // --------- START BUTTON -----------------
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      width: width * 0.75,
-                      height: height * 0.2,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              //TODO: Change this to Select Exercise page once it has navigation to select music
-                              builder: (context) => SelectExercise(),
-                              //builder: (context) => PlayPage(),
-                            ),
-                          );
-                        },
-                        child: Material(
-                          borderRadius: BorderRadius.circular(40),
-                          shadowColor: orange,
-                          color: orange,
-                          elevation: 3,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text(
-                                'Start!',
-                                style: TextStyle(
-                                  color: white,
-                                  //fontFamily: 'Museo',
-                                  fontSize: height*0.05,
-                                  //fontWeight: FontWeight.w700,
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        width: width * 0.75,
+                        height: height * 0.2,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SelectExercise(),
+                                //builder: (context) => PlayPage(),
+                              ),
+                            );
+                          },
+                          child: Material(
+                            borderRadius: BorderRadius.circular(40),
+                            shadowColor: orange,
+                            color: orange,
+                            elevation: 3,
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  'Start!',
+                                  style: TextStyle(
+                                    color: white,
+                                    //fontFamily: 'Museo',
+                                    fontSize: height * 0.05,
+                                    //fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                               ),
                             ),
@@ -198,50 +200,51 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                         ),
                       ),
                     ),
-                  ),
 // --------- START BUTTON -----------------
-                  SizedBox(
-                    height: height * 0.03,
-                  ),
+                    SizedBox(
+                      height: height * 0.03,
+                    ),
 // --------- SPACING CONTROL --------------
 // --------- MY ADMIN BUTTON --------------
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: width * 0.75,
-                      //height: height * 0.1,
-                      child: GestureDetector(
-                        onTap: () {
-                          if (adminExists == false) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => AddAdmin(),
-                              ),
-                            );
-                          } else if (adminExists == true) {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => MyAdmin(),
-                              ),
-                            );
-                          }
-                          ;
-                        },
-                        child: Material(
-                          borderRadius: BorderRadius.circular(40),
-                          shadowColor: orange,
-                          color: yellow,
-                          elevation: 3,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text(
-                                'My Admin',
-                                style: TextStyle(
-                                  color: white,
-                                  //fontFamily: 'Museo',
-                                  fontSize: height*0.033,
-                                  //fontWeight: FontWeight.w700,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        width: width * 0.75,
+                        //height: height * 0.1,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (adminExists == false) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => AddAdmin(),
+                                ),
+                              );
+                            } else if (adminExists == true) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => MyAdmin(),
+                                ),
+                              );
+                            }
+                            ;
+                          },
+                          child: Material(
+                            borderRadius: BorderRadius.circular(40),
+                            shadowColor: orange,
+                            color: yellow,
+                            elevation: 3,
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  'My Admin',
+                                  style: TextStyle(
+                                    color: white,
+                                    //fontFamily: 'Museo',
+                                    fontSize: height * 0.033,
+                                    //fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                               ),
                             ),
@@ -249,42 +252,43 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                         ),
                       ),
                     ),
-                  ),
 
 // --------- SPACING CONTROL --------------
-                  SizedBox(
-                    height: height * 0.03,
-                  ),
+                    SizedBox(
+                      height: height * 0.03,
+                    ),
 // --------- SPACING CONTROL --------------
 // --------- SETTINGS BUTTON --------------
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      width: width * 0.75,
-                      //height: height * 0.1,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => SettingsPage(),
-                            ),
-                          );
-                        },
-                        child: Material(
-                          borderRadius: BorderRadius.circular(40),
-                          shadowColor: orange,
-                          color: white,
-                          elevation: 3,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text(
-                                'Settings',
-                                style: TextStyle(
-                                  color: green,
-                                  //fontFamily: 'Museo',
-                                  fontSize: height*0.033,
-                                  //fontWeight: FontWeight.w700,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        width: width * 0.75,
+                        //height: height * 0.1,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SettingsPage(),
+                              ),
+                            );
+                          },
+                          child: Material(
+                            borderRadius: BorderRadius.circular(40),
+                            shadowColor: orange,
+                            color: white,
+                            elevation: 3,
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 12),
+                                child: Text(
+                                  'Settings',
+                                  style: TextStyle(
+                                    color: green,
+                                    //fontFamily: 'Museo',
+                                    fontSize: height * 0.033,
+                                    //fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                               ),
                             ),
@@ -292,17 +296,17 @@ class _PlayerStartPageState extends State<PlayerStartPage> {
                         ),
                       ),
                     ),
-                  ),
 // --------- SETTINGS BUTTON --------------
 // --------- SPACING CONTROL --------------
-                  SizedBox(
-                    height: height * 0.08,
-                  ),
+                    SizedBox(
+                      height: height * 0.08,
+                    ),
 // --------- SPACING CONTROL --------------
-                ])
-          ],
+                  ])
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
