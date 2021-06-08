@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
 //-----------------------------------
 // Back Button:
               Positioned(
-                top: 30,
+                top: 60,
                 left: 40,
                 child: Container(
                   width: 50,

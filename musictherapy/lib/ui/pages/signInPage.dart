@@ -34,7 +34,7 @@ class _SignInState extends State<SignIn> {
 //-----------------------------------
 // Spacing for Logo:
           SizedBox(
-            height: height * 0.10,
+            height: height * 0.1,
           ),
 //-----------------------------------
 // Text for Logo:
@@ -145,7 +145,7 @@ class _SignInState extends State<SignIn> {
 //-----------------------------------
 // Spacing for Button:
                 SizedBox(
-                  height: height * 0.15,
+                  height: height * 0.1,
                 ),
 //-----------------------------------
 // Sign In Button:
