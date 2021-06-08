@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/myAdmin.dart';
-import 'package:musictherapy/ui/pages/playPage.dart';
+//import 'package:musictherapy/ui/pages/playPage.dart';
 import 'package:musictherapy/ui/pages/selectExercise.dart';
 import 'package:musictherapy/ui/pages/selectMusic.dart';
 import 'package:musictherapy/ui/pages/settings.dart';
