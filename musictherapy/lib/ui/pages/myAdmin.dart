@@ -18,11 +18,13 @@ class _MyAdminState extends State<MyAdmin> {
   String cUsername;
   String adminUsername;
   String adminUid;
+  int _currentAvatarIndex = 0;
 
   void getPlayerInfo() async {
     _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
       setState(() {
         cUsername = value.data()["username"];
+
       });
     });
   }
@@ -34,6 +36,7 @@ class _MyAdminState extends State<MyAdmin> {
         _firestore.collection("user_info").doc(adminUid).get().then((value) {
           setState(() {
             adminUsername = value.data()["username"];
+            _currentAvatarIndex = value.data()["avatar"];
           });
         });
       });
@@ -159,7 +162,7 @@ class _MyAdminState extends State<MyAdmin> {
                     child: CircleAvatar(
                       radius: 65,
                       backgroundImage:
-                          AssetImage("assets/images/avatars/parrot.jpeg"),
+                          AssetImage("assets/images/avatars/$_currentAvatarIndex.jpeg"),
                     ),
                   ),
                   //------------------------

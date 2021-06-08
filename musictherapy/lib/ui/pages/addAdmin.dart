@@ -148,6 +148,7 @@ class _AddAdminState extends State<AddAdmin> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: height * 0.06,
+                    fontFamily: 'Museo',
                     color: const Color(0xFF1E325C),
                     fontWeight: FontWeight.bold,
                   ),
@@ -175,6 +176,7 @@ class _AddAdminState extends State<AddAdmin> {
                             labelText: 'Enter Admin Username:',
                             labelStyle: TextStyle(
                               fontSize: height * 0.03,
+                              fontFamily: 'Museo',
                               color: orange,
                             ),
                             enabledBorder: UnderlineInputBorder(
@@ -220,6 +222,7 @@ class _AddAdminState extends State<AddAdmin> {
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 32,
+                              fontFamily: 'Museo',
                               fontWeight: FontWeight.w800,
                             ),
                             textAlign: TextAlign.center,

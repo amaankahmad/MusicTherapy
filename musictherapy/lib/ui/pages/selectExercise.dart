@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:musictherapy/ui/pages/signInPage.dart';
 import 'package:musictherapy/ui/pages/DisplayVideoPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,23 +18,34 @@ class SelectExercise extends StatefulWidget {
 class SelectExerciseState extends State<SelectExercise> {
   final cUser = FirebaseAuth.instance.currentUser;
   final _firestore = FirebaseFirestore.instance;
+  var now;
   String adminUid;
+  //var adminExists;
 
   void getMyAdmin() async {
     //get uid of admin
-    _firestore.collection("player_admin").doc(cUser.uid).get().then((value) {
-      setState(() {
-        adminUid = value.data()["myAdmin"];
-      });
+    _firestore
+        .collection("player_admin")
+        .doc(cUser.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        setState(() {
+          adminUid = documentSnapshot.data()["myAdmin"];
+        });
+      } else {
+        setState(() {
+          adminUid = "noAdminConnected";
+        });
+      }
     });
-
-    print(adminUid);
   }
 
   @override
   void initState() {
     super.initState();
     getMyAdmin();
+    //print(adminUid);
   }
 
   @override
@@ -170,7 +182,6 @@ class SelectExerciseState extends State<SelectExercise> {
                                     horizontal: 20,
                                   ),
                                   child: Text(
-                                    //Text&font:'Arm Exercises'
                                     'My Exercises',
                                     style: TextStyle(
                                         fontSize: height * 0.035,
@@ -202,10 +213,11 @@ class SelectExerciseState extends State<SelectExercise> {
                                               .map((document) {
                                             return Center(
                                               child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1.2,
+                                                width: width * 0.7,
+                                                // MediaQuery.of(context)
+                                                //         .size
+                                                //         .width /
+                                                //     1.2,
                                                 child: Column(
                                                   children: <Widget>[
                                                     Padding(
@@ -222,8 +234,25 @@ class SelectExerciseState extends State<SelectExercise> {
                                                                   width * 0.7,
                                                               child:
                                                                   RaisedButton(
-                                                                onPressed:
-                                                                    () {}, //Function of the button when press
+                                                                onPressed: () {
+                                                                  now = DateTime
+                                                                      .now();
+                                                                  String formattedTime = DateFormat('yyyy-MM-dd – kk:mm'). format(now);
+                                                                  _firestore
+                                                                      .collection(
+                                                                          "play_history")
+                                                                      .doc(cUser
+                                                                          .uid)
+                                                                      .set({
+                                                                    formattedTime: {
+                                                                      "Exercise":
+                                                                          document[
+                                                                              'name'],
+                                                                      "Status":
+                                                                          "Started"
+                                                                    },
+                                                                  });
+                                                                }, //Function of the button when press
                                                                 color: Colors
                                                                     .white,
                                                                 shape:
@@ -260,6 +289,29 @@ class SelectExerciseState extends State<SelectExercise> {
                                       );
                                     }),
                               ),
+                              // //------------------------
+                              // //'My Exercises' Bar
+                              // Container(
+                              //   width: 0.8 * width,
+                              //   margin: EdgeInsets.all(8.0),
+                              //   decoration: BoxDecoration(
+                              //       color: orange,
+                              //       borderRadius: BorderRadius.circular(40)),
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.symmetric(
+                              //       vertical: 3.0,
+                              //       horizontal: 20,
+                              //     ),
+                              //     child: Text(
+                              //       //Text&font:'Arm Exercises'
+                              //       'My Exercises',
+                              //       style: TextStyle(
+                              //           fontSize: height * 0.035,
+                              //           color: Colors.white,
+                              //           fontWeight: FontWeight.bold),
+                              //     ),
+                              //   ),
+                              // ),
                               //------------------------
                               //'Public Exercises' Bar
                               Container(
@@ -305,10 +357,7 @@ class SelectExerciseState extends State<SelectExercise> {
                                               .map((document) {
                                             return Center(
                                               child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    1.2,
+                                                width: width * 0.7,
                                                 child: Column(
                                                   children: <Widget>[
                                                     Padding(
@@ -325,8 +374,24 @@ class SelectExerciseState extends State<SelectExercise> {
                                                                   width * 0.7,
                                                               child:
                                                                   RaisedButton(
-                                                                onPressed:
-                                                                    () {}, //Function of the button when press
+                                                                onPressed: () {
+                                                                  now = DateTime
+                                                                      .now();
+                                                                  _firestore
+                                                                      .collection(
+                                                                          "play_history")
+                                                                      .doc(cUser
+                                                                          .uid)
+                                                                      .set({
+                                                                    now: {
+                                                                      "Exercise":
+                                                                          document[
+                                                                              'name'],
+                                                                      "Status":
+                                                                          "Started"
+                                                                    },
+                                                                  });
+                                                                },
                                                                 color: Colors
                                                                     .white,
                                                                 shape:
@@ -381,4 +446,6 @@ class SelectExerciseState extends State<SelectExercise> {
       ),
     );
   }
+
+  saveSelection() async {}
 }
