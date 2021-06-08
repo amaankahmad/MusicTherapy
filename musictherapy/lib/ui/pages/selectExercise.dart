@@ -377,13 +377,14 @@ class SelectExerciseState extends State<SelectExercise> {
                                                                 onPressed: () {
                                                                   now = DateTime
                                                                       .now();
+                                                                  String formattedTime = DateFormat('yyyy-MM-dd – kk:mm'). format(now);
                                                                   _firestore
                                                                       .collection(
                                                                           "play_history")
                                                                       .doc(cUser
                                                                           .uid)
                                                                       .set({
-                                                                    now: {
+                                                                    formattedTime: {
                                                                       "Exercise":
                                                                           document[
                                                                               'name'],
