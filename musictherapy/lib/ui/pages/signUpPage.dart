@@ -96,545 +96,556 @@ class _SignUpState extends State<SignUp> {
 
     return Scaffold(
       backgroundColor: white,
-      body: Stack(
-        children: <Widget>[
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
 //-----------------------------------
 // Back Button:
-          Positioned(
-            top: 60,
-            left: 40,
-            child: Container(
-              width: 50,
-              height: 50,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pop(
-                    MaterialPageRoute(
-                      builder: (context) => SignIn(),
-                    ),
-                  );
-                },
-                child: Material(
-                  borderRadius: BorderRadius.circular(10000),
-                  shadowColor: orange,
-                  elevation: 3,
-                  child: ClipOval(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 12,
-                        left: 10,
-                        right: 12,
-                        bottom: 12,
-                      ),
-                      child: Image.asset(
-                        'assets/images/navigation/arrow.jpeg',
+              Positioned(
+                top: 30,
+                left: 40,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(
+                        MaterialPageRoute(
+                          builder: (context) => SignIn(),
+                        ),
+                      );
+                    },
+                    child: Material(
+                      borderRadius: BorderRadius.circular(10000),
+                      shadowColor: orange,
+                      elevation: 3,
+                      child: ClipOval(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 12,
+                            left: 10,
+                            right: 12,
+                            bottom: 12,
+                          ),
+                          child: Image.asset(
+                            'assets/images/navigation/arrow.jpeg',
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
 //-----------------------------------
 // Avatar Selection:
-          Column(
-            children: <Widget>[
-              SizedBox(
-                height: height * 0.05,
-              ),
-              Row(
-                // Left Arrow
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      print("Left");
-
-                      if (_currentAvatarIndex == 0) {
-                        setState(() {
-                          _currentAvatarIndex = 10;
-                          print(_currentAvatarIndex);
-                        });
-                      } else {
-                        setState(() {
-                          _currentAvatarIndex--;
-                        });
-                        print(_currentAvatarIndex);
-                      }
-                      ;
-                    },
-                    child: Container(
-                      width: 20,
-                      child: Image.asset(
-                        'assets/images/navigation/left.png',
-                        color: Colors.orange[700],
-                      ),
-                    ),
-                  ),
                   SizedBox(
-                    width: 10,
+                    height: height * 0.05,
                   ),
-                  // Image, TODO: ADD FUNCTIONALITY
-                  Center(
-                    child: Container(
-                      width: height * 0.2,
-                      height: height * 0.2,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: orange, width: 12.0),
-                      ),
-                      child: ClipOval(
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Image.asset("assets/images/avatars/$_currentAvatarIndex.jpeg"),
+                  Row(
+                    // Left Arrow
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () {
+                          print("Left");
+
+                          if (_currentAvatarIndex == 0) {
+                            setState(() {
+                              _currentAvatarIndex = 10;
+                              print(_currentAvatarIndex);
+                            });
+                          } else {
+                            setState(() {
+                              _currentAvatarIndex--;
+                            });
+                            print(_currentAvatarIndex);
+                          }
+                          ;
+                        },
+                        child: Container(
+                          width: 20,
+                          child: Image.asset(
+                            'assets/images/navigation/left.png',
+                            color: Colors.orange[700],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  // Right Arrow
-                  GestureDetector(
-                    onTap: () {
-                      print("Right");
-
-                      if (_currentAvatarIndex == 10) {
-                        setState(() {
-                          _currentAvatarIndex = 0;
-                          print(_currentAvatarIndex);
-                        });
-                      } else {
-                        setState(() {
-                          _currentAvatarIndex++;
-                        });
-                        print(_currentAvatarIndex);
-                      };                     
-                    },
-                    child: Container(
-                      width: 25,
-                      child: Image.asset(
-                        'assets/images/navigation/right.png',
-                        color: Colors.orange[700],
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
+                      // Image, TODO: ADD FUNCTIONALITY
+                      Center(
+                        child: Container(
+                          width: height * 0.2,
+                          height: height * 0.2,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: orange, width: 12.0),
+                          ),
+                          child: ClipOval(
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Image.asset("assets/images/avatars/$_currentAvatarIndex.jpeg"),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      // Right Arrow
+                      GestureDetector(
+                        onTap: () {
+                          print("Right");
+
+                          if (_currentAvatarIndex == 10) {
+                            setState(() {
+                              _currentAvatarIndex = 0;
+                              print(_currentAvatarIndex);
+                            });
+                          } else {
+                            setState(() {
+                              _currentAvatarIndex++;
+                            });
+                            print(_currentAvatarIndex);
+                          };                     
+                        },
+                        child: Container(
+                          width: 25,
+                          child: Image.asset(
+                            'assets/images/navigation/right.png',
+                            color: Colors.orange[700],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
 //-----------------------------------
 // Spacing for Text Fields:
-              SizedBox(
-                height: 10,
-              ),
+                  SizedBox(
+                    height: 10,
+                  ),
 //-----------------------------------
 //  Email Text Field:
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (email) {
-                        setState(() {
-                          _email = email.trim();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'email',
-                        labelStyle: TextStyle(
-                          //fontFamily: 'Museo',
-                          fontSize: 18,
-                          color: orange,
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: orange,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          onChanged: (email) {
+                            setState(() {
+                              _email = email.trim();
+                            });
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'email',
+                            labelStyle: TextStyle(
+                              //fontFamily: 'Museo',
+                              fontSize: 18,
+                              color: orange,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: orange,
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: blue,
+                              ),
+                            ),
                           ),
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: blue,
-                          ),
-                        ),
-                      ),
-                    ),
 //-----------------------------------
 //user name text field
 
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      onChanged: (username) {
-                        setState(() {
-                          _username = username.trim();
-                        });
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'username',
-                        labelStyle: TextStyle(
-                          //fontFamily: 'Museo',
-                          fontSize: 18,
-                          color: orange,
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: orange,
+                        TextFormField(
+                          keyboardType: TextInputType.emailAddress,
+                          onChanged: (username) {
+                            setState(() {
+                              _username = username.trim();
+                            });
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'username',
+                            labelStyle: TextStyle(
+                              //fontFamily: 'Museo',
+                              fontSize: 18,
+                              color: orange,
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: orange,
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: blue,
+                              ),
+                            ),
                           ),
+                          validator: (uname_exists) {
+                            if (uname_exists == true) {
+                              return "Username already in use";
+                            } else {
+                              return null;
+                            }
+                          },
                         ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: blue,
-                          ),
-                        ),
-                      ),
-                      validator: (uname_exists) {
-                        if (uname_exists == true) {
-                          return "Username already in use";
-                        } else {
-                          return null;
-                        }
-                      },
-                    ),
 
 //_________________________________
 // Spacing for Select Role:
-                    SizedBox(
-                      height: 20,
-                    ),
+                        SizedBox(
+                          height: 20,
+                        ),
 //-----------------------------------
 //  Select Role:
-                    Column(
-                      children: <Widget>[
-                        Row(
+                        Column(
                           children: <Widget>[
-                            Container(
-                              child: Text(
-                                'Select role:',
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  child: Text(
+                                    'Select role:',
+                                    style: TextStyle(
+                                      color: blue,
+                                      //fontFamily: 'Museo',
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            CheckboxListTile(
+                              title: Text(
+                                'Player',
                                 style: TextStyle(
                                   color: blue,
-                                  //fontFamily: 'Museo',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w800,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              value: _checkPlayer,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkPlayer = value;
+                                  _checkAdmin = false;
+                                });
+                              },
+                              activeColor: green,
+                              checkColor: white,
+                            ),
+                            CheckboxListTile(
+                              title: Text(
+                                'Admin',
+                                style: TextStyle(
+                                  color: blue,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              value: _checkAdmin,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkAdmin = value;
+                                  _checkPlayer = false;
+                                });
+                              },
+                              activeColor: green,
+                              checkColor: white,
+                            ),
+                          ],
+                        ),
+//-----------------------------------
+//  Password Text Fields:
+
+                        Form(
+                          key: formkey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                onChanged: (password) {
+                                  setState(() {
+                                    _password = password.trim();
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'password',
+                                  labelStyle: TextStyle(
+                                    //fontFamily: 'Museo',
+                                    fontSize: 18,
+                                    color: orange,
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: orange,
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: blue,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Password Required";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                obscureText: true,
+                              ),
+                              TextFormField(
+                                onChanged: (password) {
+                                  setState(() {
+                                    _password2 = password.trim();
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  labelText: 'confirm password',
+                                  labelStyle: TextStyle(
+                                    //fontFamily: 'Museo',
+                                    fontSize: 18,
+                                    color: orange,
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: orange,
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: blue,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Confirm Password Required";
+                                  } else if (_password != _password2) {
+                                    return "The passwords do not match";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                obscureText: true,
+                              ),
+                            ],
+                          ),
+                        ),
+
+//-----------------------------------
+//  Spacing for Terms and Conditions:
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              alignment: Alignment(1, 0),
+                              padding: EdgeInsets.only(top: 10, left: 15),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => TermsAndConditions(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Terms and Conditions',
+                                  style: TextStyle(
+                                    color: orange,
+                                    //fontFamily: 'Museo',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: orange,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: width * 0.05,
+                            ),
+                            Container(
+                              alignment: Alignment(1, 0),
+                              padding: EdgeInsets.only(top: 10, left: 15),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => PrivacyPolicy(),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  'Privacy Policy',
+                                  style: TextStyle(
+                                    color: orange,
+                                    //fontFamily: 'Museo',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: orange,
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
+                        SizedBox(
+                          height: 15,
+                        ),
+//-----------------------------------
+//  Check Terms and Conditions:
                         CheckboxListTile(
                           title: Text(
-                            'Player',
+                            'I have read and agree to the Terms and Conditions.\nLearn how we process your data in Privacy Policy',
                             style: TextStyle(
                               color: blue,
-                              fontSize: 18,
+                              fontSize: 14,
                             ),
                           ),
                           controlAffinity: ListTileControlAffinity.leading,
-                          value: _checkPlayer,
+                          value: _checkTC,
                           onChanged: (value) {
                             setState(() {
-                              _checkPlayer = value;
-                              _checkAdmin = false;
+                              _checkTC = value;
                             });
                           },
                           activeColor: green,
                           checkColor: white,
                         ),
-                        CheckboxListTile(
-                          title: Text(
-                            'Admin',
-                            style: TextStyle(
-                              color: blue,
-                              fontSize: 18,
-                            ),
-                          ),
-                          controlAffinity: ListTileControlAffinity.leading,
-                          value: _checkAdmin,
-                          onChanged: (value) {
-                            setState(() {
-                              _checkAdmin = value;
-                              _checkPlayer = false;
-                            });
-                          },
-                          activeColor: green,
-                          checkColor: white,
+//-----------------------------------
+//  Spacing for Button:
+                        SizedBox(
+                          height: 20,
                         ),
-                      ],
-                    ),
 //-----------------------------------
-//  Password Text Fields:
-
-                    Form(
-                      key: formkey,
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            onChanged: (password) {
-                              setState(() {
-                                _password = password.trim();
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'password',
-                              labelStyle: TextStyle(
-                                //fontFamily: 'Museo',
-                                fontSize: 18,
-                                color: orange,
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: orange,
-                                ),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: blue,
-                                ),
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Password Required";
-                              } else {
-                                return null;
-                              }
-                            },
-                            obscureText: true,
-                          ),
-                          TextFormField(
-                            onChanged: (password) {
-                              setState(() {
-                                _password2 = password.trim();
-                              });
-                            },
-                            decoration: InputDecoration(
-                              labelText: 'confirm password',
-                              labelStyle: TextStyle(
-                                //fontFamily: 'Museo',
-                                fontSize: 18,
-                                color: orange,
-                              ),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: orange,
-                                ),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: blue,
-                                ),
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Confirm Password Required";
-                              } else if (_password != _password2) {
-                                return "The passwords do not match";
-                              } else {
-                                return null;
-                              }
-                            },
-                            obscureText: true,
-                          ),
-                        ],
-                      ),
-                    ),
-
-//-----------------------------------
-//  Spacing for Terms and Conditions:
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
+//  Sign Up Button:
                         Container(
-                          alignment: Alignment(1, 0),
-                          padding: EdgeInsets.only(top: 10, left: 15),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => TermsAndConditions(),
-                                ),
-                              );
+                          width: width * 0.6,
+                          child: GestureDetector(
+                            onTap: () async {
+                              validate();
+
+                              //check username
+                              final result = await FirebaseFirestore.instance
+                                  .collection('user_info')
+                                  .where("username", isEqualTo: _username)
+                                  .get();
+                              result.docs.forEach((res) {
+                                uname_exists = true;
+                              });
+                              print('Some text');
+                              print(uname_exists);
+
+                              //if user name is unique
+                              if (uname_exists == false) {
+                                /* var unexists = false;
+                              var result = await FirebaseFirestore.instance
+                              firestore.collection("user_info").where("username", isEqualTo: _username).get();*/
+                                await auth.createUserWithEmailAndPassword(
+                                    email: _email, password: _password);
+
+                                auth.signInWithEmailAndPassword(
+                                    email: _email, password: _password);
+
+                                var cUser = FirebaseAuth.instance.currentUser;
+                                firestore
+                                    .collection('user_info')
+                                    .doc(cUser.uid)
+                                    .set({
+                                  'admin': _checkAdmin,
+                                  'player': _checkPlayer,
+                                  'email': _email,
+                                  'username': _username,
+                                  'avatar' : _currentAvatarIndex,
+                                });
+                                firestore
+                                    .collection('username_uid')
+                                    .doc(_username)
+                                    .set({
+                                  'UID': cUser.uid,
+                                });
+                                firestore
+                                    .collection("user_roles")
+                                    .doc(cUser.uid)
+                                    .get()
+                                    .then((value) {
+                                  if (value.data()["player"] == true) {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => PlayerStartPage(),
+                                      ),
+                                    );
+                                  } else if (value.data()["admin"] == true) {
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (context) => AdminStartPage(),
+                                      ),
+                                    );
+                                  }
+                                });
+
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => SignIn(),
+                                  ),
+                                );
+                              }
+                              //if username exists
+                              else {
+                                print('Username exists');
+                                _showMyDialog();
+                              }
                             },
-                            child: Text(
-                              'Terms and Conditions',
-                              style: TextStyle(
-                                color: orange,
-                                //fontFamily: 'Museo',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                decoration: TextDecoration.underline,
-                                decorationColor: orange,
+                            child: Material(
+                              borderRadius: BorderRadius.circular(40),
+                              shadowColor: orange,
+                              color: green,
+                              elevation: 3,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  child: Text(
+                                    'Sign Up!',
+                                    style: TextStyle(
+                                      color: white,
+                                      //fontFamily: 'Museo',
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: width * 0.1,
-                        ),
-                        Container(
-                          alignment: Alignment(1, 0),
-                          padding: EdgeInsets.only(top: 10, left: 15),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => PrivacyPolicy(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              'Privacy Policy',
-                              style: TextStyle(
-                                color: orange,
-                                //fontFamily: 'Museo',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                decoration: TextDecoration.underline,
-                                decorationColor: orange,
-                              ),
-                            ),
-                          ),
+                          height: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-//-----------------------------------
-//  Check Terms and Conditions:
-                    CheckboxListTile(
-                      title: Text(
-                        'I have read and I agree to the Terms and Conditions. \n Learn how we process your data in Privacy Policy',
-                        style: TextStyle(
-                          color: blue,
-                          fontSize: 10,
-                        ),
-                      ),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      value: _checkTC,
-                      onChanged: (value) {
-                        setState(() {
-                          _checkTC = value;
-                        });
-                      },
-                      activeColor: green,
-                      checkColor: white,
-                    ),
-//-----------------------------------
-//  Spacing for Button:
-                    SizedBox(
-                      height: 20,
-                    ),
-//-----------------------------------
-//  Sign Up Button:
-                    Container(
-                      width: width * 0.6,
-                      child: GestureDetector(
-                        onTap: () async {
-                          validate();
+                  )
+                ],
 
-                          //check username
-                          final result = await FirebaseFirestore.instance
-                              .collection('user_info')
-                              .where("username", isEqualTo: _username)
-                              .get();
-                          result.docs.forEach((res) {
-                            uname_exists = true;
-                          });
-                          print('Some text');
-                          print(uname_exists);
+              ),
 
-                          //if user name is unique
-                          if (uname_exists == false) {
-                            /* var unexists = false;
-                          var result = await FirebaseFirestore.instance
-                          firestore.collection("user_info").where("username", isEqualTo: _username).get();*/
-                            await auth.createUserWithEmailAndPassword(
-                                email: _email, password: _password);
-
-                            auth.signInWithEmailAndPassword(
-                                email: _email, password: _password);
-
-                            var cUser = FirebaseAuth.instance.currentUser;
-                            firestore
-                                .collection('user_info')
-                                .doc(cUser.uid)
-                                .set({
-                              'admin': _checkAdmin,
-                              'player': _checkPlayer,
-                              'email': _email,
-                              'username': _username,
-                              'avatar' : _currentAvatarIndex,
-                            });
-                            firestore
-                                .collection('username_uid')
-                                .doc(_username)
-                                .set({
-                              'UID': cUser.uid,
-                            });
-                            firestore
-                                .collection("user_roles")
-                                .doc(cUser.uid)
-                                .get()
-                                .then((value) {
-                              if (value.data()["player"] == true) {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => PlayerStartPage(),
-                                  ),
-                                );
-                              } else if (value.data()["admin"] == true) {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => AdminStartPage(),
-                                  ),
-                                );
-                              }
-                            });
-
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => SignIn(),
-                              ),
-                            );
-                          }
-                          //if username exists
-                          else {
-                            print('Username exists');
-                            _showMyDialog();
-                          }
-                        },
-                        child: Material(
-                          borderRadius: BorderRadius.circular(40),
-                          shadowColor: orange,
-                          color: green,
-                          elevation: 3,
-                          child: Center(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              child: Text(
-                                'Sign Up!',
-                                style: TextStyle(
-                                  color: white,
-                                  //fontFamily: 'Museo',
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
             ],
+
           ),
-        ],
+
+        ),
       ),
     );
   }
