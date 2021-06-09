@@ -11,9 +11,11 @@ class BndBox extends StatelessWidget {
   final double screenW;
   final String model;
   final List<double> movement;
+  final List<double> angles;
+  var state;
 
   BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
-      this.model, this.movement);
+      this.model, this.movement, this.angles, this.state);
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +74,11 @@ class BndBox extends StatelessWidget {
               //         "REP COUNTED! Angle difference = ${movement[movement.length - 1]}");
               //   }
               // }
-              if (compare(movement)) {
+              if (compare(movement, state)) {
                 // print(
                 //     "REP COUNTED! Angle difference = ${movement[movement.length - 1]}");
+
+                //ADD THE DIFFERENCE BETWEEN ANGLES INTO ANGLES LIST
               }
               movement.add(angle);
               // print(movement);
@@ -126,8 +130,36 @@ double getAngle(double shoulderX, double shoulderY, double elbowX,
   return angle;
 }
 
-bool compare(List<double> movement) {
+bool state = false;
+bool compare(List<double> movement, bool astate) {
   int end = movement.length - 1;
+  double angle = movement[end] / 3.1415 * 180;
+
+  double d1 = movement[end] - movement[end - 2];
+  double d2 = movement[end] - movement[end - 2];
+
+  d1 = (d1 > 0) ? d1 : (-d1);
+  d2 = (d2 > 0) ? d2 : (-d2);
+
+  double threshold = 0.03;
+
+  bool isStopping = d1 < threshold && threshold < 0.03;
+
+  if (angle > 130 && isStopping && state == true) {
+    //print('$angle');
+    print('down');
+    print('$angle');
+    state = false;
+  } else if (angle < 50 && isStopping && state == false) {
+    print('up');
+    print('$angle');
+    state = true;
+  }
+  // angle = movement[end];
+  // print('$angle');
+
+  /*
+  v
   double avg_1 = ((movement[end] +
           movement[end - 1] +
           movement[end - 2] +
@@ -165,6 +197,7 @@ bool compare(List<double> movement) {
       16);
   double diff = avg_1 - avg_2;
   print("$diff");
+  */
   // if (avg_2 - avg_1 > 0.75) {
   //   return true;
   // }

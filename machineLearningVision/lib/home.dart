@@ -7,6 +7,7 @@ import 'camera.dart';
 import 'bndbox.dart';
 
 const String posenet = "PoseNet";
+bool state;
 
 class HomePage extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -21,7 +22,9 @@ class _HomePageState extends State<HomePage> {
   List<dynamic> _recognitions;
   int _imageHeight = 0;
   int _imageWidth = 0;
+  //bool state = true;
   String _model = "";
+  List<double> angles = [];
   List<double> movement = [
     3.14,
     3.14,
@@ -95,6 +98,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
+    if (state == null) {
+      state = false;
+    }
+    state ^= true;
     return Scaffold(
       body: _model == ""
           ? Center(
@@ -115,12 +122,12 @@ class _HomePageState extends State<HomePage> {
                   _model,
                   setRecognitions,
                 ),
-                Container(
+                /*Container(
                   // Put play page here
                   width: screen.width,
                   height: screen.height,
                   decoration: BoxDecoration(color: Colors.red),
-                ),
+                ),*/
                 BndBox(
                     _recognitions == null ? [] : _recognitions,
                     math.max(_imageHeight, _imageWidth),
@@ -128,7 +135,9 @@ class _HomePageState extends State<HomePage> {
                     screen.height,
                     screen.width,
                     _model,
-                    movement),
+                    movement,
+                    angles,
+                    state),
               ],
             ),
     );
