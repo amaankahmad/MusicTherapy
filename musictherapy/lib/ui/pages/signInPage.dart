@@ -34,7 +34,7 @@ class _SignInState extends State<SignIn> {
 //-----------------------------------
 // Spacing for Logo:
           SizedBox(
-            height: height * 0.05,
+            height: height * 0.025,
           ),
 //-----------------------------------
 // LOGO
@@ -45,6 +45,9 @@ class _SignInState extends State<SignIn> {
                   height: height * 0.22,
                   child: Image.asset('assets/images/other/logo.jpeg'),
                 ),
+                SizedBox(
+                  height: height * 0.01,
+                ),
                 Text(
                   'melomotion',
                   style: TextStyle(
@@ -54,11 +57,6 @@ class _SignInState extends State<SignIn> {
                 ),
               ],
             ),
-          ),
-//-----------------------------------
-// Spacing for Text Fields:
-          SizedBox(
-            height: 20,
           ),
 //-----------------------------------
 // Column for Email and Password Text Fields:
