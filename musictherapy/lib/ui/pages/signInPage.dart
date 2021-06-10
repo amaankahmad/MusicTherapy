@@ -34,21 +34,25 @@ class _SignInState extends State<SignIn> {
 //-----------------------------------
 // Spacing for Logo:
           SizedBox(
-            height: height * 0.1,
+            height: height * 0.05,
           ),
 //-----------------------------------
-// Text for Logo:
+// LOGO
           Center(
-            child: Container(
-              child: Text(
-                'Logo',
-                style: TextStyle(
-                  //fontFamily: 'Museo',
-                  fontSize: height * 0.09,
-                  color: green,
-                  fontWeight: FontWeight.w700,
+            child: Column(
+              children: [
+                Container(
+                  height: height * 0.22,
+                  child: Image.asset('assets/images/other/logo.jpeg'),
                 ),
-              ),
+                Text(
+                  'melomotion',
+                  style: TextStyle(
+                      fontFamily: 'Museo',
+                      fontSize: height * 0.05,
+                      color: blue),
+                ),
+              ],
             ),
           ),
 //-----------------------------------
@@ -151,32 +155,31 @@ class _SignInState extends State<SignIn> {
 // Sign In Button:
                 GestureDetector(
                   onTap: () async {
-                      final user = await auth.signInWithEmailAndPassword(
-                          email: _email, password: _password);
-                      if (user != null) {
-                        final cUser = FirebaseAuth.instance.currentUser;
-                        _firestore
-                            .collection("user_info")
-                            .doc(cUser.uid)
-                            .get()
-                            .then((value) {
-                          if (value.data()["player"] == true) {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => PlayerStartPage(),
-                              ),
-                            );
-                          } else if (value.data()["admin"] == true) {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => AdminStartPage(),
-                              ),
-                            );
-                          }
-                        });
-                      }
-                    },
-
+                    final user = await auth.signInWithEmailAndPassword(
+                        email: _email, password: _password);
+                    if (user != null) {
+                      final cUser = FirebaseAuth.instance.currentUser;
+                      _firestore
+                          .collection("user_info")
+                          .doc(cUser.uid)
+                          .get()
+                          .then((value) {
+                        if (value.data()["player"] == true) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => PlayerStartPage(),
+                            ),
+                          );
+                        } else if (value.data()["admin"] == true) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => AdminStartPage(),
+                            ),
+                          );
+                        }
+                      });
+                    }
+                  },
                   child: Container(
                     width: width * 0.6,
                     child: Material(
@@ -201,7 +204,6 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
-
 
 //-----------------------------------
 // Spacing for Text:
