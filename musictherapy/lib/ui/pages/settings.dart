@@ -21,12 +21,13 @@ class _SettingsState extends State<SettingsPage> {
   var uname_exists = false;
   int _currentAvatarIndex = 0;
 
-  CollectionReference users = FirebaseFirestore.instance.collection('user_info');
+  CollectionReference users =
+      FirebaseFirestore.instance.collection('user_info');
 
-    void getUserInfo() async {
+  void getUserInfo() async {
     _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
       setState(() {
-     _currentAvatarIndex  = value.data()["avatar"];
+        _currentAvatarIndex = value.data()["avatar"];
       });
     });
   }
@@ -48,10 +49,9 @@ class _SettingsState extends State<SettingsPage> {
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
     final sectionBoxSize = width * 0.8;
-    
 
 //alterDialog of username
-        Future<void> _showMyDialog() async {
+    Future<void> _showMyDialog() async {
       return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -80,7 +80,7 @@ class _SettingsState extends State<SettingsPage> {
 
 ////alterDialog of save conformation
 
-        Future<void> _save() async {
+    Future<void> _save() async {
       return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button!
@@ -106,24 +106,25 @@ class _SettingsState extends State<SettingsPage> {
         },
       );
     }
+
 // change username
     Future<void> changeUsername() {
-  return users
-    .doc(cUser.uid)
-    .update({'username': _newUsername})
-    .then((value) => _save())
-    .catchError((error) => print("Failed to update: $error"));
-}
+      return users
+          .doc(cUser.uid)
+          .update({'username': _newUsername})
+          .then((value) => _save())
+          .catchError((error) => print("Failed to update: $error"));
+    }
 
 //change avatar
 
     Future<void> changeAvatar() {
-  return users
-    .doc(cUser.uid)
-    .update({'avatar' : _currentAvatarIndex})
-    .then((value) => _save())
-    .catchError((error) => print("Failed to update: $error"));
-}
+      return users
+          .doc(cUser.uid)
+          .update({'avatar': _currentAvatarIndex})
+          .then((value) => _save())
+          .catchError((error) => print("Failed to update: $error"));
+    }
 
     return Scaffold(
       backgroundColor: white,
@@ -299,10 +300,10 @@ class _SettingsState extends State<SettingsPage> {
                                   SizedBox(
                                     width: 25,
                                   ),
-                                  Icon(
-                                    Icons.check_sharp,
-                                    color: green,
-                                  ),
+                                  // Icon(
+                                  //   Icons.check_sharp,
+                                  //   color: green,
+                                  // ),
                                 ],
                               ),
                               SizedBox(
@@ -340,7 +341,7 @@ class _SettingsState extends State<SettingsPage> {
                   ),
 //-----------------------------------
 // Audio settings:
-                 /* Container(
+                  /* Container(
                     width: sectionBoxSize,
                     decoration: BoxDecoration(
                       color: Colors.orange[600],
@@ -520,83 +521,87 @@ class _SettingsState extends State<SettingsPage> {
                             height: 20,
                           ),
                           Row(
-                // Left Arrow
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      print("Left");
+                            // Left Arrow
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              GestureDetector(
+                                onTap: () {
+                                  print("Left");
 
-                      if (_currentAvatarIndex == 0) {
-                        setState(() {
-                          _currentAvatarIndex = 10;
-                          print(_currentAvatarIndex);
-                        });
-                      } else {
-                        setState(() {
-                          _currentAvatarIndex--;
-                        });
-                        print(_currentAvatarIndex);
-                      }
-                      ;
-                    },
-                    child: Container(
-                      width: 20,
-                      child: Image.asset(
-                        'assets/images/navigation/left.png',
-                        color: Colors.orange[700],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  // Image, TODO: ADD FUNCTIONALITY
-                  Center(
-                    child: Container(
-                      width: height * 0.2,
-                      height: height * 0.2,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: orange, width: 12.0),
-                      ),
-                      child: ClipOval(
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Image.asset("assets/images/avatars/$_currentAvatarIndex.jpeg"),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  // Right Arrow
-                  GestureDetector(
-                    onTap: () {
-                      print("Right");
+                                  if (_currentAvatarIndex == 0) {
+                                    setState(() {
+                                      _currentAvatarIndex = 10;
+                                      print(_currentAvatarIndex);
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _currentAvatarIndex--;
+                                    });
+                                    print(_currentAvatarIndex);
+                                  }
+                                  ;
+                                },
+                                child: Container(
+                                  width: 20,
+                                  child: Image.asset(
+                                    'assets/images/navigation/left.png',
+                                    color: Colors.orange[700],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              // Image, TODO: ADD FUNCTIONALITY
+                              Center(
+                                child: Container(
+                                  width: height * 0.2,
+                                  height: height * 0.2,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border:
+                                        Border.all(color: orange, width: 12.0),
+                                  ),
+                                  child: ClipOval(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Image.asset(
+                                          "assets/images/avatars/$_currentAvatarIndex.jpeg"),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              // Right Arrow
+                              GestureDetector(
+                                onTap: () {
+                                  print("Right");
 
-                      if (_currentAvatarIndex == 10) {
-                        setState(() {
-                          _currentAvatarIndex = 0;
-                          print(_currentAvatarIndex);
-                        });
-                      } else {
-                        setState(() {
-                          _currentAvatarIndex++;
-                        });
-                        print(_currentAvatarIndex);
-                      };                      ;
-                    },
-                    child: Container(
-                      width: 25,
-                      child: Image.asset(
-                        'assets/images/navigation/right.png',
-                        color: Colors.orange[700],
-                      ),
-                    ),
-                  ),
-                ],
+                                  if (_currentAvatarIndex == 10) {
+                                    setState(() {
+                                      _currentAvatarIndex = 0;
+                                      print(_currentAvatarIndex);
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _currentAvatarIndex++;
+                                    });
+                                    print(_currentAvatarIndex);
+                                  }
+                                  ;
+                                  ;
+                                },
+                                child: Container(
+                                  width: 25,
+                                  child: Image.asset(
+                                    'assets/images/navigation/right.png',
+                                    color: Colors.orange[700],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
 //-----------------------------------
 // Spacing for Text Fields:
@@ -622,11 +627,11 @@ class _SettingsState extends State<SettingsPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 TextField(
-                              onChanged: (username) {
-                         setState(() {
-                          _newUsername = username.trim();
-                        });
-                      },
+                                  onChanged: (username) {
+                                    setState(() {
+                                      _newUsername = username.trim();
+                                    });
+                                  },
                                   decoration: InputDecoration(
                                     labelText: 'new username',
                                     labelStyle: TextStyle(
@@ -681,28 +686,27 @@ class _SettingsState extends State<SettingsPage> {
                             width: width * 0.6,
                             child: GestureDetector(
                               onTap: () async {
-                            //check username
-                          final result = await _firestore
-                              .collection('user_info')
-                              .where("username", isEqualTo: _newUsername)
-                              .get();
-                          result.docs.forEach((res) {
-                            uname_exists = true;
-                          });
-                          print(uname_exists);
+                                //check username
+                                final result = await _firestore
+                                    .collection('user_info')
+                                    .where("username", isEqualTo: _newUsername)
+                                    .get();
+                                result.docs.forEach((res) {
+                                  uname_exists = true;
+                                });
+                                print(uname_exists);
 
-                          //if new username is unique
-                          if (uname_exists == false) {
-
-                          //update username and avatar
-                          changeAvatar();
-                          changeUsername();
-                          }
-                          //if username exists
-                          else {
-                            print('Username exists');
-                            _showMyDialog();
-                          }
+                                //if new username is unique
+                                if (uname_exists == false) {
+                                  //update username and avatar
+                                  changeAvatar();
+                                  changeUsername();
+                                }
+                                //if username exists
+                                else {
+                                  print('Username exists');
+                                  _showMyDialog();
+                                }
                               },
                               child: Material(
                                 borderRadius: BorderRadius.circular(40),

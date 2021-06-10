@@ -24,7 +24,6 @@ class _MyAdminState extends State<MyAdmin> {
     _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
       setState(() {
         cUsername = value.data()["username"];
-
       });
     });
   }
@@ -103,20 +102,137 @@ class _MyAdminState extends State<MyAdmin> {
       );
     }
 
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: const Color(0xFFFFFBF2),
-        body: SafeArea(
-          child: Stack(
-            children: [
-              //------------------------
-              //Back button
-              Positioned(
-                top: 60,
-                left: 40,
-                child: Container(
-                  width: 50,
-                  height: 50,
+    return Scaffold(
+      backgroundColor: const Color(0xFFFFFBF2),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            //------------------------
+            //Back button
+            Positioned(
+              top: 30,
+              left: 40,
+              child: Container(
+                width: 50,
+                height: 50,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PlayerStartPage(),
+                      ),
+                    );
+                  },
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10000),
+                    shadowColor: const Color(0xFF1E325C),
+                    elevation: 5,
+                    child: ClipOval(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 12,
+                          left: 10,
+                          right: 12,
+                          bottom: 12,
+                        ),
+                        child: Image.asset(
+                          'assets/images/navigation/arrow.jpeg',
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            Center(
+              child: Column(children: <Widget>[
+                //Spacing
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                //----------------------
+                //------------------------
+                //Admin's Avatar
+                CircleAvatar(
+                  radius: 80,
+                  backgroundColor: orange,
+                  child: CircleAvatar(
+                    radius: 65,
+                    backgroundImage: AssetImage(
+                        "assets/images/avatars/$_currentAvatarIndex.jpeg"),
+                  ),
+                ),
+                //------------------------
+                //Spacing
+                SizedBox(
+                  height: height * 0.05,
+                ),
+                //------------------------
+                //Admin's Username
+                Center(
+                  child: Container(
+                    child: Text(
+                      'My Admin:\n$adminUsername',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Museo',
+                        fontSize: height * 0.06,
+                        color: blue,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+                //------------------------
+                //Spacing
+                SizedBox(
+                  height: height * 0.05,
+                ),
+                //----------------------
+                //Button: change my admin
+                Container(
+                  margin: EdgeInsets.all(30),
+                  height: 120,
+                  width: width * 0.8,
+                  child: GestureDetector(
+                    onTap: () {
+                      _showMyDialog();
+                    },
+                    child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: Colors.grey[300],
+                      color: yellow,
+                      elevation: 3,
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                            'Change My Admin',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Museo',
+                              fontSize: 40,
+                              fontWeight: FontWeight.w800,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                //------------------------
+                //Spacing
+                SizedBox(
+                  height: height * 0.003,
+                ),
+                //----------------------
+                //Button: OK
+                Container(
+                  margin: EdgeInsets.all(30),
+                  height: 175,
+                  width: width * 0.8,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -126,150 +242,31 @@ class _MyAdminState extends State<MyAdmin> {
                       );
                     },
                     child: Material(
-                      borderRadius: BorderRadius.circular(10000),
-                      shadowColor: const Color(0xFF1E325C),
-                      elevation: 5,
-                      child: ClipOval(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: Colors.grey[300],
+                      color: orange,
+                      elevation: 3,
+                      child: Center(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 12,
-                            left: 10,
-                            right: 12,
-                            bottom: 12,
-                          ),
-                          child: Image.asset(
-                            'assets/images/navigation/arrow.jpeg',
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: Text(
+                            'OK',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Museo',
+                              fontSize: 50,
+                              fontWeight: FontWeight.w800,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-
-              Center(
-                child: Column(children: <Widget>[
-                  //Spacing
-                  SizedBox(
-                    height: height * 0.15,
-                  ),
-                  //----------------------
-                  //------------------------
-                  //Admin's Avatar
-                  CircleAvatar(
-                    radius: 80,
-                    backgroundColor: orange,
-                    child: CircleAvatar(
-                      radius: 65,
-                      backgroundImage:
-                          AssetImage("assets/images/avatars/$_currentAvatarIndex.jpeg"),
-                    ),
-                  ),
-                  //------------------------
-                  //Spacing
-                  SizedBox(
-                    height: height * 0.05,
-                  ),
-                  //------------------------
-                  //Admin's Username
-                  Center(
-                    child: Container(
-                      child: Text(
-                        'My Admin:\n$adminUsername',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Museo',
-                          fontSize: height * 0.06,
-                          color: blue,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  //------------------------
-                  //Spacing
-                  SizedBox(
-                    height: height * 0.05,
-                  ),
-                  //----------------------
-                  //Button: change my admin
-                  Container(
-                    margin: EdgeInsets.all(30),
-                    height: 120,
-                    width: width * 0.8,
-                    child: GestureDetector(
-                      onTap: () {
-                        _showMyDialog();
-                      },
-                      child: Material(
-                        borderRadius: BorderRadius.circular(40),
-                        shadowColor: Colors.grey[300],
-                        color: yellow,
-                        elevation: 3,
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child: Text(
-                              'Change My Admin',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Museo',
-                                fontSize: 40,
-                                fontWeight: FontWeight.w800,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  //------------------------
-                  //Spacing
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  //----------------------
-                  //Button: OK
-                  Container(
-                    margin: EdgeInsets.all(30),
-                    height: 200,
-                    width: width * 0.8,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => PlayerStartPage(),
-                          ),
-                        );
-                      },
-                      child: Material(
-                        borderRadius: BorderRadius.circular(40),
-                        shadowColor: Colors.grey[300],
-                        color: orange,
-                        elevation: 3,
-                        child: Center(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            child: Text(
-                              'OK',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Museo',
-                                fontSize: 50,
-                                fontWeight: FontWeight.w800,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ]),
-              ),
-            ],
-          ),
+              ]),
+            ),
+          ],
         ),
       ),
     );

@@ -70,7 +70,7 @@ class SelectExerciseState extends State<SelectExercise> {
             //------------------------
             //Back button
             Container(
-              margin: EdgeInsets.only(top: 60, left: 40),
+              margin: EdgeInsets.only(top: 30, left: 40),
               width: 50,
               height: 50,
               child: Material(
@@ -111,7 +111,7 @@ class SelectExerciseState extends State<SelectExercise> {
                       //------------------------
                       //Spacing above 'Select Exercise'
                       SizedBox(
-                        height: height * 0.08,
+                        height: height * 0.03,
                       ),
                       //------------------------
                       //Title text&font: 'Select Exercise'
@@ -134,7 +134,7 @@ class SelectExerciseState extends State<SelectExercise> {
                           //Scrolling area background
                           margin: EdgeInsets.symmetric(
                               vertical: 30, horizontal: 20),
-                          height: height * 0.6,
+                          height: height * 0.66,
                           decoration: BoxDecoration(
                             color: Colors.green[50],
                             borderRadius: BorderRadius.all(
@@ -237,14 +237,20 @@ class SelectExerciseState extends State<SelectExercise> {
                                                                 onPressed: () {
                                                                   now = DateTime
                                                                       .now();
-                                                                  String formattedTime = DateFormat('yyyy-MM-dd – kk:mm'). format(now);
+                                                                  String
+                                                                      formattedTime =
+                                                                      DateFormat(
+                                                                              'yyyy-MM-dd – kk:mm')
+                                                                          .format(
+                                                                              now);
                                                                   _firestore
                                                                       .collection(
                                                                           "play_history")
                                                                       .doc(cUser
                                                                           .uid)
                                                                       .set({
-                                                                    formattedTime: {
+                                                                    formattedTime:
+                                                                        {
                                                                       "Exercise":
                                                                           document[
                                                                               'name'],
@@ -377,14 +383,20 @@ class SelectExerciseState extends State<SelectExercise> {
                                                                 onPressed: () {
                                                                   now = DateTime
                                                                       .now();
-                                                                  String formattedTime = DateFormat('yyyy-MM-dd – kk:mm'). format(now);
+                                                                  String
+                                                                      formattedTime =
+                                                                      DateFormat(
+                                                                              'yyyy-MM-dd – kk:mm')
+                                                                          .format(
+                                                                              now);
                                                                   _firestore
                                                                       .collection(
                                                                           "play_history")
                                                                       .doc(cUser
                                                                           .uid)
                                                                       .set({
-                                                                    formattedTime: {
+                                                                    formattedTime:
+                                                                        {
                                                                       "Exercise":
                                                                           document[
                                                                               'name'],

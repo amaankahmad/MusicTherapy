@@ -45,7 +45,7 @@ class _SignUpState extends State<SignUp> {
 
   // Avatar image selection
 
- /* switch (_currentAvatarIndex) {
+  /* switch (_currentAvatarIndex) {
     case 0:
       Image.asset("assets/images/avatars/lion.png");
   break;
@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
 //-----------------------------------
 // Back Button:
               Positioned(
-                top: 60,
+                top: 30,
                 left: 40,
                 child: Container(
                   width: 50,
@@ -142,7 +142,7 @@ class _SignUpState extends State<SignUp> {
               Column(
                 children: <Widget>[
                   SizedBox(
-                    height: height * 0.05,
+                    height: height * 0.025,
                   ),
                   Row(
                     // Left Arrow
@@ -188,7 +188,8 @@ class _SignUpState extends State<SignUp> {
                           child: ClipOval(
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: Image.asset("assets/images/avatars/$_currentAvatarIndex.jpeg"),
+                              child: Image.asset(
+                                  "assets/images/avatars/$_currentAvatarIndex.jpeg"),
                             ),
                           ),
                         ),
@@ -211,7 +212,8 @@ class _SignUpState extends State<SignUp> {
                               _currentAvatarIndex++;
                             });
                             print(_currentAvatarIndex);
-                          };                     
+                          }
+                          ;
                         },
                         child: Container(
                           width: 25,
@@ -456,7 +458,8 @@ class _SignUpState extends State<SignUp> {
                                 onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) => TermsAndConditions(),
+                                      builder: (context) =>
+                                          TermsAndConditions(),
                                     ),
                                   );
                                 },
@@ -569,7 +572,7 @@ class _SignUpState extends State<SignUp> {
                                   'player': _checkPlayer,
                                   'email': _email,
                                   'username': _username,
-                                  'avatar' : _currentAvatarIndex,
+                                  'avatar': _currentAvatarIndex,
                                 });
                                 firestore
                                     .collection('username_uid')
@@ -616,7 +619,8 @@ class _SignUpState extends State<SignUp> {
                               elevation: 3,
                               child: Center(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
                                   child: Text(
                                     'Sign Up!',
                                     style: TextStyle(
@@ -638,13 +642,9 @@ class _SignUpState extends State<SignUp> {
                     ),
                   )
                 ],
-
               ),
-
             ],
-
           ),
-
         ),
       ),
     );
