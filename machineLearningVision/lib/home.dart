@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   //bool state = true;
   String _model = "";
   List<double> angles = [];
+  List<double> percentage_result = [];
   List<double> movement = [
     3.14,
     3.14,
@@ -137,6 +138,7 @@ class _HomePageState extends State<HomePage> {
                     _model,
                     movement,
                     angles,
+                    percentage_result,
                     state),
               ],
             ),

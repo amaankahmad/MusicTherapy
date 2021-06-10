@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 const String posenet = "PoseNet";
+const max_angle = 173;
+const min_angle = 40;
 
 class BndBox extends StatelessWidget {
   final List<dynamic> results;
@@ -12,10 +14,20 @@ class BndBox extends StatelessWidget {
   final String model;
   final List<double> movement;
   final List<double> angles;
+  final List<double> percentage_result;
   var state;
 
-  BndBox(this.results, this.previewH, this.previewW, this.screenH, this.screenW,
-      this.model, this.movement, this.angles, this.state);
+  BndBox(
+      this.results,
+      this.previewH,
+      this.previewW,
+      this.screenH,
+      this.screenW,
+      this.model,
+      this.movement,
+      this.angles,
+      this.percentage_result,
+      this.state);
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +77,8 @@ class BndBox extends StatelessWidget {
             if (shoulderX != null && elbowX != null && wristX != null) {
               angle = getAngle(
                   shoulderX, shoulderY, elbowX, elbowY, wristX, wristY);
+
+              double angle_deg = angle * 180 / 3.1415;
               // print(angle);
               // if (movement[movement.length - 1] -
               //         movement[movement.length - 3] <
@@ -74,13 +88,28 @@ class BndBox extends StatelessWidget {
               //         "REP COUNTED! Angle difference = ${movement[movement.length - 1]}");
               //   }
               // }
+              //double comp_angle = compare(movement, state);
+              movement.add(angle);
               if (compare(movement, state)) {
                 // print(
                 //     "REP COUNTED! Angle difference = ${movement[movement.length - 1]}");
+                //ADD up/down  ANGLES INTO ANGLES LIST
+                angles.add(angle_deg);
+                //print('ANGLE: $angles');
 
-                //ADD THE DIFFERENCE BETWEEN ANGLES INTO ANGLES LIST
+                if (angle_deg < max_angle && angle_deg > 90) {
+                  percentage_result.add(angle_deg / max_angle * 100);
+                } else if (angle_deg > max_angle) {
+                  percentage_result.add(100);
+                } else if (angle_deg < 90 && angle_deg > min_angle) {
+                  percentage_result.add(min_angle / angle_deg * 100);
+                } else if (angle_deg < min_angle) {
+                  percentage_result.add(100);
+                }
               }
-              movement.add(angle);
+
+              print(percentage_result);
+              //movement.add(angle);
               // print(movement);
             }
           }
@@ -143,17 +172,20 @@ bool compare(List<double> movement, bool astate) {
 
   double threshold = 0.03;
 
-  bool isStopping = d1 < threshold && threshold < 0.03;
+  bool isStopping = d1 < threshold && d2 < threshold;
 
-  if (angle > 130 && isStopping && state == true) {
+  //print('hello');
+  if (angle > 90 && isStopping && state == true) {
     //print('$angle');
     print('down');
     print('$angle');
     state = false;
-  } else if (angle < 50 && isStopping && state == false) {
+    return true;
+  } else if (angle < 90 && isStopping && state == false) {
     print('up');
     print('$angle');
     state = true;
+    return true;
   }
   // angle = movement[end];
   // print('$angle');
