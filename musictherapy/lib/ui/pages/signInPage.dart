@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:musictherapy/ui/pages/adminStartPage.dart';
 import 'package:musictherapy/ui/pages/forgotPassword.dart';
 import 'package:musictherapy/ui/pages/playerStartPage.dart';
 import 'package:musictherapy/ui/pages/signUpPage.dart';
@@ -12,6 +14,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   String _email, _password;
   final auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +34,29 @@ class _SignInState extends State<SignIn> {
 //-----------------------------------
 // Spacing for Logo:
           SizedBox(
-            height: height * 0.10,
+            height: height * 0.025,
           ),
 //-----------------------------------
-// Text for Logo:
+// LOGO
           Center(
-            child: Container(
-              child: Text(
-                'Logo',
-                style: TextStyle(
-                  //fontFamily: 'Museo',
-                  fontSize: height * 0.09,
-                  color: green,
-                  fontWeight: FontWeight.w700,
+            child: Column(
+              children: [
+                Container(
+                  height: height * 0.22,
+                  child: Image.asset('assets/images/other/logo.jpeg'),
                 ),
-              ),
+                SizedBox(
+                  height: height * 0.01,
+                ),
+                Text(
+                  'melomotion',
+                  style: TextStyle(
+                      fontFamily: 'Museo',
+                      fontSize: height * 0.05,
+                      color: blue),
+                ),
+              ],
             ),
-          ),
-//-----------------------------------
-// Spacing for Text Fields:
-          SizedBox(
-            height: 20,
           ),
 //-----------------------------------
 // Column for Email and Password Text Fields:
@@ -142,30 +147,44 @@ class _SignInState extends State<SignIn> {
 //-----------------------------------
 // Spacing for Button:
                 SizedBox(
-                  height: height * 0.15,
+                  height: height * 0.1,
                 ),
 //-----------------------------------
 // Sign In Button:
-                Container(
-                  width: width * 0.6,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(40),
-                    shadowColor: orange,
-                    color: orange,
-                    elevation: 3,
-                    child: GestureDetector(
-                      onTap: () {
-                        auth
-                            .signInWithEmailAndPassword(
-                                email: _email, password: _password)
-                            .then((_) {
+                GestureDetector(
+                  onTap: () async {
+                    final user = await auth.signInWithEmailAndPassword(
+                        email: _email, password: _password);
+                    if (user != null) {
+                      final cUser = FirebaseAuth.instance.currentUser;
+                      _firestore
+                          .collection("user_info")
+                          .doc(cUser.uid)
+                          .get()
+                          .then((value) {
+                        if (value.data()["player"] == true) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => PlayerStartPage(),
                             ),
                           );
-                        });
-                      },
+                        } else if (value.data()["admin"] == true) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => AdminStartPage(),
+                            ),
+                          );
+                        }
+                      });
+                    }
+                  },
+                  child: Container(
+                    width: width * 0.6,
+                    child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: orange,
+                      color: orange,
+                      elevation: 3,
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -183,6 +202,7 @@ class _SignInState extends State<SignIn> {
                     ),
                   ),
                 ),
+
 //-----------------------------------
 // Spacing for Text:
                 SizedBox(

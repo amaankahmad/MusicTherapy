@@ -30,19 +30,19 @@ class PrivacyPolicy extends StatelessWidget {
             child: Container(
               width: 50,
               height: 50,
-              child: Material(
-                borderRadius: BorderRadius.circular(10000),
-                shadowColor: orange,
-                color: Colors.white,
-                elevation: 3,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop(
-                      MaterialPageRoute(
-                        builder: (context) => SignUp(),
-                      ),
-                    );
-                  },
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop(
+                    MaterialPageRoute(
+                      builder: (context) => SignUp(),
+                    ),
+                  );
+                },
+                child: Material(
+                  borderRadius: BorderRadius.circular(10000),
+                  shadowColor: orange,
+                  color: Colors.white,
+                  elevation: 3,
                   child: ClipOval(
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -108,16 +108,16 @@ class PrivacyPolicy extends StatelessWidget {
               Container(
                 height: height * 0.1,
                 width: width * 0.7,
-                child: Material(
-                  borderRadius: BorderRadius.circular(40),
-                  shadowColor: blue,
-                  color: green,
-                  elevation: 3,
-                  child: GestureDetector(
-                    onTap: () {
-                      auth.sendPasswordResetEmail(email: _email);
-                      Navigator.of(context).pop();
-                    },
+                child: GestureDetector(
+                  onTap: () {
+                    auth.sendPasswordResetEmail(email: _email);
+                    Navigator.of(context).pop();
+                  },
+                  child: Material(
+                    borderRadius: BorderRadius.circular(40),
+                    shadowColor: blue,
+                    color: green,
+                    elevation: 3,
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 12),

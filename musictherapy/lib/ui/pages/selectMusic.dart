@@ -32,7 +32,8 @@ class _SelectMusicState extends State<SelectMusic> {
         child: Stack(
           children: [
             //-----------------------------------
-// Home Button:
+// Home Button: (Redundant, kept in case we change our minds)
+/*
             Positioned(
               top: 15,
               right: 40,
@@ -70,6 +71,8 @@ class _SelectMusicState extends State<SelectMusic> {
                 ),
               ),
             ),
+*/
+
 //-----------------------------------
 // Back Button:
             Positioned(
@@ -78,18 +81,18 @@ class _SelectMusicState extends State<SelectMusic> {
               child: Container(
                 width: 50,
                 height: 50,
-                child: Material(
-                  borderRadius: BorderRadius.circular(10000),
-                  shadowColor: const Color(0xFF1E325C),
-                  elevation: 5,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop(
-                        MaterialPageRoute(
-                          builder: (context) => SelectExercise(),
-                        ),
-                      );
-                    },
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop(
+                      MaterialPageRoute(
+                        builder: (context) => SelectExercise(),
+                      ),
+                    );
+                  },
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10000),
+                    shadowColor: const Color(0xFF1E325C),
+                    elevation: 5,
                     child: ClipOval(
                       child: Padding(
                         padding: const EdgeInsets.only(

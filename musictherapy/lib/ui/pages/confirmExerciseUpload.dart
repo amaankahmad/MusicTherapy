@@ -104,19 +104,19 @@ class ConfirmExerciseUploadPage extends StatelessWidget {
               height: 100.0,
               width: width * 0.75,
               margin: EdgeInsets.all(20.0),
-              child: Material(
-                borderRadius: BorderRadius.circular(40),
-                shadowColor: const Color(0xFFF57E00),
-                color: const Color(0xFFFFC247),
-                elevation: 3,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => AdminStartPage(),
-                      ),
-                    );
-                  },
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AdminStartPage(),
+                    ),
+                  );
+                },
+                child: Material(
+                  borderRadius: BorderRadius.circular(40),
+                  shadowColor: const Color(0xFFF57E00),
+                  color: const Color(0xFFFFC247),
+                  elevation: 3,
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),

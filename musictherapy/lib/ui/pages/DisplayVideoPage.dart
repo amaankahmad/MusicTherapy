@@ -21,12 +21,12 @@ class DisplayVideoPage extends StatelessWidget {
             child: Container(
               width: 50,
               height: 50,
-              child: Material(
-                borderRadius: BorderRadius.circular(10000),
-                shadowColor: const Color(0xFF1E325C),
-                elevation: 5,
-                child: GestureDetector(
-                  onTap: () {},
+              child: GestureDetector(
+                onTap: () {},
+                child: Material(
+                  borderRadius: BorderRadius.circular(10000),
+                  shadowColor: const Color(0xFF1E325C),
+                  elevation: 5,
                   child: ClipOval(
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -63,13 +63,13 @@ class DisplayVideoPage extends StatelessWidget {
                   child: Container(
                     width: width * 0.75,
                     height: height * 0.3,
-                    child: Material(
-                      borderRadius: BorderRadius.circular(40),
-                      shadowColor: orange,
-                      color: yellow,
-                      elevation: 3,
-                      child: GestureDetector(
-                        onTap: () {},
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Material(
+                        borderRadius: BorderRadius.circular(40),
+                        shadowColor: orange,
+                        color: yellow,
+                        elevation: 3,
                         child: Center(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 12),
@@ -99,13 +99,13 @@ class DisplayVideoPage extends StatelessWidget {
                 Container(
                   width: width * 0.75,
                   height: height * 0.1,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(40),
-                    shadowColor: orange,
-                    color: orange,
-                    elevation: 3,
-                    child: GestureDetector(
-                      onTap: () {},
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: orange,
+                      color: orange,
+                      elevation: 3,
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -133,13 +133,13 @@ class DisplayVideoPage extends StatelessWidget {
                 Container(
                   width: width * 0.75,
                   height: height * 0.1,
-                  child: Material(
-                    borderRadius: BorderRadius.circular(40),
-                    shadowColor: orange,
-                    color: white,
-                    elevation: 3,
-                    child: GestureDetector(
-                      onTap: () {},
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: orange,
+                      color: white,
+                      elevation: 3,
                       child: Center(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),

@@ -1,16 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:musictherapy/ui/pages/playerStartPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Settings extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState extends State<SettingsPage> {
   var state = false;
   var switchColor = Colors.red[900];
   var _currentVolume = 60.0;
   var _currentFeedbackVolume = 80.0;
+  final auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  final firebaseUser = FirebaseAuth.instance.currentUser;
+  final cUser = FirebaseAuth.instance.currentUser;
+  String _newUsername;
+  var uname_exists = false;
+  int _currentAvatarIndex = 0;
+
+  CollectionReference users =
+      FirebaseFirestore.instance.collection('user_info');
+
+  void getUserInfo() async {
+    _firestore.collection("user_info").doc(cUser.uid).get().then((value) {
+      setState(() {
+        _currentAvatarIndex = value.data()["avatar"];
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -22,6 +49,83 @@ class _SettingsState extends State<Settings> {
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
     final sectionBoxSize = width * 0.8;
+
+//alterDialog of username
+    Future<void> _showMyDialog() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Username already exists'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Please choose a different username.'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+////alterDialog of save conformation
+
+    Future<void> _save() async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Update saved'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('：）'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+// change username
+    Future<void> changeUsername() {
+      return users
+          .doc(cUser.uid)
+          .update({'username': _newUsername})
+          .then((value) => _save())
+          .catchError((error) => print("Failed to update: $error"));
+    }
+
+//change avatar
+
+    Future<void> changeAvatar() {
+      return users
+          .doc(cUser.uid)
+          .update({'avatar': _currentAvatarIndex})
+          .then((value) => _save())
+          .catchError((error) => print("Failed to update: $error"));
+    }
+
     return Scaffold(
       backgroundColor: white,
       body: Stack(
@@ -34,19 +138,19 @@ class _SettingsState extends State<Settings> {
             child: Container(
               width: 50,
               height: 50,
-              child: Material(
-                borderRadius: BorderRadius.circular(10000),
-                shadowColor: orange,
-                color: Colors.white,
-                elevation: 3,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop(
-                      MaterialPageRoute(
-                        builder: (context) => PlayerStartPage(),
-                      ),
-                    );
-                  },
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop(
+                    MaterialPageRoute(
+                      builder: (context) => PlayerStartPage(),
+                    ),
+                  );
+                },
+                child: Material(
+                  borderRadius: BorderRadius.circular(10000),
+                  shadowColor: orange,
+                  color: Colors.white,
+                  elevation: 3,
                   child: ClipOval(
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -196,10 +300,10 @@ class _SettingsState extends State<Settings> {
                                   SizedBox(
                                     width: 25,
                                   ),
-                                  Icon(
-                                    Icons.check_sharp,
-                                    color: green,
-                                  ),
+                                  // Icon(
+                                  //   Icons.check_sharp,
+                                  //   color: green,
+                                  // ),
                                 ],
                               ),
                               SizedBox(
@@ -237,7 +341,7 @@ class _SettingsState extends State<Settings> {
                   ),
 //-----------------------------------
 // Audio settings:
-                  Container(
+                  /* Container(
                     width: sectionBoxSize,
                     decoration: BoxDecoration(
                       color: Colors.orange[600],
@@ -258,11 +362,11 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                   Column(
                     children: <Widget>[
 //-----------------------------------
-// Volume of Music:
+/*// Volume of Music:
                       Padding(
                         padding: const EdgeInsets.only(
                           top: 30,
@@ -373,7 +477,7 @@ class _SettingsState extends State<Settings> {
                       ),
                       SizedBox(
                         height: 30,
-                      ),
+                      ),*/
 //-----------------------------------
 // Account settings:
                       Container(
@@ -420,11 +524,29 @@ class _SettingsState extends State<Settings> {
                             // Left Arrow
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Container(
-                                width: 30,
-                                child: Image.asset(
-                                  'assets/images/navigation/left.png',
-                                  color: Colors.orange[700],
+                              GestureDetector(
+                                onTap: () {
+                                  print("Left");
+
+                                  if (_currentAvatarIndex == 0) {
+                                    setState(() {
+                                      _currentAvatarIndex = 10;
+                                      print(_currentAvatarIndex);
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _currentAvatarIndex--;
+                                    });
+                                    print(_currentAvatarIndex);
+                                  }
+                                  ;
+                                },
+                                child: Container(
+                                  width: 20,
+                                  child: Image.asset(
+                                    'assets/images/navigation/left.png',
+                                    color: Colors.orange[700],
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -433,8 +555,8 @@ class _SettingsState extends State<Settings> {
                               // Image, TODO: ADD FUNCTIONALITY
                               Center(
                                 child: Container(
-                                  width: 250,
-                                  height: 250,
+                                  width: height * 0.2,
+                                  height: height * 0.2,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border:
@@ -444,7 +566,7 @@ class _SettingsState extends State<Settings> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: Image.asset(
-                                          "assets/images/avatars/lion.png"),
+                                          "assets/images/avatars/$_currentAvatarIndex.jpeg"),
                                     ),
                                   ),
                                 ),
@@ -453,11 +575,30 @@ class _SettingsState extends State<Settings> {
                                 width: 10,
                               ),
                               // Right Arrow
-                              Container(
-                                width: 30,
-                                child: Image.asset(
-                                  'assets/images/navigation/right.png',
-                                  color: Colors.orange[700],
+                              GestureDetector(
+                                onTap: () {
+                                  print("Right");
+
+                                  if (_currentAvatarIndex == 10) {
+                                    setState(() {
+                                      _currentAvatarIndex = 0;
+                                      print(_currentAvatarIndex);
+                                    });
+                                  } else {
+                                    setState(() {
+                                      _currentAvatarIndex++;
+                                    });
+                                    print(_currentAvatarIndex);
+                                  }
+                                  ;
+                                  ;
+                                },
+                                child: Container(
+                                  width: 25,
+                                  child: Image.asset(
+                                    'assets/images/navigation/right.png',
+                                    color: Colors.orange[700],
+                                  ),
                                 ),
                               ),
                             ],
@@ -468,10 +609,10 @@ class _SettingsState extends State<Settings> {
                             height: 25,
                           ),
 //-----------------------------------
-//  Email Text Field:
+//  Username Text Field:
                           Container(
                             child: Text(
-                              'Change email address:',
+                              'Change username:',
                               style: TextStyle(
                                 fontSize: 24,
                               ),
@@ -486,8 +627,13 @@ class _SettingsState extends State<Settings> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 TextField(
+                                  onChanged: (username) {
+                                    setState(() {
+                                      _newUsername = username.trim();
+                                    });
+                                  },
                                   decoration: InputDecoration(
-                                    labelText: 'new email address',
+                                    labelText: 'new username',
                                     labelStyle: TextStyle(
                                       //fontFamily: 'Museo',
                                       fontSize: 18,
@@ -505,6 +651,7 @@ class _SettingsState extends State<Settings> {
                                     ),
                                   ),
                                 ),
+/*
                                 TextField(
                                   decoration: InputDecoration(
                                     labelText: 'password',
@@ -526,6 +673,7 @@ class _SettingsState extends State<Settings> {
                                   ),
                                   obscureText: true,
                                 ),
+                                */
                               ],
                             ),
                           ),
@@ -536,13 +684,35 @@ class _SettingsState extends State<Settings> {
 //  Sign Up Button:
                           Container(
                             width: width * 0.6,
-                            child: Material(
-                              borderRadius: BorderRadius.circular(40),
-                              shadowColor: blue,
-                              color: green,
-                              elevation: 3,
-                              child: GestureDetector(
-                                onTap: () {},
+                            child: GestureDetector(
+                              onTap: () async {
+                                //check username
+                                final result = await _firestore
+                                    .collection('user_info')
+                                    .where("username", isEqualTo: _newUsername)
+                                    .get();
+                                result.docs.forEach((res) {
+                                  uname_exists = true;
+                                });
+                                print(uname_exists);
+
+                                //if new username is unique
+                                if (uname_exists == false) {
+                                  //update username and avatar
+                                  changeAvatar();
+                                  changeUsername();
+                                }
+                                //if username exists
+                                else {
+                                  print('Username exists');
+                                  _showMyDialog();
+                                }
+                              },
+                              child: Material(
+                                borderRadius: BorderRadius.circular(40),
+                                shadowColor: blue,
+                                color: green,
+                                elevation: 3,
                                 child: Center(
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
