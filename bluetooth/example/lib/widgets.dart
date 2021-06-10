@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:video_player/video_player.dart';
 
 //----------------- HOW DEVICE NAMES ARE SHOWN ----------------------
 class ScanResultTile extends StatelessWidget {
@@ -233,7 +234,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_2(int reps) {
     if (reps >= 5) {
       setState(() {
-        assetsAudioPlayer_2.setVolume(0.5);
+        assetsAudioPlayer_2.setVolume(0.3);
       });
     }
   }
@@ -241,7 +242,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_3(int reps) {
     if (reps >= 10) {
       setState(() {
-        assetsAudioPlayer_3.setVolume(0.7);
+        assetsAudioPlayer_3.setVolume(0.4);
       });
     }
   }
@@ -249,7 +250,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_4(int reps) {
     if (reps >= 15) {
       setState(() {
-        assetsAudioPlayer_4.setVolume(0.7);
+        assetsAudioPlayer_4.setVolume(0.8);
       });
     }
   }
@@ -257,7 +258,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   void increase_5(int reps) {
     if (reps >= 20) {
       setState(() {
-        assetsAudioPlayer_5.setVolume(0.5);
+        assetsAudioPlayer_5.setVolume(0.2);
       });
     }
   }
@@ -315,13 +316,31 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                height: 100,
+                height: 25,
               ),
               Row(
                 children: [
                   SizedBox(
-                    width: 200,
+                    width: 20,
                   ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: blue, borderRadius: BorderRadius.circular(20)),
+                    width: 150,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Image.asset('assets/videos/lion.GIF'),
+                    ),
+                    // child: VideoPlayer(),
+                    // height: 500,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+
+                  // SizedBox(
+                  //   width: 200,
+                  // ),
                   Column(
                     children: [
                       Text(
@@ -336,12 +355,17 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                       //     style: Theme.of(context).textTheme.body1?.copyWith(
                       //         color: Theme.of(context).textTheme.caption?.color))
                       Container(
-                        child: Text(
-                          reps.toString(),
-                          style: TextStyle(
-                            color: blue,
-                            fontSize: 125,
-                            fontWeight: FontWeight.bold,
+                        decoration: BoxDecoration(
+                            color: orange, shape: BoxShape.circle),
+                        child: Padding(
+                          padding: const EdgeInsets.all(40.0),
+                          child: Text(
+                            reps.toString(),
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 125,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -354,7 +378,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                 ],
               ),
               SizedBox(
-                height: 100,
+                height: 30,
               ),
               Padding(
                 padding:
@@ -395,7 +419,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                           child: Material(
                             borderRadius: BorderRadius.circular(40),
                             shadowColor: orange,
-                            color: blue,
+                            color: orange,
                             elevation: 3,
                             child: Center(
                               child: Padding(

@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_blue_example/Bluetooth_Off_Screen.dart';
+import 'package:flutter_blue_example/Find_Devices_Screen.dart';
 import 'package:flutter_blue_example/widgets.dart';
 
 class DeviceScreen extends StatelessWidget {
@@ -65,50 +66,50 @@ class DeviceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 //----------------- APP BAR ----------------------
-      appBar: AppBar(
-        backgroundColor: orange,
-        // title: Text(device.name),
-        title: Text(
-          'Melomotion',
-          style: TextStyle(fontSize: 25),
-        ),
+      // appBar: AppBar(
+      //   backgroundColor: orange,
+      //   // title: Text(device.name),
+      //   title: Text(
+      //     'Melomotion',
+      //     style: TextStyle(fontSize: 25),
+      //   ),
 
-        actions: <Widget>[
-          StreamBuilder<BluetoothDeviceState>(
-            stream: device.state,
-            initialData: BluetoothDeviceState.connecting,
-            builder: (c, snapshot) {
-              VoidCallback? onPressed;
-              String text;
-              switch (snapshot.data) {
-                case BluetoothDeviceState.connected:
-                  onPressed = () => device.disconnect();
-                  text = 'DISCONNECT';
+      //   actions: <Widget>[
+      //     StreamBuilder<BluetoothDeviceState>(
+      //       stream: device.state,
+      //       initialData: BluetoothDeviceState.connecting,
+      //       builder: (c, snapshot) {
+      //         VoidCallback? onPressed;
+      //         String text;
+      //         switch (snapshot.data) {
+      //           case BluetoothDeviceState.connected:
+      //             onPressed = () => device.disconnect();
+      //             text = 'DISCONNECT';
 
-                  break;
-                case BluetoothDeviceState.disconnected:
-                  onPressed = () => device.connect();
-                  text = 'CONNECT';
-                  break;
-                default:
-                  onPressed = null;
-                  text = snapshot.data.toString().substring(21).toUpperCase();
-                  break;
-              }
-              return FlatButton(
-                onPressed: onPressed,
-                child: Text(
-                  text,
-                  style: Theme.of(context)
-                      .primaryTextTheme
-                      .button
-                      ?.copyWith(color: Colors.white),
-                ),
-              );
-            },
-          )
-        ],
-      ),
+      //             break;
+      //           case BluetoothDeviceState.disconnected:
+      //             onPressed = () => device.connect();
+      //             text = 'CONNECT';
+      //             break;
+      //           default:
+      //             onPressed = null;
+      //             text = snapshot.data.toString().substring(21).toUpperCase();
+      //             break;
+      //         }
+      //         return FlatButton(
+      //           onPressed: onPressed,
+      //           child: Text(
+      //             text,
+      //             style: Theme.of(context)
+      //                 .primaryTextTheme
+      //                 .button
+      //                 ?.copyWith(color: Colors.white),
+      //           ),
+      //         );
+      //       },
+      //     )
+      //   ],
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -160,13 +161,139 @@ class DeviceScreen extends StatelessWidget {
           //   ),
           // ),
 // ------------- GROOVE METER ---------------
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          //   child: Container(
+          //     width: 500,
+          //     height: 10,
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(40), color: orange),
+          //   ),
+          // ),
+          // TODO change app font
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-            child: Container(
-              width: 500,
-              height: 10,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40), color: orange),
+            padding: const EdgeInsets.all(15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  child: Material(
+                    borderRadius: BorderRadius.circular(10000),
+                    shadowColor: const Color(0xFF1E325C),
+                    elevation: 5,
+                    child: GestureDetector(
+                      onTap: () {
+                        // print('yes');
+                        Navigator.of(context).pop(
+                          MaterialPageRoute(
+                            builder: (context) => FindDevicesScreen(),
+                          ),
+                        );
+                      },
+                      child: ClipOval(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 12,
+                            left: 10,
+                            right: 12,
+                            bottom: 12,
+                          ),
+                          child: Image.asset(
+                            'assets/arrow.jpeg',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                // Text(
+                //   'Melomotion',
+                //   style: TextStyle(fontSize: 25),
+                // ),
+// Row(
+                // children: <Widget>[
+                Container(
+                  // decoration: BoxDecoration(color: blue),
+                  child: StreamBuilder<BluetoothDeviceState>(
+                      stream: device.state,
+                      initialData: BluetoothDeviceState.connecting,
+                      builder: (c, snapshot) {
+                        VoidCallback? onPressed;
+                        String text;
+                        switch (snapshot.data) {
+                          case BluetoothDeviceState.connected:
+                            onPressed = () => device.disconnect();
+                            text = 'Disconnect';
+
+                            break;
+                          case BluetoothDeviceState.disconnected:
+                            onPressed = () => device.connect();
+                            text = 'Connect';
+                            break;
+                          default:
+                            onPressed = null;
+                            text = snapshot.data
+                                .toString()
+                                .substring(21)
+                                .toUpperCase();
+                            break;
+                        }
+
+                        return Container(
+                          child: GestureDetector(
+                            onTap: onPressed,
+                            child: Material(
+                              borderRadius: BorderRadius.circular(40),
+                              shadowColor: orange,
+                              color: blue,
+                              elevation: 3,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 12, horizontal: 8),
+                                  child: Text(
+                                    text,
+                                    style: TextStyle(
+                                      color: white,
+                                      // fontFamily: 'Museo',
+                                      fontSize: 18,
+                                      //fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                        // FlatButton(
+                        //   // color: orange,
+                        //   onPressed: onPressed,
+                        //   child: Text(
+                        //     text,
+                        //     style: Theme.of(context)
+                        //         .primaryTextTheme
+                        //         .button
+                        //         ?.copyWith(color: Colors.white),
+                        //   ),
+                        // );
+                      }),
+                ),
+              ],
+            ),
+          ),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // Text(
+          //   'melomotion',
+          //   style: TextStyle(fontSize: 25),
+          // ),
+          Container(
+            child: Text(
+              'Please face the camera whilst\nperforming the movement',
+              style: TextStyle(color: blue, fontSize: 22),
             ),
           ),
 // ------------- MAIN BIT ---------------
@@ -186,8 +313,9 @@ class DeviceScreen extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 1,
+            height: 10,
           ),
+
 //           Padding(
 //             padding: const EdgeInsets.all(10.0),
 //             child: Row(

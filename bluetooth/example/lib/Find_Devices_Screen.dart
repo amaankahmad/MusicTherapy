@@ -20,7 +20,7 @@ class FindDevicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: honeydew,
+      backgroundColor: white,
 //----------------- APP BAR ----------------------
       // appBar: AppBar(
       //   title: Text(
