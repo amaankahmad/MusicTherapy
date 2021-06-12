@@ -63,7 +63,7 @@ class AdminStartState extends State<AdminStartPage> {
           children: <Widget>[
 // --------- BACK BUTTON --------------
             Positioned(
-              top: 60,
+              top: 30,
               left: 40,
               child: Container(
                 width: 50,
@@ -102,15 +102,15 @@ class AdminStartState extends State<AdminStartPage> {
             Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
 // --------- SPACING CONTROL --------------
               SizedBox(
-                height: height * 0.1,
+                height: height * 0.075,
               ),
 // --------- SPACING CONTROL --------------
 // --------- AVATAR DON -------------------
               CircleAvatar(
-                radius: 80,
+                radius: 90,
                 backgroundColor: orange,
                 child: CircleAvatar(
-                  radius: 65,
+                  radius: 75,
                   backgroundImage: AssetImage(
                     "assets/images/avatars/$_currentAvatarIndex.jpeg",
                   ),
@@ -139,7 +139,7 @@ class AdminStartState extends State<AdminStartPage> {
               ),
 // --------- SPACING CONTROL --------------
               SizedBox(
-                height: height * 0.05,
+                height: height * 0.075,
               ),
 // --------- SPACING CONTROL --------------
 // --------- CREATE EXERCISES BUTTON ------

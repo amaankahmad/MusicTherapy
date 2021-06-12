@@ -72,15 +72,17 @@ class _SelectMusicState extends State<SelectMusic> {
               ),
             ),
 */
-
 //-----------------------------------
 // Back Button:
-            Positioned(
-              top: 15,
-              left: 40,
-              child: Container(
-                width: 50,
-                height: 50,
+            Container(
+              margin: EdgeInsets.only(top: 15, left: 35),
+              width: 50,
+              height: 50,
+              child: Material(
+                borderRadius: BorderRadius.circular(10000),
+                shadowColor: blue,
+                color: white,
+                elevation: 3,
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop(
@@ -89,44 +91,40 @@ class _SelectMusicState extends State<SelectMusic> {
                       ),
                     );
                   },
-                  child: Material(
-                    borderRadius: BorderRadius.circular(10000),
-                    shadowColor: const Color(0xFF1E325C),
-                    elevation: 5,
-                    child: ClipOval(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 12,
-                          left: 10,
-                          right: 12,
-                          bottom: 12,
-                        ),
-                        child: Image.asset(
-                          "assets/images/navigation/arrow.jpeg",
-                        ),
+                  child: ClipOval(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        left: 12,
+                        right: 12,
+                        bottom: 12,
                       ),
+                      child: Image.asset('assets/images/navigation/arrow.jpeg'),
                     ),
                   ),
                 ),
               ),
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
 //-------------------------------
 // Column -> Text + Flat button for Random
                 Column(
                   children: [
                     SizedBox(
-                      height: height * 0.07,
+                      height: height * 0.0225,
                     ),
                     Text(
-                      'Select Music',
+                      '     Select Music',
                       style: TextStyle(
                           color: blue,
                           fontFamily: 'Museo',
                           fontWeight: FontWeight.bold,
-                          fontSize: height * 0.07),
+                          fontSize: height * 0.05),
+                    ),
+                    SizedBox(
+                      height: height * 0.05,
                     ),
                     FlatButton(
                       onPressed: //Fill in to make button functional when pressed
@@ -196,6 +194,9 @@ class _SelectMusicState extends State<SelectMusic> {
 // Text + Card + Container (both song names) x2
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: height * 0.035,
+                              ),
                               Text(
                                 'Find a Song!',
                                 style: TextStyle(
@@ -203,6 +204,9 @@ class _SelectMusicState extends State<SelectMusic> {
                                     fontFamily: 'Museo',
                                     fontWeight: FontWeight.bold,
                                     fontSize: height * 0.05),
+                              ),
+                              SizedBox(
+                                height: height * 0.0225,
                               ),
                               Card(
                                 elevation: 3,
@@ -264,6 +268,9 @@ class _SelectMusicState extends State<SelectMusic> {
                                       (BuildContext context, int index) =>
                                           const Divider(),
                                 ),
+                              ),
+                              SizedBox(
+                                height: height * 0.02,
                               ),
                               Card(
                                 elevation: 3,

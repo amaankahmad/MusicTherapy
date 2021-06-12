@@ -62,38 +62,34 @@ class _AddAdminState extends State<AddAdmin> {
       backgroundColor: const Color(0xFFFFFBF2),
       body: Stack(
         children: [
-          //------------------------
-          //Back button
-          Positioned(
-            top: 60,
-            left: 40,
-            child: Container(
-              width: 50,
-              height: 50,
+//-----------------------------------
+// Back Button:
+          Container(
+            margin: EdgeInsets.only(top: 60, left: 35),
+            width: 50,
+            height: 50,
+            child: Material(
+              borderRadius: BorderRadius.circular(10000),
+              shadowColor: blue,
+              color: white,
+              elevation: 3,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
+                  Navigator.of(context).pop(
                     MaterialPageRoute(
                       builder: (context) => PlayerStartPage(),
                     ),
                   );
                 },
-                child: Material(
-                  borderRadius: BorderRadius.circular(10000),
-                  shadowColor: const Color(0xFF1E325C),
-                  elevation: 5,
-                  child: ClipOval(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 12,
-                        left: 10,
-                        right: 12,
-                        bottom: 12,
-                      ),
-                      child: Image.asset(
-                        'assets/images/navigation/arrow.jpeg',
-                      ),
+                child: ClipOval(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      left: 12,
+                      right: 12,
+                      bottom: 12,
                     ),
+                    child: Image.asset('assets/images/navigation/arrow.jpeg'),
                   ),
                 ),
               ),
@@ -134,104 +130,111 @@ class _AddAdminState extends State<AddAdmin> {
               ),
             ),*/
           Center(
-            child: Column(children: <Widget>[
-              //------------------------
-              //Spacing
-              SizedBox(
-                height: height * 0.08,
-              ),
-              //------------------------
-              //Title text&font: 'Connect to an Admin'
-              Text(
-                'Connect to\nan Admin',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: height * 0.06,
-                  fontFamily: 'Museo',
-                  color: const Color(0xFF1E325C),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              // SizedBox(
-              //   height: height * 0.01,
-              // ),
-              //------------------------
-              //"Enter Username of Admin"
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: height * 0.3,
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  //------------------------
+                  //Spacing
+                  SizedBox(
+                    height: height * 0.075,
+                  ),
+                  //------------------------
+                  //Title text&font: 'Connect to an Admin'
+                  Text(
+                    '  Connect to\n  an Admin',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: height * 0.05,
+                      fontFamily: 'Museo',
+                      color: const Color(0xFF1E325C),
+                      fontWeight: FontWeight.bold,
                     ),
-                    Container(
-                      width: width * 0.8,
-                      child: TextField(
-                        onChanged: (adminUname) {
-                          setState(() {
-                            adminUsername = adminUname.trim();
-                          });
-                        },
-                        decoration: InputDecoration(
-                          labelText: 'Enter Admin Username:',
-                          labelStyle: TextStyle(
-                            fontSize: height * 0.03,
-                            fontFamily: 'Museo',
-                            color: orange,
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: orange,
-                            ),
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                              color: blue,
+                  ),
+                  // SizedBox(
+                  //   height: height * 0.01,
+                  // ),
+                  //------------------------
+                  //"Enter Username of Admin"
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          height: height * 0.3,
+                        ),
+                        Container(
+                          width: width * 0.8,
+                          child: TextField(
+                            onChanged: (adminUname) {
+                              setState(() {
+                                adminUsername = adminUname.trim();
+                              });
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Enter Admin Username:',
+                              labelStyle: TextStyle(
+                                fontSize: height * 0.03,
+                                fontFamily: 'Museo',
+                                color: orange,
+                              ),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: orange,
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: blue,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ]),
-              //------------------------
-              //Spacing
-              SizedBox(
-                height: height * 0.2,
-              ),
-              //----------------------
-              //Button: Send Request
-              Container(
-                margin: EdgeInsets.all(30),
-                height: 120,
-                width: width * 0.8,
-                child: GestureDetector(
-                  onTap: () {
-                    requestAdmin();
-                    //if (adminUid != null) {
-                  },
-                  child: Material(
-                    borderRadius: BorderRadius.circular(40),
-                    shadowColor: Colors.grey[300],
-                    color: const Color(0xFFFFC247),
-                    elevation: 3,
-                    child: Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Text(
-                          'Send Request',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 32,
-                            fontFamily: 'Museo',
-                            fontWeight: FontWeight.w800,
+                      ]),
+                  //------------------------
+                  //Spacing
+                  SizedBox(
+                    height: height * 0.2,
+                  ),
+                  //----------------------
+                  //Button: Send Request
+                  Container(
+                    margin: EdgeInsets.all(30),
+                    height: 120,
+                    width: width * 0.8,
+                    child: GestureDetector(
+                      onTap: () {
+                        requestAdmin();
+                        //if (adminUid != null) {
+                      },
+                      child: Material(
+                        borderRadius: BorderRadius.circular(40),
+                        shadowColor: Colors.grey[300],
+                        color: const Color(0xFFFFC247),
+                        elevation: 3,
+                        child: Center(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: Text(
+                              'Send Request',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 32,
+                                fontFamily: 'Museo',
+                                fontWeight: FontWeight.w800,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: height * 0.05,
+                  ),
+                ],
               ),
-            ]),
+            ),
           ),
         ],
       ),

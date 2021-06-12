@@ -34,8 +34,8 @@ class _SelectPlayerState extends State<SelectPlayer> {
 //----------------------------
 // Home button
               Positioned(
-                top: 60,
-                right: 40,
+                top: 30,
+                right: 20,
                 child: Container(
                   width: 50,
                   height: 50,
@@ -73,8 +73,8 @@ class _SelectPlayerState extends State<SelectPlayer> {
 //---------------------------------
 //Back button
               Positioned(
-                top: 60,
-                left: 40,
+                top: 30,
+                left: 20,
                 child: Container(
                   width: 50,
                   height: 50,
@@ -112,7 +112,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
                 children: [
                   //Spacing above 'Select Player'
                   SizedBox(
-                    height: height * 0.05,
+                    height: height * 0.01,
                   ),
 
 //-----------------------------------
@@ -121,7 +121,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
                     'Select\nPlayer',
                     style: TextStyle(
                       fontFamily: 'Museo',
-                      fontSize: height * 0.06,
+                      fontSize: height * 0.05,
                       color: blue,
                       fontWeight: FontWeight.bold,
                     ),
@@ -217,8 +217,7 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                         .collection('PlayerList')
                                         .snapshots(),
                                     builder: (BuildContext context,
-                                        AsyncSnapshot<QuerySnapshot>
-                                            snapshot) {
+                                        AsyncSnapshot<QuerySnapshot> snapshot) {
                                       if (!snapshot.hasData) {
                                         return Center(
                                           child: CircularProgressIndicator(),
@@ -228,10 +227,14 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                       return SizedBox(
                                         height: height * 0.4,
                                         child: ListView(
-                                          children: snapshot.data.docs.map((document) {
+                                          children: snapshot.data.docs
+                                              .map((document) {
                                             return Center(
                                               child: Container(
-                                                width: MediaQuery.of(context).size.width / 1.2,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1.2,
                                                 child: Column(
                                                   children: <Widget>[
                                                     Padding(
@@ -240,23 +243,40 @@ class _SelectPlayerState extends State<SelectPlayer> {
                                                         bottom: 5,
                                                       ),
                                                       child:
-                                                      //button
+                                                          //button
                                                           Container(
-                                                              height: height * 0.1,
-                                                              width: width * 0.7,
-                                                              child: RaisedButton(
+                                                              height:
+                                                                  height * 0.1,
+                                                              width:
+                                                                  width * 0.7,
+                                                              child:
+                                                                  RaisedButton(
                                                                 onPressed:
                                                                     () {}, //Function of the button when press
-                                                                color: Colors.white,
-                                                                shape: RoundedRectangleBorder(
-                                                                  borderRadius: BorderRadius.circular(40.0),
+                                                                color: Colors
+                                                                    .white,
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              40.0),
                                                                 ),
-                                                                child: Text(document['player'],
-                                                                    style: TextStyle(
-                                                                      fontFamily:'Museo',
-                                                                      color: Colors.black,
-                                                                      fontSize: height * 0.025,
-                                                                      fontWeight: FontWeight.bold,
+                                                                child: Text(
+                                                                    document[
+                                                                        'player'],
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontFamily:
+                                                                          'Museo',
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          height *
+                                                                              0.025,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
                                                                     )),
                                                               )),
                                                     ),
@@ -314,7 +334,8 @@ class _SelectPlayerState extends State<SelectPlayer> {
                               ),
                               //),
                               SizedBox(
-                                height: height * 0.1, //Creates space at bottom of grid
+                                height: height *
+                                    0.1, //Creates space at bottom of grid
                               ),
                             ],
                           ),

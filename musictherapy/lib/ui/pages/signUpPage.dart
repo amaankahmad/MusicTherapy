@@ -103,7 +103,7 @@ class _SignUpState extends State<SignUp> {
 //-----------------------------------
 // Back Button:
               Positioned(
-                top: 30,
+                top: 10,
                 left: 40,
                 child: Container(
                   width: 50,
@@ -142,7 +142,7 @@ class _SignUpState extends State<SignUp> {
               Column(
                 children: <Widget>[
                   SizedBox(
-                    height: height * 0.025,
+                    height: height * 0.05,
                   ),
                   Row(
                     // Left Arrow
@@ -176,7 +176,6 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         width: 10,
                       ),
-                      // Image, TODO: ADD FUNCTIONALITY
                       Center(
                         child: Container(
                           width: height * 0.2,
@@ -303,7 +302,7 @@ class _SignUpState extends State<SignUp> {
 //_________________________________
 // Spacing for Select Role:
                         SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
 //-----------------------------------
 //  Select Role:
@@ -323,6 +322,9 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                               ],
+                            ),
+                            SizedBox(
+                              height: height * 0.02,
                             ),
                             CheckboxListTile(
                               title: Text(
@@ -366,7 +368,6 @@ class _SignUpState extends State<SignUp> {
                         ),
 //-----------------------------------
 //  Password Text Fields:
-
                         Form(
                           key: formkey,
                           child: Column(
@@ -442,7 +443,6 @@ class _SignUpState extends State<SignUp> {
                             ],
                           ),
                         ),
-
 //-----------------------------------
 //  Spacing for Terms and Conditions:
                         SizedBox(
