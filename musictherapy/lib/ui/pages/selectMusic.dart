@@ -22,10 +22,10 @@ class _SelectMusicState extends State<SelectMusic> {
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
     final List<String> entriesone = <String>[
-      'Can-Can',
-      'When the Saints go Marching'
+      'Groovy Beats',
+      'Funky Notes'
     ];
-    final List<String> entriestwo = <String>['Auld Lang Syne', '...'];
+    final List<String> entriestwo = <String>['Chill Track', 'Lazy Days'];
     return Scaffold(
       backgroundColor: white,
       body: SafeArea(
@@ -247,7 +247,12 @@ class _SelectMusicState extends State<SelectMusic> {
                                         // Rounded edges for card
                                       ),
                                       child: FlatButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) => FeedbackExcellent(),
+                                              ));
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5),
@@ -311,7 +316,12 @@ class _SelectMusicState extends State<SelectMusic> {
                                         // Rounded edges for card
                                       ),
                                       child: FlatButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) => FeedbackExcellent(),
+                                              ));
+                                        },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 5),
