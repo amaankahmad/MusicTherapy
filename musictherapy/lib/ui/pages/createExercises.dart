@@ -35,7 +35,6 @@ class _CreateExercisesState extends State<CreateExercises> {
     final white = const Color(0xFFFFFBF2);
     final yellow = const Color(0xFFFFC247);
     final honeydew = const Color(0xFFF1FAEE);
-    
 
     // TODO: implement build
     return Scaffold(
@@ -84,25 +83,26 @@ class _CreateExercisesState extends State<CreateExercises> {
 //Center+Column+Text...
 //Text "upload exercise video"
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: height * 0.01,
-                ),
-                Text(
-                  'Create\nExercise',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Museo',
-                    fontSize: height * 0.04,
-                    color: const Color(0xFF1E325C),
-                    fontWeight: FontWeight.w700,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Create\nExercise',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Museo',
+                      fontSize: height * 0.04,
+                      color: const Color(0xFF1E325C),
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-//--------------------------------------------------
-//Container+Stack+Center+SingleChildScrollView+Column
-                Container(
+                  SizedBox(
+                    height: height * 0.03,
+                  ),
+                  //--------------------------------------------------
+                  //Container+Stack+Center+SingleChildScrollView+Column
+                  Container(
                     height: height * 0.6,
                     width: width * 0.8,
                     decoration: BoxDecoration(
@@ -141,9 +141,11 @@ class _CreateExercisesState extends State<CreateExercises> {
                                   ),
                                 ),
                               ),
-
-//TextField in Card
-                              SizedBox(height: 8), //gap
+                              SizedBox(
+                                height: height * 0.01,
+                              ),
+                              //TextField in Card
+                              SizedBox(height: height * 0.01), //gap
                               SizedBox(
                                 width: width * 0.7,
                                 height: 40,
@@ -158,19 +160,21 @@ class _CreateExercisesState extends State<CreateExercises> {
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10.0, vertical: 4),
-                                    child: TextField(  onChanged: (video_name) {
-                                    setState(() {
-                                      exercise_name = video_name.trim();
-                                    });
-                                  },
+                                    child: TextField(
+                                      onChanged: (video_name) {
+                                        setState(() {
+                                          exercise_name = video_name.trim();
+                                        });
+                                      },
                                     ),
-                                    
                                   ),
                                 ),
                               ),
 
-//Text: "Upload video below:"
-                              SizedBox(height: height * 0.05), //gap
+                              //Text: "Upload video below:"
+                              SizedBox(
+                                height: height * 0.035,
+                              ), //gap
                               SizedBox(
                                 width: width * 0.7,
                                 height: 40,
@@ -193,58 +197,63 @@ class _CreateExercisesState extends State<CreateExercises> {
                                   ),
                                 ),
                               ),
-//check boxs
-                       CheckboxListTile(
-                          title: Text(
-                            'Public',
-                            style: TextStyle(
-                              color: blue,
-                              fontSize: 18,
-                            ),
-                          ),
-                          controlAffinity: ListTileControlAffinity.leading,
-                          value: _public,
-                          onChanged: (value) {
-                            setState(() {
-                              _public = value;
-                              _private = false;
-                              //print("public");
-                              //print(_public);
-                            });
-                          },
-                          activeColor: green,
-                          checkColor: white,
-                        ),
-                        CheckboxListTile(
-                          title: Text(
-                            'Private',
-                            style: TextStyle(
-                              color: blue,
-                              fontSize: 18,
-                            ),
-                          ),
-                          controlAffinity: ListTileControlAffinity.leading,
-                          value: _private,
-                          onChanged: (value) {
-                            setState(() {
-                              _private = value;
-                              //print("private");
-                              //print(_private);
-                              _public = false;
-                            });
-                          },
-                          activeColor: green,
-                          checkColor: white,
-                        ),
+                              SizedBox(
+                                height: height * 0.01,
+                              ),
+                              //check boxs
+                              CheckboxListTile(
+                                title: Text(
+                                  'Public',
+                                  style: TextStyle(
+                                    color: blue,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                value: _public,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _public = value;
+                                    _private = false;
+                                    //print("public");
+                                    //print(_public);
+                                  });
+                                },
+                                activeColor: green,
+                                checkColor: white,
+                              ),
+                              CheckboxListTile(
+                                title: Text(
+                                  'Private',
+                                  style: TextStyle(
+                                    color: blue,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                value: _private,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _private = value;
+                                    //print("private");
+                                    //print(_private);
+                                    _public = false;
+                                  });
+                                },
+                                activeColor: green,
+                                checkColor: white,
+                              ),
 
-//browse file button
+                              //browse file button
                               SizedBox(height: 8), //gap
                               Container(
                                   width: width * 0.7,
                                   height: height * 0.25,
                                   child: RaisedButton(
-                                        onPressed: () =>
-                                            selectVideo(), //Function of the button when press
+                                    onPressed: () =>
+                                        selectVideo(), //Function of the button when press
                                     color: Colors.white,
                                     elevation: 3,
                                     shape: RoundedRectangleBorder(
@@ -262,9 +271,8 @@ class _CreateExercisesState extends State<CreateExercises> {
                                     ),
                                   )),
 
-                
-//----------------------------------------------------
-//Text: "Upload data file below"
+                              //----------------------------------------------------
+                              //Text: "Upload data file below"
                               SizedBox(height: height * 0.05), //gap
                               SizedBox(
                                 width: width * 0.7,
@@ -289,59 +297,63 @@ class _CreateExercisesState extends State<CreateExercises> {
                                 ),
                               ),
 
-//browse file button
+                              //browse file button
                               SizedBox(height: 8), //gap
                               Container(
-                                  width: width * 0.7,
-                                  height: height * 0.25,
-                                  child: RaisedButton(
-                                    onPressed:
-                                        () {}, //Function of the button when press
-                                    color: Colors.white,
-                                    elevation: 3,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    child: Text(
-                                      'Click to browse file/\ndrag & drop',
-                                      //move the text to center horizontally
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontFamily: 'Museo',
-                                          fontSize: 18,
-                                          color: Colors.grey[400],
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  )),
+                                width: width * 0.7,
+                                height: height * 0.25,
+                                child: RaisedButton(
+                                  onPressed:
+                                      () {}, //Function of the button when press
+                                  color: Colors.white,
+                                  elevation: 3,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Text(
+                                    'Click to browse file/\ndrag & drop',
+                                    //move the text to center horizontally
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontFamily: 'Museo',
+                                        fontSize: 18,
+                                        color: Colors.grey[400],
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
                             ],
                           ) //column
                               ),
                         ),
                       ], //children
-                    )),
-
-//-----------------------------------------------------
-//Orange Upload Button
-                Container(
-                    height: 50.0,
-                    width: width * 0.75,
-                    child: RaisedButton(
-                       onPressed: () =>
-                        uploadVideo(),
-                      color: orange,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40.0),
-                      ),
-                      child: Text('Click to upload ',
-                          style: TextStyle(
-                            fontFamily: 'Museo',
-                            color: Colors.white,
-                            fontSize: height * 0.025,
-                            fontWeight: FontWeight.bold,
-                          )),
-                    )),
-//-----------------------------------------------------
-              ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.05,
+                  ),
+                  //-----------------------------------------------------
+                  //Orange Upload Button
+                  Container(
+                      height: 50.0,
+                      width: width * 0.75,
+                      child: RaisedButton(
+                        onPressed: () => uploadVideo(),
+                        color: orange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40.0),
+                        ),
+                        child: Text('Click to upload ',
+                            style: TextStyle(
+                              fontFamily: 'Museo',
+                              color: Colors.white,
+                              fontSize: height * 0.025,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      )),
+                  //-----------------------------------------------------
+                ],
+              ),
             ),
           ), //Center
         ],
@@ -362,21 +374,24 @@ class _CreateExercisesState extends State<CreateExercises> {
       if (video != null) {
         print("Video Selected");
       }
-    } 
-    else {
+    } else {
       print("Grant Permissions and Try Again");
     }
     // Upload to firebase
   }
 
   uploadVideo() async {
-    if (_public == true){
+    if (_public == true) {
       print("public");
       print(_public);
-         if (video != null) {
+      if (video != null) {
         // Upload to firebase
-        var snapshot =
-            await _storage.ref().child("Exercises").child("Public").child(exercise_name).putFile(file);
+        var snapshot = await _storage
+            .ref()
+            .child("Exercises")
+            .child("Public")
+            .child(exercise_name)
+            .putFile(file);
         print('File Uploaded');
         //saved video name as exercise name + uid.
         var downloadUrl = await snapshot.ref.getDownloadURL();
@@ -385,47 +400,57 @@ class _CreateExercisesState extends State<CreateExercises> {
         });
 
         //Save URL in firestore
-           firestore.collection("exercises_info").doc(exercise_name).set({
-          'URL' : videoUrl,
-             'name' : exercise_name,
+        firestore.collection("exercises_info").doc(exercise_name).set({
+          'URL': videoUrl,
+          'name': exercise_name,
         });
-        if (videoUrl != null){
-                      Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ConfirmExerciseUploadPage(),
-                      ),
-                    );
-        }        
+        if (videoUrl != null) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ConfirmExerciseUploadPage(),
+            ),
+          );
+        }
       } else {
         print("No path received, please select a video");
-      }     
+      }
     }
     //if private
-    else if(_private==true){
+    else if (_private == true) {
       //print("Private");
       //print(_private);
-        if (video != null) {
+      if (video != null) {
         // Upload to firebase
-        var snapshot =
-            await _storage.ref().child("Exercises").child("Private").child(cUser.uid).child(exercise_name).putFile(file);
-            print('File Uploaded');
+        var snapshot = await _storage
+            .ref()
+            .child("Exercises")
+            .child("Private")
+            .child(cUser.uid)
+            .child(exercise_name)
+            .putFile(file);
+        print('File Uploaded');
         //saved video name as exercise name + uid.
         var downloadUrl = await snapshot.ref.getDownloadURL();
         setState(() {
           videoUrl = downloadUrl;
         });
-            //Save URL in firestore
-           firestore.collection("exercises_info").doc("PrivateExercises").collection(cUser.uid).doc(exercise_name).set({
-          'URL' : videoUrl,
-          'name' : exercise_name,
+        //Save URL in firestore
+        firestore
+            .collection("exercises_info")
+            .doc("PrivateExercises")
+            .collection(cUser.uid)
+            .doc(exercise_name)
+            .set({
+          'URL': videoUrl,
+          'name': exercise_name,
         });
-        if (videoUrl != null){
-                      Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ConfirmExerciseUploadPage(),
-                      ),
-                    );
-        }        
+        if (videoUrl != null) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => ConfirmExerciseUploadPage(),
+            ),
+          );
+        }
       } else {
         print("No path received, please select a video");
       }

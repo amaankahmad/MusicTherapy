@@ -71,7 +71,7 @@ class SelectExerciseState extends State<SelectExercise> {
             //------------------------
             //Back button
             Container(
-              margin: EdgeInsets.only(top: 30, left: 40),
+              margin: EdgeInsets.only(top: 15, left: 35),
               width: 50,
               height: 50,
               child: Material(
@@ -126,7 +126,7 @@ class SelectExerciseState extends State<SelectExercise> {
                         ),
                       ),
                       SizedBox(
-                        height: height * 0.01,
+                        height: height * 0.005,
                       ),
                       //------------------------
                       //Scrolling area
@@ -236,10 +236,14 @@ class SelectExerciseState extends State<SelectExercise> {
                                                               child:
                                                                   RaisedButton(
                                                                 onPressed: () {
-                                                                  Navigator.of(context).push(
-                                                                      MaterialPageRoute(
-                                                                          builder: (context) => SelectMusic(),
-                                                                      ));
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(
+                                                                          MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            SelectMusic(),
+                                                                  ));
                                                                   now = DateTime
                                                                       .now();
                                                                   String
@@ -386,10 +390,14 @@ class SelectExerciseState extends State<SelectExercise> {
                                                               child:
                                                                   RaisedButton(
                                                                 onPressed: () {
-                                                                  Navigator.of(context).push(
-                                                                      MaterialPageRoute(
-                                                                        builder: (context) => SelectMusic(),
-                                                                      ));
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .push(
+                                                                          MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            SelectMusic(),
+                                                                  ));
                                                                   now = DateTime
                                                                       .now();
                                                                   String

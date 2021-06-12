@@ -155,10 +155,10 @@ class _MyAdminState extends State<MyAdmin> {
                 //------------------------
                 //Admin's Avatar
                 CircleAvatar(
-                  radius: 80,
+                  radius: 90,
                   backgroundColor: orange,
                   child: CircleAvatar(
-                    radius: 65,
+                    radius: 75,
                     backgroundImage: AssetImage(
                         "assets/images/avatars/$_currentAvatarIndex.jpeg"),
                   ),
@@ -187,7 +187,7 @@ class _MyAdminState extends State<MyAdmin> {
                 //------------------------
                 //Spacing
                 SizedBox(
-                  height: height * 0.05,
+                  height: height * 0.03,
                 ),
                 //----------------------
                 //Button: change my admin
@@ -212,7 +212,7 @@ class _MyAdminState extends State<MyAdmin> {
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Museo',
-                              fontSize: 40,
+                              fontSize: 32,
                               fontWeight: FontWeight.w800,
                             ),
                             textAlign: TextAlign.center,
@@ -223,14 +223,10 @@ class _MyAdminState extends State<MyAdmin> {
                   ),
                 ),
                 //------------------------
-                //Spacing
-                SizedBox(
-                  height: height * 0.003,
-                ),
                 //----------------------
                 //Button: OK
                 Container(
-                  margin: EdgeInsets.all(30),
+                  margin: EdgeInsets.all(10),
                   height: 175,
                   width: width * 0.8,
                   child: GestureDetector(
