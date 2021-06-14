@@ -90,7 +90,7 @@ class _SettingsState extends State<SettingsPage> {
             content: SingleChildScrollView(
               child: ListBody(
                 children: const <Widget>[
-                  Text('：）'),
+                  Text('The changes will take effect on your next log in.'),
                 ],
               ),
             ),
@@ -604,7 +604,43 @@ class _SettingsState extends State<SettingsPage> {
                             ],
                           ),
 //-----------------------------------
-// Spacing for Text Fields:
+// Spacing for save avatar Button:
+                          SizedBox(
+                            height: 25,
+                          ),
+//-----------------------------------
+//  Save avatar Button:
+                          Container(
+                            width: width * 0.6,
+                            child: GestureDetector(
+                              onTap: () async {
+                              changeAvatar();
+                              },
+                              child: Material(
+                                borderRadius: BorderRadius.circular(40),
+                                shadowColor: blue,
+                                color: green,
+                                elevation: 3,
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                    child: Text(
+                                      'Save new avatar',
+                                      style: TextStyle(
+                                        color: white,
+                                        //fontFamily: 'Museo',
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+//-----------------------------------
+// Spacing for text field:
                           SizedBox(
                             height: 25,
                           ),
@@ -699,8 +735,13 @@ class _SettingsState extends State<SettingsPage> {
                                 //if new username is unique
                                 if (uname_exists == false) {
                                   //update username and avatar
-                                  changeAvatar();
                                   changeUsername();
+                            _firestore
+                          .collection('username_uid')
+                          .doc(_newUsername)
+                          .set({
+                        'UID': cUser.uid,
+                            });
                                 }
                                 //if username exists
                                 else {
@@ -718,7 +759,7 @@ class _SettingsState extends State<SettingsPage> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 12),
                                     child: Text(
-                                      'Save',
+                                      'Save new username',
                                       style: TextStyle(
                                         color: white,
                                         //fontFamily: 'Museo',
