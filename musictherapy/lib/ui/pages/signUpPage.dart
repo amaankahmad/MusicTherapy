@@ -448,62 +448,31 @@ class _SignUpState extends State<SignUp> {
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment(1, 0),
-                              padding: EdgeInsets.only(top: 10, left: 15),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          TermsAndConditions(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  'Terms and Conditions',
-                                  style: TextStyle(
-                                    color: orange,
-                                    //fontFamily: 'Museo',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: orange,
-                                  ),
+                        Container(
+                          //alignment: Alignment(1, 0),
+
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      TermsAndConditions(),
                                 ),
+                              );
+                            },
+                            child: Text(
+                              'Terms and Conditions\nand Privacy Policy',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: orange,
+                                //fontFamily: 'Museo',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                decoration: TextDecoration.underline,
+                                decorationColor: orange,
                               ),
                             ),
-                            SizedBox(
-                              width: width * 0.05,
-                            ),
-                            Container(
-                              alignment: Alignment(1, 0),
-                              padding: EdgeInsets.only(top: 10, left: 15),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => PrivacyPolicy(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  'Privacy Policy',
-                                  style: TextStyle(
-                                    color: orange,
-                                    //fontFamily: 'Museo',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: orange,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                         SizedBox(
                           height: 15,
@@ -512,10 +481,11 @@ class _SignUpState extends State<SignUp> {
 //  Check Terms and Conditions:
                         CheckboxListTile(
                           title: Text(
-                            'I have read and agree to the Terms and Conditions.\nLearn how we process your data in Privacy Policy',
+                            'I have read and agree to the Terms and '
+                                'Conditions, and the Privacy Policy',
                             style: TextStyle(
                               color: blue,
-                              fontSize: 14,
+                              fontSize: 18,
                             ),
                           ),
                           controlAffinity: ListTileControlAffinity.leading,
