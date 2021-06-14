@@ -171,8 +171,11 @@ class DeviceScreen extends StatelessWidget {
           //   ),
           // ),
           // TODO change app font
+          SizedBox(
+            height: 1,
+          ),
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

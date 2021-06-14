@@ -335,7 +335,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                     // height: 500,
                   ),
                   SizedBox(
-                    width: 15,
+                    width: 40,
                   ),
 
                   // SizedBox(
@@ -378,7 +378,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                 ],
               ),
               SizedBox(
-                height: 30,
+                height: 100,
               ),
               Padding(
                 padding:
