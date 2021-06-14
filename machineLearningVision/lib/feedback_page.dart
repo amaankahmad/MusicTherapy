@@ -68,7 +68,7 @@ class FeedbackPage extends StatelessWidget {
                   SizedBox(height: 8), //gap
 
                   Text(
-                    '30 reps today',
+                    '18 reps today',
                     style: TextStyle(
                       fontFamily: 'Museo',
                       fontSize: height * 0.035,

@@ -232,7 +232,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   Stopwatch s = new Stopwatch();
 
   void increase_2(int reps) {
-    if (reps >= 5) {
+    if (reps >= 3) {
       setState(() {
         assetsAudioPlayer_2.setVolume(0.3);
       });
@@ -240,7 +240,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   }
 
   void increase_3(int reps) {
-    if (reps >= 10) {
+    if (reps >= 6) {
       setState(() {
         assetsAudioPlayer_3.setVolume(0.4);
       });
@@ -248,7 +248,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   }
 
   void increase_4(int reps) {
-    if (reps >= 15) {
+    if (reps >= 9) {
       setState(() {
         assetsAudioPlayer_4.setVolume(0.8);
       });
@@ -256,7 +256,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   }
 
   void increase_5(int reps) {
-    if (reps >= 20) {
+    if (reps >= 12) {
       setState(() {
         assetsAudioPlayer_5.setVolume(0.2);
       });
@@ -264,7 +264,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   }
 
   void increase_6(int reps) {
-    if (reps >= 25) {
+    if (reps >= 15) {
       setState(() {
         assetsAudioPlayer_6.setVolume(0.7);
       });
@@ -272,7 +272,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
   }
 
   void increase_7(int reps) {
-    if (reps >= 30) {
+    if (reps >= 18) {
       setState(() {
         assetsAudioPlayer_7.setVolume(0.7);
       });
@@ -316,9 +316,10 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                height: 25,
+                height: 50,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: 15,
@@ -326,7 +327,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                   Container(
                     decoration: BoxDecoration(
                         color: blue, borderRadius: BorderRadius.circular(20)),
-                    width: 150,
+                    width: 200,
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Image.asset('assets/videos/lion.GIF'),
@@ -335,7 +336,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                     // height: 500,
                   ),
                   SizedBox(
-                    width: 25,
+                    width: 17,
                   ),
 
                   // SizedBox(
@@ -351,8 +352,8 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                       //   ),
                       // ),
                       Container(
-                        height: 100,
-                        width: 100,
+                        // height: 100,
+                        width: 120,
                         child: GestureDetector(
                           onTap: widget.onNotificationPressed,
                           child: Material(
@@ -368,24 +369,26 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                       //     style: Theme.of(context).textTheme.body1?.copyWith(
                       //         color: Theme.of(context).textTheme.caption?.color))
                       Container(
-                        // height: 200,
-                        // width: 200,
+                        height: 170,
+                        width: 170,
                         decoration: BoxDecoration(
                             color: yellow, shape: BoxShape.circle),
                         child: Padding(
                           padding: const EdgeInsets.all(40.0),
-                          child: Text(
-                            reps.toString(),
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 125,
-                              fontWeight: FontWeight.bold,
+                          child: Center(
+                            child: Text(
+                              reps.toString(),
+                              style: TextStyle(
+                                color: white,
+                                fontSize: 60,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -401,17 +404,20 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
+                  ),
+                  SizedBox(
+                    width: 12,
                   ),
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 90,
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

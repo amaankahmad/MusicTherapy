@@ -65,6 +65,7 @@ class DeviceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: honeydew,
 //----------------- APP BAR ----------------------
       // appBar: AppBar(
       //   backgroundColor: orange,
@@ -111,7 +112,6 @@ class DeviceScreen extends StatelessWidget {
       //   ],
       // ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           // StreamBuilder<BluetoothDeviceState>(
           //   stream: device.state,
@@ -172,10 +172,10 @@ class DeviceScreen extends StatelessWidget {
           // ),
           // TODO change app font
           SizedBox(
-            height: 1,
+            height: 50,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -293,6 +293,9 @@ class DeviceScreen extends StatelessWidget {
           //   'melomotion',
           //   style: TextStyle(fontSize: 25),
           // ),
+          SizedBox(
+            height: 50,
+          ),
           Container(
             child: Text(
               'Please face the camera whilst\nperforming the movement',
@@ -303,6 +306,9 @@ class DeviceScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+          ),
+          SizedBox(
+            height: 30,
           ),
 // ------------- MAIN BIT ---------------
           Column(

@@ -33,7 +33,7 @@ class FindDevicesScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: 35,
+            height: 60,
           ),
           Center(
             child: Container(
