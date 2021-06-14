@@ -114,20 +114,24 @@ class BndBox extends StatelessWidget {
             }
           }
 
-          return Positioned(
-            left: x - 6,
-            top: y - 6,
-            width: 100,
-            height: 12,
-            child: Container(
-              child: Text(
-                "● ${k["part"]}",
-                style: TextStyle(
-                  color: Color.fromRGBO(37, 213, 253, 1.0),
-                  fontSize: 12.0,
+          return Stack(
+            children: [
+              Positioned(
+                left: x - 6,
+                top: y - 6,
+                width: 100,
+                height: 12,
+                child: Container(
+                  child: Text(
+                    "● ${k["part"]}",
+                    style: TextStyle(
+                      color: Color.fromRGBO(37, 213, 253, 1.0),
+                      fontSize: 12.0,
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           );
         }).toList();
 

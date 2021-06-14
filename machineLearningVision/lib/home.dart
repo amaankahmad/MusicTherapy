@@ -64,6 +64,14 @@ class _HomePageState extends State<HomePage> {
     3.14,
     3.14
   ];
+  double percent = 0;
+
+  double result() {
+    setState(() {
+      percent = percentage_result[percentage_result.length];
+      return percent;
+    });
+  }
 
   @override
   void initState() {
@@ -129,6 +137,14 @@ class _HomePageState extends State<HomePage> {
                   height: screen.height,
                   decoration: BoxDecoration(color: Colors.red),
                 ),*/
+                // Container(
+                //   alignment: Alignment.bottomRight,
+                //   margin: EdgeInsets.all(30),
+                //   color: Colors.transparent,
+                //   child: ElevatedButton(
+                //       onPressed: result,
+                //       child: Text('$percent', textAlign: TextAlign.center)),
+                // ),
                 BndBox(
                     _recognitions == null ? [] : _recognitions,
                     math.max(_imageHeight, _imageWidth),
