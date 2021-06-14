@@ -321,7 +321,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
               Row(
                 children: [
                   SizedBox(
-                    width: 20,
+                    width: 15,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -335,7 +335,7 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                     // height: 500,
                   ),
                   SizedBox(
-                    width: 40,
+                    width: 25,
                   ),
 
                   // SizedBox(
@@ -343,20 +343,35 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                   // ),
                   Column(
                     children: [
-                      Text(
-                        'Rep Counter:',
-                        style: TextStyle(
-                          color: blue,
-                          fontSize: 20,
+                      // Text(
+                      //   'Rep Counter:',
+                      //   style: TextStyle(
+                      //     color: blue,
+                      //     fontSize: 20,
+                      //   ),
+                      // ),
+                      Container(
+                        height: 100,
+                        width: 100,
+                        child: GestureDetector(
+                          onTap: widget.onNotificationPressed,
+                          child: Material(
+                            child: Image.asset('assets/logo.jpeg'),
+                          ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                       // Text(
                       //     '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
                       //     style: Theme.of(context).textTheme.body1?.copyWith(
                       //         color: Theme.of(context).textTheme.caption?.color))
                       Container(
+                        // height: 200,
+                        // width: 200,
                         decoration: BoxDecoration(
-                            color: orange, shape: BoxShape.circle),
+                            color: yellow, shape: BoxShape.circle),
                         child: Padding(
                           padding: const EdgeInsets.all(40.0),
                           child: Text(
@@ -369,153 +384,235 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Container(
-                        child: Text(
-                            "${((s.elapsedMilliseconds / 1000).round()).toString()} seconds"),
+                        decoration: BoxDecoration(
+                            color: orange,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "${((s.elapsedMilliseconds / 1000).round()).toString()} seconds",
+                            style: TextStyle(
+                              fontFamily: 'Museo',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
                       )
                     ],
                   ),
                 ],
               ),
               SizedBox(
-                height: 100,
+                height: 20,
               ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
 // ------------- START MUSIC ---------------
                     Expanded(
                       child: Container(
                         child: GestureDetector(
                           onTap: () {
-                            // Music On Tap Function
-                            assetsAudioPlayer_1.open(
-                                Audio('assets/tracks/kick.wav'),
-                                volume: 0.5);
-                            assetsAudioPlayer_2.open(
-                                Audio('assets/tracks/highhat.wav'),
-                                volume: 0);
-                            assetsAudioPlayer_3.open(
-                                Audio('assets/tracks/bass.wav'),
-                                volume: 0);
-                            assetsAudioPlayer_4.open(
-                                Audio('assets/tracks/piano.wav'),
-                                volume: 0);
-                            assetsAudioPlayer_5.open(
-                                Audio('assets/tracks/beat.wav'),
-                                volume: 0);
-                            assetsAudioPlayer_6.open(
-                                Audio('assets/tracks/guitar.wav'),
-                                volume: 0);
-                            assetsAudioPlayer_7.open(
-                                Audio('assets/tracks/horns.wav'),
-                                volume: 0);
-                            s.start();
-
-                            // print(s.elapsedTicks);
+                            assetsAudioPlayer_1.stop();
+                            assetsAudioPlayer_2.stop();
+                            assetsAudioPlayer_3.stop();
+                            assetsAudioPlayer_4.stop();
+                            assetsAudioPlayer_5.stop();
+                            assetsAudioPlayer_6.stop();
+                            assetsAudioPlayer_7.stop();
+                            s.stop();
                           },
-                          child: Material(
-                            borderRadius: BorderRadius.circular(40),
-                            shadowColor: orange,
-                            color: orange,
-                            elevation: 3,
-                            child: Center(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                                child: Text(
-                                  'Start Music',
-                                  style: TextStyle(
-                                    color: white,
-                                    //fontFamily: 'Museo',
-                                    fontSize: 18,
-                                    //fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
+                          child: Container(
+                            height: 70,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              color: blue,
+                              shape: BoxShape.circle,
+                            ),
+                            // color: blue,
+                            child: Icon(
+                              Icons.stop,
+                              size: 50,
+                              color: white,
                             ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
-// ------------- START COUNTING REPS ---------------
+                    // SizedBox(
+                    //   width: 20,
+                    // ),
                     Expanded(
                       child: Container(
                         child: GestureDetector(
-                          onTap: widget.onNotificationPressed,
-                          child: Material(
-                            borderRadius: BorderRadius.circular(40),
-                            shadowColor: orange,
-                            color: green,
-                            elevation: 3,
-                            child: Center(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                                child: Text(
-                                  'Start Counting',
-                                  style: TextStyle(
-                                    color: white,
-                                    // fontFamily: 'Museo',
-                                    fontSize: 18,
-                                    //fontWeight: FontWeight.w700,
-                                  ),
+                            onTap: () {
+                              // Music On Tap Function
+                              assetsAudioPlayer_1.open(
+                                  Audio('assets/tracks/kick.wav'),
+                                  volume: 0.5);
+                              assetsAudioPlayer_2.open(
+                                  Audio('assets/tracks/highhat.wav'),
+                                  volume: 0);
+                              assetsAudioPlayer_3.open(
+                                  Audio('assets/tracks/bass.wav'),
+                                  volume: 0);
+                              assetsAudioPlayer_4.open(
+                                  Audio('assets/tracks/piano.wav'),
+                                  volume: 0);
+                              assetsAudioPlayer_5.open(
+                                  Audio('assets/tracks/beat.wav'),
+                                  volume: 0);
+                              assetsAudioPlayer_6.open(
+                                  Audio('assets/tracks/guitar.wav'),
+                                  volume: 0);
+                              assetsAudioPlayer_7.open(
+                                  Audio('assets/tracks/horns.wav'),
+                                  volume: 0);
+                              s.start();
+
+                              // print(s.elapsedTicks);
+                            },
+                            child: Container(
+                                height: 70,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                  color: blue,
+                                  shape: BoxShape.circle,
                                 ),
-                              ),
+                                // color: blue,
+                                child: Icon(
+                                  Icons.play_arrow,
+                                  size: 50,
+                                  color: white,
+                                ))
+                            // Material(
+                            //   borderRadius: BorderRadius.circular(40),
+                            //   shadowColor: orange,
+                            //   color: orange,
+                            //   elevation: 3,
+                            //   child: Center(
+                            //     child: Padding(
+                            //       padding:
+                            //           const EdgeInsets.symmetric(vertical: 12),
+                            //       child: Text(
+                            //         'Start Music',
+                            //         style: TextStyle(
+                            //           color: white,
+                            //           //fontFamily: 'Museo',
+                            //           fontSize: 18,
+                            //           //fontWeight: FontWeight.w700,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        child: GestureDetector(
+                          onTap: () {
+                            //-------------------- Navigate to next page ------------------
+                          },
+                          child: Container(
+                            height: 70,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              color: blue,
+                              shape: BoxShape.circle,
+                            ),
+                            // color: blue,
+                            child: Icon(
+                              Icons.chevron_right_rounded,
+                              size: 50,
+                              color: white,
                             ),
                           ),
                         ),
                       ),
                     ),
+
+// ------------- START COUNTING REPS ---------------
+                    // Expanded(
+                    //   child: Container(
+                    //     child: GestureDetector(
+                    //       onTap: widget.onNotificationPressed,
+                    //       child: Material(
+                    //         borderRadius: BorderRadius.circular(40),
+                    //         shadowColor: orange,
+                    //         color: green,
+                    //         elevation: 3,
+                    //         child: Center(
+                    //           child: Padding(
+                    //             padding:
+                    //                 const EdgeInsets.symmetric(vertical: 12),
+                    //             child: Text(
+                    //               'Start Counting',
+                    //               style: TextStyle(
+                    //                 color: white,
+                    //                 // fontFamily: 'Museo',
+                    //                 fontSize: 18,
+                    //                 //fontWeight: FontWeight.w700,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
 //---------------- STOP BUTTON ------------------------
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 80, vertical: 8),
-                child: Container(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Music On Tap Function
-                      assetsAudioPlayer_1.stop();
-                      assetsAudioPlayer_2.stop();
-                      assetsAudioPlayer_3.stop();
-                      assetsAudioPlayer_4.stop();
-                      assetsAudioPlayer_5.stop();
-                      assetsAudioPlayer_6.stop();
-                      assetsAudioPlayer_7.stop();
-                      s.stop();
-                    },
-                    child: Material(
-                      borderRadius: BorderRadius.circular(40),
-                      shadowColor: orange,
-                      color: yellow,
-                      elevation: 3,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 20),
-                          child: Text(
-                            'Stop Music',
-                            style: TextStyle(
-                              color: white,
-                              //fontFamily: 'Museo',
-                              fontSize: 18,
-                              //fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding:
+              //       const EdgeInsets.symmetric(horizontal: 80, vertical: 8),
+              //   child: Container(
+              //     child: GestureDetector(
+              //       onTap: () {
+              //         // Music On Tap Function
+              //         assetsAudioPlayer_1.stop();
+              //         assetsAudioPlayer_2.stop();
+              //         assetsAudioPlayer_3.stop();
+              //         assetsAudioPlayer_4.stop();
+              //         assetsAudioPlayer_5.stop();
+              //         assetsAudioPlayer_6.stop();
+              //         assetsAudioPlayer_7.stop();
+              //         s.stop();
+              //       },
+              //       child: Material(
+              //         borderRadius: BorderRadius.circular(40),
+              //         shadowColor: orange,
+              //         color: yellow,
+              //         elevation: 3,
+              //         child: Center(
+              //           child: Padding(
+              //             padding: const EdgeInsets.symmetric(
+              //                 vertical: 12, horizontal: 20),
+              //             child: Text(
+              //               'Stop Music',
+              //               style: TextStyle(
+              //                 color: white,
+              //                 //fontFamily: 'Museo',
+              //                 fontSize: 18,
+              //                 //fontWeight: FontWeight.w700,
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         );

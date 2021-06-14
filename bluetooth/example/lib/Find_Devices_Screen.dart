@@ -39,7 +39,12 @@ class FindDevicesScreen extends StatelessWidget {
             child: Container(
               child: Text(
                 'Find Devices',
-                style: TextStyle(color: orange, fontSize: 28),
+                style: TextStyle(
+                  color: orange,
+                  fontSize: 28,
+                  fontFamily: 'Museo',
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),
@@ -65,8 +70,20 @@ class FindDevicesScreen extends StatelessWidget {
                           children: snapshot.data!
                               .map(
                                 (device) => ListTile(
-                                  title: Text(device.name),
-                                  subtitle: Text(device.id.toString()),
+                                  title: Text(
+                                    device.name,
+                                    style: TextStyle(
+                                      fontFamily: 'Museo',
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    device.id.toString(),
+                                    style: TextStyle(
+                                      fontFamily: 'Museo',
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
                                   trailing: StreamBuilder<BluetoothDeviceState>(
                                     stream: device.state,
                                     initialData:
@@ -104,9 +121,10 @@ class FindDevicesScreen extends StatelessWidget {
                                                       'Open',
                                                       style: TextStyle(
                                                         color: white,
-                                                        // fontFamily: 'Museo',
+                                                        fontFamily: 'Museo',
                                                         fontSize: 20,
-                                                        //fontWeight: FontWeight.w700,
+                                                        fontWeight:
+                                                            FontWeight.w700,
                                                       ),
                                                     ),
                                                   ),

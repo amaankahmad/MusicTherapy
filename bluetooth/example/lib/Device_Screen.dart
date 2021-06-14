@@ -296,7 +296,12 @@ class DeviceScreen extends StatelessWidget {
           Container(
             child: Text(
               'Please face the camera whilst\nperforming the movement',
-              style: TextStyle(color: blue, fontSize: 22),
+              style: TextStyle(
+                color: blue,
+                fontSize: 22,
+                fontFamily: 'Museo',
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
 // ------------- MAIN BIT ---------------
