@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:machineLearningVision/feedback_page.dart';
+
 const String posenet = "PoseNet";
 const max_angle = 173;
 const min_angle = 40;
@@ -36,6 +38,8 @@ class BndBox extends StatelessWidget {
     double shoulderY, elbowY, wristY;
     List<Widget> _renderKeypoints() {
       var lists = <Widget>[];
+      var perc;
+      String feedback;
       results.forEach((re) {
         var list = re["keypoints"].values.map<Widget>((k) {
           var _x = k["x"];
@@ -57,20 +61,20 @@ class BndBox extends StatelessWidget {
             y = (_y - difH / 2) * scaleH;
           }
 
-          if (k["part"] == "leftElbow" ||
-              k["part"] == "leftWrist" ||
-              k["part"] == "leftShoulder") {
+          if (k["part"] == "rightElbow" ||
+              k["part"] == "rightWrist" ||
+              k["part"] == "rightShoulder") {
             // print("${k["part"]}: (${x - 6}, ${y - 6})");
 
-            if (k["part"] == "leftShoulder") {
+            if (k["part"] == "rightShoulder") {
               shoulderX = x - 6;
               shoulderY = y - 6;
             }
-            if (k["part"] == "leftElbow") {
+            if (k["part"] == "rightElbow") {
               elbowX = x - 6;
               elbowY = y - 6;
             }
-            if (k["part"] == "leftWrist") {
+            if (k["part"] == "rightWrist") {
               wristX = x - 6;
               wristY = y - 6;
             }
@@ -108,7 +112,7 @@ class BndBox extends StatelessWidget {
                 }
               }
 
-              print(percentage_result);
+              print(angles);
               //movement.add(angle);
               // print(movement);
             }
@@ -127,6 +131,49 @@ class BndBox extends StatelessWidget {
                     style: TextStyle(
                       color: Color.fromRGBO(37, 213, 253, 1.0),
                       fontSize: 12.0,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 2,
+                child: Container(
+                  width: 500,
+                  height: 500,
+                  child: GestureDetector(
+                    onTap: () {
+                      feedback = response(angles);
+                      perc = calc_avg(percentage_result);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => FeedbackPage(
+                            movement: movement,
+                            percentage: perc,
+                            feedback: feedback,
+                          ),
+                        ),
+                      );
+                      // print("CLICKED");
+                    },
+                    child: Material(
+                      borderRadius: BorderRadius.circular(40),
+                      shadowColor: Colors.transparent,
+                      color: Colors.transparent,
+                      elevation: 3,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Text(
+                            'Create Exercises',
+                            style: TextStyle(
+                              color: Colors.transparent,
+                              //fontFamily: 'Museo',
+                              fontSize: 30,
+                              //fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -181,13 +228,13 @@ bool compare(List<double> movement, bool astate) {
   //print('hello');
   if (angle > 90 && isStopping && state == true) {
     //print('$angle');
-    print('down');
-    print('$angle');
+    // print('down');
+    // print('$angle');
     state = false;
     return true;
   } else if (angle < 90 && isStopping && state == false) {
-    print('up');
-    print('$angle');
+    // print('up');
+    // print('$angle');
     state = true;
     return true;
   }
@@ -238,4 +285,29 @@ bool compare(List<double> movement, bool astate) {
   //   return true;
   // }
   return false;
+}
+
+int calc_avg(List<double> percentages) {
+  double sum = 0;
+  for (int i = 0; i < percentages.length; i++) {
+    sum = percentages[i] + sum;
+  }
+  return (sum / (percentages.length)).round();
+}
+
+String response(List<double> angles) {
+  double up = 0;
+  double down = 0;
+  for (int i = 0; i < angles.length; i++) {
+    if (angles[i] < 90) {
+      up = up + (min_angle - angles[i]);
+    } else {
+      down = down + (max_angle - angles[i]);
+    }
+  }
+  if ((up / angles.length) > (down / angles.length)) {
+    return "For next session: Focus on lifting arm completely upwards";
+  } else {
+    return "For next session: Focus on extending arm completely downwards";
+  }
 }
